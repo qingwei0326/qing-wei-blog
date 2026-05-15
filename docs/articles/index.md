@@ -4,6 +4,7 @@
 
 ## 最新文章
 
+- [用 9 块钱买回 1 小时睡眠——通勤出行的隐形成本优化](/articles/commute-optimization)
 - [新手理财入门指南](/articles/beginner-guide)
 - [如何制定个人预算](/articles/personal-budget)
 - [识别消费陷阱](/articles/consumption-traps)
