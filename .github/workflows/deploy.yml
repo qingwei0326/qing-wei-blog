@@ -41,7 +41,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install --allow-scripts
+        run: pnpm install
 
       - name: Approve builds
         run: pnpm approve-builds
