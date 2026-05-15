@@ -38,6 +38,14 @@ categories: [理财知识]
 
 ### 数字背后的真实收益
 
+![打车价格](https://cdn.jsdelivr.net/gh/qingwei0326/qing-wei-blog@main/docs/public/images/打车价格.jpg)
+
+*P4｜下单页面*
+
+![用完支付宝30-3](https://cdn.jsdelivr.net/gh/qingwei0326/qing-wei-blog@main/docs/public/images/用完支付宝30-3.jpg)
+
+*P5｜账单页面（最终扣款）*
+
 - **原始打车价**：28-35 元（视时段、加价波动）
 - **顺风车实付**：**11.1 元**（已应用优惠）
 - **相比公交多花**：约 9 元
@@ -73,6 +81,10 @@ categories: [理财知识]
 
 1. **扫描学生专属券**
    - 获取基础福利（学生专属二维码）
+
+![学生优惠券](https://cdn.jsdelivr.net/gh/qingwei0326/qing-wei-blog@main/docs/public/images/学生优惠券.png)
+
+*P1｜学生专属券入口*
    
 2. **支付宝【青春特权】**
    - 进入支付宝 → 搜索"青春特权"
