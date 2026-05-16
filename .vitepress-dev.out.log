@@ -17,3 +17,192 @@
   [32m[1mvitepress[22m v1.6.4[39m
 
   [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5173[22m/[39m
+[2m22:30:55[22m [36m[1m[vitepress][22m[39m [32mdocs\.vitepress\config.ts changed, restarting server...
+[39m
+Re-optimizing dependencies because vite config has changed
+
+  [32m[1mvitepress[22m v1.6.4[39m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5173[22m/[39m
+[2m22:30:55[22m [36m[1m[vitepress][22m[39m [32mdocs\.vitepress\theme\index.ts created, restarting server...
+[39m
+
+  [32m[1mvitepress[22m v1.6.4[39m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5173[22m/[39m
+[2m22:37:12[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/404.html[22m
+[2m22:37:12[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/about.html[22m
+[2m22:37:12[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/beginner-guide.html[22m
+[2m22:37:12[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/commute-optimization.html[22m
+[2m22:37:12[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/consumption-traps.html[22m
+[2m22:37:12[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/index.html[22m
+[2m22:37:12[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/personal-budget.html[22m
+[2m22:37:12[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/public/images/README.html[22m
+[2m22:37:12[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/index.html[22m
+[2m22:37:13[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/404.html[22m
+[2m22:37:13[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/about.html[22m
+[2m22:37:13[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/index.html[22m
+[2m22:37:13[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/beginner-guide.html[22m
+[2m22:37:13[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/commute-optimization.html[22m
+[2m22:37:13[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/consumption-traps.html[22m
+[2m22:37:13[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/index.html[22m
+[2m22:37:13[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/personal-budget.html[22m
+[2m22:37:13[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/public/images/README.html[22m
+[2m22:42:00[22m [36m[1m[vitepress][22m[39m [32mhmr update [39m[2m/.vitepress/theme/components/ArticleList.vue, /.vitepress/theme/components/HomeBoard.vue[22m
+[2m22:42:00[22m [36m[1m[vitepress][22m[39m [32mhmr update [39m[2m/.vitepress/theme/components/ArticleList.vue, /.vitepress/theme/components/ArticleList.vue?vue&type=style&index=0&scoped=4c40550b&lang.css[22m
+[2m22:42:00[22m [36m[1m[vitepress][22m[39m [32mhmr update [39m[2m/.vitepress/theme/components/HomeBoard.vue, /.vitepress/theme/components/HomeBoard.vue?vue&type=style&index=0&scoped=01b193a6&lang.css[22m
+[2m22:51:12[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/404.html[22m
+[2m22:51:12[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/about.html[22m
+[2m22:51:12[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/beginner-guide.html[22m
+[2m22:51:12[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/commute-optimization.html[22m
+[2m22:51:12[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/consumption-traps.html[22m
+[2m22:51:12[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/index.html[22m
+[2m22:51:12[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/personal-budget.html[22m
+[2m22:51:12[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/public/images/README.html[22m
+[2m22:51:12[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/index.html[22m
+[2m22:51:13[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/about.html[22m
+[2m22:51:13[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/404.html[22m
+[2m22:51:13[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/index.html[22m
+[2m22:51:13[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/beginner-guide.html[22m
+[2m22:51:13[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/commute-optimization.html[22m
+[2m22:51:13[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/consumption-traps.html[22m
+[2m22:51:13[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/index.html[22m
+[2m22:51:13[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/personal-budget.html[22m
+[2m22:51:13[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/public/images/README.html[22m
+[2m22:58:45[22m [36m[1m[vitepress][22m[39m [32mhmr update [39m[2m/.vitepress/theme/components/ArticleList.vue, /.vitepress/theme/components/HomeBoard.vue[22m
+[2m22:58:58[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/404.html[22m
+[2m22:58:58[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/about.html[22m
+[2m22:58:58[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/beginner-guide.html[22m
+[2m22:58:58[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/commute-optimization.html[22m
+[2m22:58:58[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/consumption-traps.html[22m
+[2m22:58:58[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/index.html[22m
+[2m22:58:58[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/personal-budget.html[22m
+[2m22:58:58[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/public/images/README.html[22m
+[2m22:58:58[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/index.html[22m
+[2m22:59:00[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/about.html[22m
+[2m22:59:00[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/index.html[22m
+[2m22:59:00[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/404.html[22m
+[2m22:59:00[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/beginner-guide.html[22m
+[2m22:59:00[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/commute-optimization.html[22m
+[2m22:59:00[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/consumption-traps.html[22m
+[2m22:59:00[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/index.html[22m
+[2m22:59:00[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/personal-budget.html[22m
+[2m22:59:00[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/public/images/README.html[22m
+[2m23:09:16[22m [36m[1m[vitepress][22m[39m [32mhmr update [39m[2m/articles/commute-optimization.md[22m
+[2m23:09:28[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/404.html[22m
+[2m23:09:28[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/about.html[22m
+[2m23:09:28[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/beginner-guide.html[22m
+[2m23:09:28[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/commute-optimization.html[22m
+[2m23:09:28[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/consumption-traps.html[22m
+[2m23:09:28[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/index.html[22m
+[2m23:09:28[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/personal-budget.html[22m
+[2m23:09:28[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/index.html[22m
+[2m23:09:28[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/public/images/README.html[22m
+[2m23:09:29[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/index.html[22m
+[2m23:09:29[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/404.html[22m
+[2m23:09:29[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/about.html[22m
+[2m23:09:29[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/beginner-guide.html[22m
+[2m23:09:29[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/commute-optimization.html[22m
+[2m23:09:29[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/consumption-traps.html[22m
+[2m23:09:29[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/index.html[22m
+[2m23:09:29[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/personal-budget.html[22m
+[2m23:09:29[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/public/images/README.html[22m
+[2m23:12:11[22m [36m[1m[vitepress][22m[39m [32mhmr update [39m[2m/articles/commute-optimization.md[22m
+[2m23:12:23[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/404.html[22m
+[2m23:12:23[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/about.html[22m
+[2m23:12:23[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/beginner-guide.html[22m
+[2m23:12:23[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/commute-optimization.html[22m
+[2m23:12:23[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/consumption-traps.html[22m
+[2m23:12:23[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/index.html[22m
+[2m23:12:23[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/personal-budget.html[22m
+[2m23:12:23[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/index.html[22m
+[2m23:12:23[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/public/images/README.html[22m
+[2m23:12:24[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/404.html[22m
+[2m23:12:24[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/about.html[22m
+[2m23:12:24[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/index.html[22m
+[2m23:12:24[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/beginner-guide.html[22m
+[2m23:12:24[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/commute-optimization.html[22m
+[2m23:12:24[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/consumption-traps.html[22m
+[2m23:12:24[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/index.html[22m
+[2m23:12:24[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/personal-budget.html[22m
+[2m23:12:24[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/public/images/README.html[22m
+[2m23:48:36[22m [36m[1m[vitepress][22m[39m [32mdocs\.vitepress\config.ts changed, restarting server...
+[39m
+[2m23:48:37[22m [36m[1m[vitepress-plugin-sidebar-resolve v1.2.2][22m[39m [32mInjected Sidebar Data Successfully. 注入侧边栏数据成功![39m
+[2m23:48:37[22m [36m[1m[vitepress-plugin-permalink v1.2.1][22m[39m [32mInjected Permalinks Data Successfully. 注入永久链接数据成功![39m
+[2m23:48:37[22m [36m[1m[vitepress-plugin-doc-analysis v1.0.13][22m[39m [32mInjected DocAnalysisInfo Data Successfully. 注入文档分析数据成功![39m
+[2m23:48:37[22m [36m[1m[vitepress-plugin-catalogue v1.1.2][22m[39m [32mInjected Catalogues Data Successfully. 注入目录页数据成功![39m
+[2m23:48:37[22m [36m[1m[vitepress-plugin-file-content-loader v1.0.13][22m[39m [32mInjected Posts Data Successfully. 注入 Posts 数据成功![39m
+Re-optimizing dependencies because lockfile has changed
+
+  [32m[1mvitepress[22m v1.6.4[39m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5173[22m/[39m
+[2m23:49:16[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/404.html[22m
+[2m23:49:16[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/about.html[22m
+[2m23:49:16[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/beginner-guide.html[22m
+[2m23:49:16[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/commute-optimization.html[22m
+[2m23:49:16[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/consumption-traps.html[22m
+[2m23:49:16[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/index.html[22m
+[2m23:49:16[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/personal-budget.html[22m
+[2m23:49:16[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/index.html[22m
+[2m23:49:16[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/public/images/README.html[22m
+[2m23:49:19[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/404.html[22m
+[2m23:49:19[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/about.html[22m
+[2m23:49:19[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/index.html[22m
+[2m23:49:19[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/beginner-guide.html[22m
+[2m23:49:19[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/commute-optimization.html[22m
+[2m23:49:19[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/consumption-traps.html[22m
+[2m23:49:19[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/index.html[22m
+[2m23:49:19[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/personal-budget.html[22m
+[2m23:49:19[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/public/images/README.html[22m
+[2m23:49:55[22m [36m[1m[vitepress][22m[39m [32mdocs\.vitepress\config.ts changed, restarting server...
+[39m
+[2m23:49:55[22m [36m[1m[vitepress-plugin-sidebar-resolve v1.2.2][22m[39m [32mInjected Sidebar Data Successfully. 注入侧边栏数据成功![39m
+[2m23:49:55[22m [36m[1m[vitepress-plugin-permalink v1.2.1][22m[39m [32mInjected Permalinks Data Successfully. 注入永久链接数据成功![39m
+[2m23:49:55[22m [36m[1m[vitepress-plugin-doc-analysis v1.0.13][22m[39m [32mInjected DocAnalysisInfo Data Successfully. 注入文档分析数据成功![39m
+[2m23:49:55[22m [36m[1m[vitepress-plugin-catalogue v1.1.2][22m[39m [32mInjected Catalogues Data Successfully. 注入目录页数据成功![39m
+[2m23:49:55[22m [36m[1m[vitepress-plugin-file-content-loader v1.0.13][22m[39m [32mInjected Posts Data Successfully. 注入 Posts 数据成功![39m
+
+  [32m[1mvitepress[22m v1.6.4[39m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5173[22m/[39m
+[2m23:50:17[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/404.html[22m
+[2m23:50:17[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/about.html[22m
+[2m23:50:17[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/beginner-guide.html[22m
+[2m23:50:17[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/commute-optimization.html[22m
+[2m23:50:17[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/consumption-traps.html[22m
+[2m23:50:17[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/index.html[22m
+[2m23:50:17[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/personal-budget.html[22m
+[2m23:50:17[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/index.html[22m
+[2m23:50:17[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/public/images/README.html[22m
+[2m23:50:20[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/about.html[22m
+[2m23:50:20[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/404.html[22m
+[2m23:50:20[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/index.html[22m
+[2m23:50:20[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/beginner-guide.html[22m
+[2m23:50:20[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/commute-optimization.html[22m
+[2m23:50:20[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/consumption-traps.html[22m
+[2m23:50:20[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/index.html[22m
+[2m23:50:20[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/personal-budget.html[22m
+[2m23:50:20[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/public/images/README.html[22m
+[2m00:37:35[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/theme/index.ts[22m
+[2m00:37:45[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/theme/index.ts[22m
+[2m00:38:09[22m [36m[1m[vitepress][22m[39m [32mhmr update [39m[2m/.vitepress/theme/style.css[22m
+[2m00:38:23[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/404.html[22m
+[2m00:38:23[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/about.html[22m
+[2m00:38:23[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/beginner-guide.html[22m
+[2m00:38:23[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/commute-optimization.html[22m
+[2m00:38:23[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/consumption-traps.html[22m
+[2m00:38:23[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/index.html[22m
+[2m00:38:23[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/personal-budget.html[22m
+[2m00:38:23[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/index.html[22m
+[2m00:38:23[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/public/images/README.html[22m
+[2m00:38:27[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/404.html[22m
+[2m00:38:27[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/about.html[22m
+[2m00:38:27[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/index.html[22m
+[2m00:38:27[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/beginner-guide.html[22m
+[2m00:38:27[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/commute-optimization.html[22m
+[2m00:38:27[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/consumption-traps.html[22m
+[2m00:38:27[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/index.html[22m
+[2m00:38:27[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/articles/personal-budget.html[22m
+[2m00:38:27[22m [36m[1m[vitepress][22m[39m [32mpage reload [39m[2m.vitepress/dist/public/images/README.html[22m

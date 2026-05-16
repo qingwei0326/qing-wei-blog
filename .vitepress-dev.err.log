@@ -1,0 +1,26 @@
+✘ [ERROR] The build was canceled
+
+▲ [WARNING] Duplicate key "ignoreDeadLinks" in object literal [duplicate-object-key]
+
+    docs/.vitepress/config.ts:55:2:
+      55 │   ignoreDeadLinks: true
+         ╵   ~~~~~~~~~~~~~~~
+
+  The original key "ignoreDeadLinks" is here:
+
+    docs/.vitepress/config.ts:43:2:
+      43 │   ignoreDeadLinks: true,
+         ╵   ~~~~~~~~~~~~~~~
+
+▲ [WARNING] Duplicate key "ignoreDeadLinks" in object literal [duplicate-object-key]
+
+    docs/.vitepress/config.ts:55:2:
+      55 │   ignoreDeadLinks: true
+         ╵   ~~~~~~~~~~~~~~~
+
+  The original key "ignoreDeadLinks" is here:
+
+    docs/.vitepress/config.ts:43:2:
+      43 │   ignoreDeadLinks: true,
+         ╵   ~~~~~~~~~~~~~~~
+

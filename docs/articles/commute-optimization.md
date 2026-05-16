@@ -42,7 +42,7 @@ categories: [理财知识]
 
 *P4｜下单页面*
 
-![用完支付宝30-3](https://cdn.jsdelivr.net/gh/qingwei0326/qing-wei-blog@main/docs/public/images/用完支付宝30-3.jpg)
+![顺风车价格](https://cdn.jsdelivr.net/gh/qingwei0326/qing-wei-blog@main/docs/public/images/顺风车价格.jpg)
 
 *P5｜账单页面（最终扣款）*
 
@@ -87,7 +87,8 @@ categories: [理财知识]
 *P1｜学生专属券入口*
    
 2. **支付宝【青春特权】**
-   - 进入支付宝 → 搜索"青春特权"
+   - 入口：支付宝 App 首页搜索"青春特权" → 进入【青春特权】页面
+   - 在出行权益里找到【哈啰顺风车 5 折支付券】
    - 领取 **哈啰顺风车 5 折支付券**
    
 3. **出行专区叠加**

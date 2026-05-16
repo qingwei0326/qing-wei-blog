@@ -1,17 +1,26 @@
-import { h } from 'vue'
 import type { Theme } from 'vitepress'
-import DefaultTheme from 'vitepress/theme'
+import { h } from 'vue'
+import Teek from 'vitepress-theme-teek'
+import ArticleList from './components/ArticleList.vue'
+import ConfigSwitch from './components/ConfigSwitch.vue'
+import FeatureIcon from './components/FeatureIcon.vue'
+import HomeBoard from './components/HomeBoard.vue'
+import VPFeature from './components/VPFeature.vue'
+import 'vitepress-theme-teek/index.css'
 import './style.css'
 
 export default {
-  extends: DefaultTheme,
-  Layout: () => {
-    return h(DefaultTheme.Layout, null, {
-      // We can use slots, for example:
-      // 'home-features-after': () => h('div', 'Some extra content'),
+  extends: Teek,
+  Layout() {
+    return h(Teek.Layout, null, {
+      'teek-theme-enhance-bottom': () => h(ConfigSwitch)
     })
   },
-  enhanceApp({ app, router, siteData }) {
-    // ...
+  enhanceApp({ app }) {
+    app.component('ArticleList', ArticleList)
+    app.component('ConfigSwitch', ConfigSwitch)
+    app.component('FeatureIcon', FeatureIcon)
+    app.component('HomeBoard', HomeBoard)
+    app.component('VPFeature', VPFeature)
   }
 } satisfies Theme

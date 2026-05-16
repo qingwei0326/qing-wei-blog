@@ -1,7 +1,7 @@
 {
   "name": "money-saving-blog",
   "version": "1.0.0",
-  "description": "省钱达人博客 - 智慧生活，精明消费",
+  "description": "青微的博客 - 记录技术、生活与折腾",
   "type": "module",
   "scripts": {
     "docs:dev": "vitepress dev docs",
@@ -16,6 +16,7 @@
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.0",
     "postcss": "^8.4.0",
-    "tailwindcss": "^4.0.0"
+    "tailwindcss": "^4.0.0",
+    "vitepress-theme-teek": "^1.5.7"
   }
 }
