@@ -19,7 +19,7 @@ const teekConfig = defineTeekConfig({
 
   footer: {
     message: '基于 VitePress + Teek 搭建',
-    copyright: 'Copyright © 2024-present 青微'
+    copyright: 'Copyright © 2024-2026 青微'
   },
 
   search: {
