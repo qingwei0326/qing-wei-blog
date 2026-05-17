@@ -1,7 +1,7 @@
 ---
 title: 用 9 块钱买回 1 小时睡眠——通勤出行的隐形成本优化
 description: 远距离通勤的博弈：如何通过哈啰顺风车 + 优惠券组合，在 11 元左右实现"公交便利度"与"打车舒适度"的平衡
-date: 2024-05-15
+date: 2026-05-15
 tags: [省钱, 通勤, 出行优化, 生活质量]
 categories: [理财知识]
 cover: /covers/commute-value.svg

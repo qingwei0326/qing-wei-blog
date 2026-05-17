@@ -1,7 +1,7 @@
 ---
 title: 识别消费陷阱
 description: 看清促销、冲动和从众心理，减少不必要的支出，把钱花在真正重要的地方
-date: 2024-05-13
+date: 2026-05-13
 tags: [消费智慧, 理性消费]
 categories: [理财知识]
 cover: /covers/consumption-traps.svg

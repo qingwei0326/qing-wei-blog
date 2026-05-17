@@ -1,7 +1,7 @@
 ---
 title: 新手理财入门指南
 description: 从零开始学习理财，掌握基础知识和实用技巧
-date: 2024-05-15
+date: 2026-05-15
 tags: [理财基础, 新手入门]
 categories: [理财知识]
 cover: /covers/finance-beginner.svg

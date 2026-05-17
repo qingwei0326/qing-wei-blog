@@ -1,7 +1,7 @@
 ---
 title: 如何制定个人预算
 description: 用可执行的分配法建立月度预算，先守住现金流，再安排储蓄与支出
-date: 2024-05-14
+date: 2026-05-14
 tags: [预算规划, 理财基础]
 categories: [理财知识]
 cover: /covers/budget-plan.svg
