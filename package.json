@@ -14,8 +14,5 @@
   },
   "devDependencies": {
     "vitepress-theme-teek": "^1.5.7"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": ["esbuild"]
   }
 }
