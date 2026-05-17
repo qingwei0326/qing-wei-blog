@@ -3,3 +3,13 @@ docs/.vitepress/cache/
 docs/.vitepress/dist/
 pnpm-lock.yaml
 project_all.txt
+
+# 开发日志
+*.log
+.vitepress-dev.err.log
+.vitepress-dev.out.log
+.vitepress-dev-current.err.log
+.vitepress-dev-current.out.log
+
+# 异常 shell 残留文件
+__manus_ec=*

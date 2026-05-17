@@ -9,14 +9,10 @@
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.60.3",
     "vitepress": "^1.0.0",
     "vue": "^3.4.0"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.0.0",
-    "postcss": "^8.4.0",
-    "tailwindcss": "^4.0.0",
     "vitepress-theme-teek": "^1.5.7"
   }
 }
