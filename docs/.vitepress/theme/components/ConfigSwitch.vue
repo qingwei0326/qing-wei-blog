@@ -7,27 +7,54 @@ type Preset = {
 }
 
 const storageKey = 'qingwei-teek-config-preset'
+const defaultPreset = 'blog'
 
 const presets: Preset[] = [
-  { label: '文档预设', value: 'doc' },
-  { label: '博客预设', value: 'blog' },
-  { label: '博客小图', value: 'compact' },
-  { label: '博客大图', value: 'large' },
+  { label: '文档首页', value: 'doc' },
+  { label: '博客默认', value: 'blog' },
+  { label: 'Banner 小图', value: 'compact' },
+  { label: 'Banner 大图', value: 'large' },
   { label: '博客全图', value: 'wide' },
   { label: '博客卡片', value: 'card' }
 ]
 
-const activePreset = ref('blog')
+const legacyPresetMap: Record<string, string> = {
+  small: 'compact',
+  default: defaultPreset
+}
+
+const activePreset = ref(defaultPreset)
+
+const readPreset = () => {
+  try {
+    return localStorage.getItem(storageKey)
+  } catch {
+    return null
+  }
+}
+
+const writePreset = (preset: string) => {
+  try {
+    localStorage.setItem(storageKey, preset)
+  } catch {
+    return
+  }
+}
 
 const applyPreset = (preset: string) => {
   activePreset.value = preset
   document.documentElement.dataset.teekPreset = preset
-  localStorage.setItem(storageKey, preset)
+  writePreset(preset)
+}
+
+const resetPreset = () => {
+  applyPreset(defaultPreset)
 }
 
 onMounted(() => {
-  const savedPreset = localStorage.getItem(storageKey)
-  const nextPreset = presets.some(item => item.value === savedPreset) ? savedPreset! : activePreset.value
+  const savedPreset = readPreset()
+  const normalizedPreset = savedPreset ? (legacyPresetMap[savedPreset] ?? savedPreset) : activePreset.value
+  const nextPreset = presets.some(item => item.value === normalizedPreset) ? normalizedPreset : activePreset.value
 
   applyPreset(nextPreset)
 })
@@ -37,8 +64,8 @@ onMounted(() => {
   <section class="config-switch" aria-label="配置切换">
     <div class="config-switch__head">
       <span>配置切换</span>
-      <button class="config-switch__copy" type="button" @click="applyPreset(activePreset)">
-        Copy
+      <button class="config-switch__copy" type="button" @click="resetPreset">
+        默认
       </button>
     </div>
 
@@ -54,6 +81,8 @@ onMounted(() => {
         {{ preset.label }}
       </button>
     </div>
+
+    <p class="config-switch__hint">按 Teek README 的首页示例整理成 6 种可见风格。</p>
   </section>
 </template>
 
@@ -89,6 +118,13 @@ onMounted(() => {
   color: var(--vp-c-brand);
   background: transparent;
   transform: none;
+}
+
+.config-switch__hint {
+  margin: 0;
+  color: var(--vp-c-text-3);
+  font-size: 12px;
+  line-height: 1.5;
 }
 
 .config-switch__grid {

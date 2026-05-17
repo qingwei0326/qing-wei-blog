@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { articleCategories, articles } from '../data/articles'
+import { articleCategories, articleTags, articles } from '../data/articles'
 
 const total = articles.length
 const latestDate = articles[0]?.date ?? '持续更新'
@@ -7,39 +7,56 @@ const latestDate = articles[0]?.date ?? '持续更新'
 
 <template>
   <section class="article-archive">
-    <header class="archive-head">
+    <header class="archive-hero">
       <div>
-        <p class="archive-kicker">文章归档</p>
-        <h1>文章列表</h1>
+        <p class="archive-kicker">Archive</p>
+        <h1>文章归档</h1>
         <p class="archive-lead">
-          {{ total }} 篇记录，围绕技术、生活和折腾，按时间顺序整理在这里。
+          {{ total }} 篇记录，围绕理财、消费、通勤和生活效率整理。先看真实经验，再看可执行的方法。
         </p>
       </div>
-      <div class="archive-meta">
+      <dl class="archive-stats">
         <div>
-          <span>总数</span>
-          <strong>{{ total }}</strong>
+          <dt>文章</dt>
+          <dd>{{ total }}</dd>
         </div>
         <div>
-          <span>最近更新</span>
-          <strong>{{ latestDate }}</strong>
+          <dt>主题</dt>
+          <dd>{{ articleCategories.length || 1 }}</dd>
         </div>
-      </div>
+        <div>
+          <dt>最近更新</dt>
+          <dd>{{ latestDate }}</dd>
+        </div>
+      </dl>
     </header>
 
-    <div class="archive-layout">
+    <div class="archive-shell">
       <aside class="archive-aside">
-        <section class="archive-panel">
-          <p class="archive-kicker">专题</p>
-          <div class="archive-topics">
-            <span v-for="category in articleCategories" :key="category" class="topic-badge">
+        <section class="side-panel">
+          <p class="archive-kicker">Topics</p>
+          <div class="topic-list">
+            <a
+              v-for="category in articleCategories"
+              :key="category"
+              href="/articles/"
+            >
               {{ category }}
-            </span>
+            </a>
+          </div>
+        </section>
+
+        <section class="side-panel">
+          <p class="archive-kicker">Tags</p>
+          <div class="tag-cloud">
+            <a v-for="tag in articleTags" :key="tag" href="/articles/">
+              {{ tag }}
+            </a>
           </div>
         </section>
       </aside>
 
-      <div class="archive-grid">
+      <div class="archive-list">
         <a
           v-for="article in articles"
           :key="article.slug"
@@ -50,7 +67,6 @@ const latestDate = articles[0]?.date ?? '持续更新'
             <img v-if="article.cover" :src="article.cover" :alt="article.title" />
             <div v-else class="cover-placeholder" aria-hidden="true">
               <FeatureIcon name="book" />
-              <span>{{ article.categories[0] ?? '随笔' }}</span>
             </div>
           </div>
           <div class="archive-body">
@@ -61,7 +77,7 @@ const latestDate = articles[0]?.date ?? '持续更新'
             <h2>{{ article.title }}</h2>
             <p>{{ article.description }}</p>
             <div class="archive-tags">
-              <span v-for="tag in article.tags" :key="tag" class="tag-pill">
+              <span v-for="tag in article.tags.slice(0, 4)" :key="tag" class="tag-pill">
                 {{ tag }}
               </span>
             </div>
@@ -74,193 +90,194 @@ const latestDate = articles[0]?.date ?? '持续更新'
 
 <style scoped>
 .article-archive {
-  display: grid;
-  gap: 20px;
+  width: min(1100px, calc(100vw - 48px));
+  margin: 0 auto;
+  padding: 34px 0 56px;
 }
 
-.archive-head {
-  display: flex;
+.archive-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 28px;
   align-items: end;
-  justify-content: space-between;
-  gap: 20px;
-  padding-bottom: 6px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--vp-c-divider);
 }
 
 .archive-kicker {
-  margin: 0 0 8px;
-  color: var(--vp-c-text-3);
+  margin: 0;
+  color: var(--vp-c-brand);
   font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 800;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.archive-head h1 {
-  margin: 0;
-  font-size: 1.9rem;
-  line-height: 1.15;
+.archive-hero h1 {
+  margin: 8px 0 0;
+  font-size: 2.45rem;
+  line-height: 1.12;
+  letter-spacing: 0;
 }
 
 .archive-lead {
-  max-width: 56ch;
-  margin: 10px 0 0;
+  max-width: 58ch;
+  margin: 14px 0 0;
   color: var(--vp-c-text-2);
-  line-height: 1.8;
+  font-size: 1rem;
+  line-height: 1.9;
 }
 
-.archive-meta {
-  display: flex;
+.archive-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(110px, 1fr));
   gap: 12px;
+  margin: 0;
 }
 
-.archive-meta div {
-  min-width: 150px;
-  padding: 12px 14px;
+.archive-stats div {
+  padding: 14px;
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
   background: var(--vp-c-bg-soft);
 }
 
-.archive-meta span {
-  display: block;
+.archive-stats dt {
   color: var(--vp-c-text-3);
   font-size: 0.76rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-weight: 700;
 }
 
-.archive-meta strong {
-  display: block;
-  margin-top: 6px;
-  font-size: 0.95rem;
-  line-height: 1.4;
+.archive-stats dd {
+  margin: 6px 0 0;
+  color: var(--vp-c-text-1);
+  font-size: 1rem;
+  font-weight: 800;
 }
 
-.archive-layout {
+.archive-shell {
   display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  gap: 20px;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: 30px;
   align-items: start;
+  margin-top: 30px;
 }
 
 .archive-aside {
   position: sticky;
   top: 96px;
+  display: grid;
+  gap: 18px;
 }
 
-.archive-panel {
-  padding: 16px;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
-  background: var(--vp-c-bg-soft);
-}
-
-.archive-topics {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.topic-badge {
-  display: inline-flex;
-  align-items: center;
-  min-height: 28px;
-  padding: 0 10px;
-  border: 1px solid color-mix(in srgb, var(--vp-c-brand) 20%, transparent);
-  border-radius: 999px;
-  color: var(--vp-c-brand);
-  background: color-mix(in srgb, var(--vp-c-brand) 8%, transparent);
-  font-size: 0.8rem;
-}
-
-.archive-grid {
+.side-panel {
   display: grid;
   gap: 12px;
 }
 
+.topic-list,
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.topic-list a,
+.tag-cloud a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand) 18%, var(--vp-c-divider));
+  border-radius: 8px;
+  color: var(--vp-c-brand);
+  background: color-mix(in srgb, var(--vp-c-brand) 6%, var(--vp-c-bg-soft));
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.archive-list {
+  display: grid;
+  gap: 16px;
+}
+
 .archive-card {
   display: grid;
-  grid-template-columns: 180px minmax(0, 1fr);
-  gap: 16px;
-  padding: 14px;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 20px;
+  padding: 16px;
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
   background: var(--vp-c-bg-soft);
   color: var(--vp-c-text-1);
   text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .archive-card:hover {
-  border-color: var(--vp-c-brand);
+  border-color: color-mix(in srgb, var(--vp-c-brand) 54%, var(--vp-c-divider));
+  box-shadow: 0 16px 42px rgb(15 23 42 / 8%);
+  transform: translateY(-2px);
   text-decoration: none;
 }
 
 .archive-cover {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  min-height: 156px;
   overflow: hidden;
   border-radius: 8px;
   background: var(--vp-c-bg-mute);
 }
 
-.archive-cover.is-placeholder {
-  border: 1px solid color-mix(in srgb, var(--vp-c-brand) 18%, transparent);
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--vp-c-brand) 18%, transparent), transparent 62%),
-    var(--vp-c-bg-mute);
-}
-
 .archive-cover img {
   width: 100%;
   height: 100%;
-  min-height: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
   margin: 0;
+  object-fit: cover;
 }
 
 .cover-placeholder {
   display: grid;
-  gap: 10px;
-  justify-items: center;
+  width: 100%;
+  place-items: center;
   color: var(--vp-c-brand);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--vp-c-brand) 16%, transparent), transparent 62%),
+    color-mix(in srgb, var(--vp-c-brand) 5%, var(--vp-c-bg-mute));
 }
 
 .cover-placeholder :deep(svg) {
-  width: 42px;
-  height: 42px;
-}
-
-.cover-placeholder span {
-  color: var(--vp-c-text-2);
-  font-size: 0.82rem;
+  width: 52px;
+  height: 52px;
 }
 
 .archive-body {
   display: grid;
   gap: 10px;
-  align-content: start;
+  align-content: center;
 }
 
 .archive-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  color: var(--vp-c-text-2);
+  gap: 9px;
+  color: var(--vp-c-text-3);
   font-size: 0.8rem;
+  font-weight: 700;
 }
 
 .archive-body h2 {
   margin: 0;
-  font-size: 1.08rem;
-  line-height: 1.5;
+  font-size: 1.2rem;
+  line-height: 1.45;
+  letter-spacing: 0;
 }
 
 .archive-body p {
   margin: 0;
   color: var(--vp-c-text-2);
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
 .archive-tags {
@@ -272,17 +289,23 @@ const latestDate = articles[0]?.date ?? '持续更新'
 .tag-pill {
   display: inline-flex;
   align-items: center;
-  min-height: 26px;
+  min-height: 27px;
   padding: 0 10px;
-  border: 1px solid color-mix(in srgb, var(--vp-c-brand) 18%, transparent);
-  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand) 18%, var(--vp-c-divider));
+  border-radius: 8px;
   color: var(--vp-c-brand);
-  background: color-mix(in srgb, var(--vp-c-brand) 6%, transparent);
-  font-size: 0.76rem;
+  background: color-mix(in srgb, var(--vp-c-brand) 6%, var(--vp-c-bg-soft));
+  font-size: 0.78rem;
+  font-weight: 700;
 }
 
 @media (max-width: 960px) {
-  .archive-layout {
+  .article-archive {
+    width: min(100% - 28px, 760px);
+  }
+
+  .archive-hero,
+  .archive-shell {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -291,19 +314,21 @@ const latestDate = articles[0]?.date ?? '持续更新'
   }
 }
 
-@media (max-width: 720px) {
-  .archive-head {
-    flex-direction: column;
-    align-items: flex-start;
+@media (max-width: 680px) {
+  .archive-hero h1 {
+    font-size: 2rem;
   }
 
-  .archive-meta {
-    width: 100%;
-    flex-direction: column;
+  .archive-stats {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .archive-card {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .archive-cover {
+    min-height: 190px;
   }
 }
 </style>

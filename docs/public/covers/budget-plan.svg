@@ -1,0 +1,63 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Budget plan cover</title>
+  <desc id="desc">A clean editorial illustration with a monthly budget board, envelopes, and allocation charts.</desc>
+  <defs>
+    <linearGradient id="bg" x1="96" y1="46" x2="1086" y2="628" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FBFF"/>
+      <stop offset="1" stop-color="#F4F1FF"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0F2740" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="675" rx="40" fill="url(#bg)"/>
+  <circle cx="201" cy="520" r="76" fill="#D7F7EA"/>
+  <circle cx="1015" cy="130" r="86" fill="#E8DEFF"/>
+  <circle cx="1032" cy="518" r="44" fill="#FFE8B5"/>
+  <g opacity="0.42" stroke="#C9D6E4" stroke-width="2">
+    <path d="M122 166H1064"/>
+    <path d="M122 278H1064"/>
+    <path d="M122 390H1064"/>
+    <path d="M122 502H1064"/>
+    <path d="M242 98V575"/>
+    <path d="M386 98V575"/>
+    <path d="M530 98V575"/>
+    <path d="M674 98V575"/>
+    <path d="M818 98V575"/>
+    <path d="M962 98V575"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="276" y="130" width="482" height="404" rx="32" fill="#FFFFFF"/>
+    <rect x="276" y="130" width="482" height="78" rx="32" fill="#1677FF"/>
+    <path d="M276 180H758" stroke="#1677FF" stroke-width="56"/>
+    <circle cx="334" cy="168" r="13" fill="#FFFFFF" opacity="0.75"/>
+    <circle cx="382" cy="168" r="13" fill="#FFFFFF" opacity="0.75"/>
+    <circle cx="430" cy="168" r="13" fill="#FFFFFF" opacity="0.75"/>
+    <rect x="322" y="256" width="152" height="70" rx="18" fill="#EEF5FF"/>
+    <rect x="504" y="256" width="196" height="70" rx="18" fill="#F3F7FB"/>
+    <rect x="322" y="356" width="378" height="22" rx="11" fill="#E7EDF5"/>
+    <rect x="322" y="410" width="274" height="22" rx="11" fill="#E7EDF5"/>
+    <rect x="322" y="464" width="330" height="22" rx="11" fill="#E7EDF5"/>
+    <path d="M350 291H438" stroke="#49C7B8" stroke-width="15" stroke-linecap="round"/>
+    <path d="M532 291H662" stroke="#8B5CF6" stroke-width="15" stroke-linecap="round"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="778" y="242" width="214" height="138" rx="28" fill="#FFFFFF"/>
+    <path d="M778 283L885 338L992 283" stroke="#FFB928" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="810" y="416" width="164" height="72" rx="22" fill="#FFFFFF"/>
+    <path d="M836 452H944" stroke="#49C7B8" stroke-width="14" stroke-linecap="round"/>
+  </g>
+  <g filter="url(#shadow)">
+    <circle cx="225" cy="260" r="84" fill="#FFFFFF"/>
+    <path d="M225 188A72 72 0 1 1 163 296" stroke="#49C7B8" stroke-width="28" stroke-linecap="round"/>
+    <path d="M225 188A72 72 0 0 1 296 272" stroke="#FFB928" stroke-width="28" stroke-linecap="round"/>
+    <path d="M163 296A72 72 0 0 1 225 188" stroke="#1677FF" stroke-width="28" stroke-linecap="round"/>
+    <circle cx="225" cy="260" r="38" fill="#FFFFFF"/>
+  </g>
+  <g opacity="0.9">
+    <rect x="124" y="436" width="156" height="56" rx="18" fill="#FFFFFF"/>
+    <path d="M158 464H246" stroke="#C9D6E4" stroke-width="12" stroke-linecap="round"/>
+    <rect x="880" y="145" width="160" height="56" rx="18" fill="#FFFFFF"/>
+    <path d="M912 173H1008" stroke="#C9D6E4" stroke-width="12" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -45,6 +45,10 @@ defineProps<{
         <path d="M6 5a2 2 0 0 0-2 2v10a2 2 0 0 1 2-2h9" />
         <path d="M9 9h4" />
       </g>
+      <g v-else-if="name === 'arrow-right'">
+        <path d="M5 12h12" />
+        <path d="m13 6 6 6-6 6" />
+      </g>
       <g v-else>
         <path d="M12 3a6 6 0 0 0-3 11v2h6v-2a6 6 0 0 0-3-11z" />
         <path d="M10.5 21h3" />

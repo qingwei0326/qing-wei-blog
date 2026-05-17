@@ -4,6 +4,7 @@ description: 看清促销、冲动和从众心理，减少不必要的支出，�
 date: 2024-05-13
 tags: [消费智慧, 理性消费]
 categories: [理财知识]
+cover: /covers/consumption-traps.svg
 ---
 
 # 识别消费陷阱

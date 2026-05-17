@@ -1,0 +1,68 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Finance beginner cover</title>
+  <desc id="desc">A clean editorial illustration with coins, a notebook, a growth chart, and a small plant.</desc>
+  <defs>
+    <linearGradient id="bg" x1="80" y1="54" x2="1080" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6FBFF"/>
+      <stop offset="1" stop-color="#EDF7F3"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="202" y1="170" x2="486" y2="478" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2E8BFF"/>
+      <stop offset="1" stop-color="#49C7B8"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0F2740" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="675" rx="40" fill="url(#bg)"/>
+  <path d="M0 510C182 460 286 554 465 515C642 476 723 355 900 388C1035 413 1115 509 1200 486V675H0V510Z" fill="#E0F2FE"/>
+  <circle cx="990" cy="145" r="82" fill="#D7F7EA"/>
+  <circle cx="187" cy="141" r="54" fill="#FFE8B5"/>
+  <circle cx="1050" cy="510" r="32" fill="#BEEAE3"/>
+  <g opacity="0.55" stroke="#B8C7D9" stroke-width="2">
+    <path d="M110 255H1045"/>
+    <path d="M110 340H1045"/>
+    <path d="M110 425H1045"/>
+    <path d="M232 110V560"/>
+    <path d="M392 110V560"/>
+    <path d="M552 110V560"/>
+    <path d="M712 110V560"/>
+    <path d="M872 110V560"/>
+    <path d="M1032 110V560"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="268" y="158" width="404" height="356" rx="28" fill="#FFFFFF"/>
+    <rect x="300" y="206" width="340" height="26" rx="13" fill="#DDEBFA"/>
+    <rect x="300" y="262" width="252" height="18" rx="9" fill="#EEF4FA"/>
+    <rect x="300" y="304" width="300" height="18" rx="9" fill="#EEF4FA"/>
+    <rect x="300" y="346" width="212" height="18" rx="9" fill="#EEF4FA"/>
+    <rect x="300" y="410" width="58" height="70" rx="14" fill="#D7F7EA"/>
+    <rect x="386" y="374" width="58" height="106" rx="14" fill="#BFE0FF"/>
+    <rect x="472" y="322" width="58" height="158" rx="14" fill="#6CC7BF"/>
+    <path d="M320 450C385 430 432 374 508 334C558 308 586 277 622 244" stroke="#1677FF" stroke-width="14" stroke-linecap="round"/>
+    <circle cx="622" cy="244" r="16" fill="#1677FF"/>
+  </g>
+  <g filter="url(#shadow)">
+    <circle cx="766" cy="246" r="76" fill="#FFFFFF"/>
+    <circle cx="766" cy="246" r="48" fill="#FFE6A6"/>
+    <path d="M744 248H788" stroke="#6B5A21" stroke-width="13" stroke-linecap="round"/>
+    <path d="M766 224V272" stroke="#6B5A21" stroke-width="13" stroke-linecap="round"/>
+    <circle cx="844" cy="350" r="58" fill="#FFFFFF"/>
+    <circle cx="844" cy="350" r="34" fill="#BFE0FF"/>
+    <path d="M823 352H865" stroke="#1D4F88" stroke-width="11" stroke-linecap="round"/>
+  </g>
+  <g filter="url(#shadow)">
+    <path d="M766 505C756 454 785 416 824 402C839 449 817 493 766 505Z" fill="#44B678"/>
+    <path d="M759 507C705 492 684 448 697 403C748 417 777 454 759 507Z" fill="#7BCF9A"/>
+    <path d="M764 507V574" stroke="#2F8E60" stroke-width="12" stroke-linecap="round"/>
+    <rect x="704" y="555" width="126" height="42" rx="21" fill="#2F8E60"/>
+  </g>
+  <g opacity="0.9">
+    <rect x="870" y="178" width="160" height="54" rx="18" fill="#FFFFFF"/>
+    <circle cx="900" cy="205" r="11" fill="#49C7B8"/>
+    <rect x="925" y="194" width="78" height="12" rx="6" fill="#DDEBFA"/>
+    <rect x="870" y="258" width="208" height="54" rx="18" fill="#FFFFFF"/>
+    <circle cx="900" cy="285" r="11" fill="#FFCA52"/>
+    <rect x="925" y="274" width="118" height="12" rx="6" fill="#DDEBFA"/>
+  </g>
+</svg>

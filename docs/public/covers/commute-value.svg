@@ -1,0 +1,55 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Commute value cover</title>
+  <desc id="desc">A clean editorial illustration with a city route, a car, a clock, and a saved-time motif.</desc>
+  <defs>
+    <linearGradient id="bg" x1="74" y1="52" x2="1092" y2="622" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6FAFF"/>
+      <stop offset="1" stop-color="#F9F6EA"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0F2740" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="675" rx="40" fill="url(#bg)"/>
+  <circle cx="168" cy="132" r="70" fill="#DDEBFF"/>
+  <circle cx="1018" cy="174" r="92" fill="#FFF0B8"/>
+  <circle cx="1037" cy="528" r="44" fill="#D7F7EA"/>
+  <g opacity="0.65" stroke="#C8D3E0" stroke-width="22" stroke-linecap="round">
+    <path d="M126 470C248 390 303 246 424 269C550 293 545 462 685 454C826 446 847 254 1000 222"/>
+  </g>
+  <path d="M126 470C248 390 303 246 424 269C550 293 545 462 685 454C826 446 847 254 1000 222" stroke="#1677FF" stroke-width="14" stroke-linecap="round" stroke-dasharray="2 34"/>
+  <g filter="url(#shadow)">
+    <rect x="338" y="264" width="526" height="220" rx="34" fill="#FFFFFF"/>
+    <path d="M464 383H742" stroke="#253348" stroke-width="40" stroke-linecap="round"/>
+    <path d="M430 385C442 332 488 298 552 298H650C708 298 756 330 782 383" fill="#4C8EF7"/>
+    <path d="M503 319H635C678 319 718 343 741 381H458C466 346 480 326 503 319Z" fill="#DDEBFF"/>
+    <circle cx="498" cy="409" r="33" fill="#253348"/>
+    <circle cx="712" cy="409" r="33" fill="#253348"/>
+    <circle cx="498" cy="409" r="13" fill="#FFFFFF"/>
+    <circle cx="712" cy="409" r="13" fill="#FFFFFF"/>
+    <rect x="816" y="312" width="130" height="48" rx="24" fill="#E7F7F2"/>
+    <path d="M848 336H914" stroke="#35A67A" stroke-width="13" stroke-linecap="round"/>
+    <path d="M884 302V370" stroke="#35A67A" stroke-width="13" stroke-linecap="round"/>
+  </g>
+  <g filter="url(#shadow)">
+    <circle cx="299" cy="230" r="78" fill="#FFFFFF"/>
+    <circle cx="299" cy="230" r="48" fill="#EEF5FF"/>
+    <path d="M299 198V232L326 247" stroke="#1677FF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M256 288L230 324" stroke="#4B5B70" stroke-width="10" stroke-linecap="round"/>
+    <path d="M342 288L368 324" stroke="#4B5B70" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="794" y="116" width="210" height="92" rx="28" fill="#FFFFFF"/>
+    <circle cx="840" cy="162" r="22" fill="#FFE6A6"/>
+    <path d="M834 162H847" stroke="#6B5A21" stroke-width="8" stroke-linecap="round"/>
+    <path d="M862 150H964" stroke="#C9D6E4" stroke-width="12" stroke-linecap="round"/>
+    <path d="M862 176H930" stroke="#E5EDF5" stroke-width="12" stroke-linecap="round"/>
+  </g>
+  <g opacity="0.85">
+    <rect x="155" y="418" width="72" height="72" rx="20" fill="#FFFFFF"/>
+    <path d="M181 458H203" stroke="#49C7B8" stroke-width="10" stroke-linecap="round"/>
+    <path d="M192 447V469" stroke="#49C7B8" stroke-width="10" stroke-linecap="round"/>
+    <rect x="960" y="356" width="78" height="78" rx="22" fill="#FFFFFF"/>
+    <path d="M982 395L996 409L1018 381" stroke="#FFB928" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

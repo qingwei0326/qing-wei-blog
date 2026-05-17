@@ -2,864 +2,988 @@
 import { computed } from 'vue'
 import { articleCategories, articleTags, articles } from '../data/articles'
 
-const quickLinks = [
+const blogCover = '/images/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2.png'
+
+const spotlight = computed(() => articles.slice(0, 3))
+const latest = computed(() => articles.slice(0, 5))
+const latestLabel = computed(() => articles[0]?.date || '持续更新')
+const totalTags = computed(() => articleTags.length)
+const heroTags = computed(() => articleTags.slice(0, 6))
+
+const categoryStats = computed(() =>
+  articleCategories.map((category) => ({
+    name: category,
+    count: articles.filter((article) => article.categories.includes(category)).length
+  }))
+)
+
+const heroFeatures = [
   {
     icon: 'spark',
-    label: '推荐文章',
-    description: '先读最近值得看的内容',
-    href: '#推荐文章'
+    title: '真实账单',
+    detail: '把省钱、通勤和消费判断写成能重复执行的方法。'
   },
   {
     icon: 'clock',
-    label: '最新文章',
-    description: '按时间顺序浏览更新',
-    href: '#最新文章'
+    title: '持续更新',
+    detail: '优先整理最近仍然有效、还能直接照着做的方案。'
   },
   {
     icon: 'archive',
-    label: '文章归档',
-    description: '查看全部文章列表',
-    href: '/articles/'
-  },
-  {
-    icon: 'tag',
-    label: '标签云',
-    description: '按主题快速定位',
-    href: '#标签云'
-  },
-  {
-    icon: 'user',
-    label: '关于青微',
-    description: '看看这个博客在写什么',
-    href: '/about'
+    title: '文章归档',
+    detail: '从新手理财到日常效率，把经验沉淀成长期可查的清单。'
   }
 ]
 
-const spotlight = computed(() => articles.slice(0, 3))
-const latest = computed(() => articles.slice(0, 4))
-const totalTags = computed(() => articleTags.length)
-const totalCategories = computed(() => articleCategories.length || 1)
-const latestLabel = computed(() => articles[0]?.date || '持续更新')
+const boardStyle = computed(() => ({
+  '--home-cover-url': `url(${blogCover})`
+}))
 </script>
 
 <template>
-  <div class="home-board">
-    <div class="home-grid">
-      <aside class="home-sidebar">
-        <section class="panel sticky-panel">
-          <p class="panel-kicker">导航</p>
-          <nav class="link-list" aria-label="主页导航">
-            <a
-              v-for="link in quickLinks"
-              :key="link.label"
-              class="link-item"
-              :href="link.href"
-            >
-              <span class="link-icon" aria-hidden="true">
-                <FeatureIcon :name="link.icon" />
-              </span>
-              <span class="link-copy">
-                <strong>{{ link.label }}</strong>
-                <small>{{ link.description }}</small>
-              </span>
-            </a>
-          </nav>
-        </section>
+  <div class="home-board" :style="boardStyle">
+    <section class="home-hero">
+      <div class="hero-backdrop" aria-hidden="true"></div>
 
-        <section class="panel">
-          <p class="panel-kicker">专题</p>
-          <div class="topic-cloud">
-            <a
-              v-for="tag in articleTags"
-              :key="tag"
-              class="topic-chip"
-              href="/articles/"
-            >
-              {{ tag }}
-            </a>
+      <div class="hero-copy">
+        <p class="eyebrow">青微的博客</p>
+        <h1>把日常选择写成可复用的判断。</h1>
+        <p class="hero-lead">
+          记录理财、消费、通勤和工具使用里的真实经验。少一点口号，多一点可以照着做的细节。
+        </p>
+
+        <div class="hero-actions">
+          <a class="action action-primary" href="/articles/">浏览文章</a>
+          <a class="action action-secondary" href="/about">关于作者</a>
+        </div>
+
+        <dl class="hero-stats">
+          <div>
+            <dt>文章</dt>
+            <dd>{{ articles.length }}</dd>
           </div>
-        </section>
-      </aside>
+          <div>
+            <dt>标签</dt>
+            <dd>{{ totalTags }}</dd>
+          </div>
+          <div>
+            <dt>最近更新</dt>
+            <dd>{{ latestLabel }}</dd>
+          </div>
+        </dl>
 
-      <main class="home-main">
-        <section class="hero-band">
-          <div class="hero-copy">
-            <p class="hero-kicker">青微的博客</p>
-            <h1>信息 · 思考 · 执行</h1>
-            <p class="hero-lead">
-              记录认知迭代的过程，保留技巧、观察与真实的思考。
-            </p>
-            <div class="hero-actions">
-              <a class="action action-primary" href="/articles/">查看文章</a>
-              <a class="action action-secondary" href="/about">认识青微</a>
+        <div class="hero-tags" aria-label="站点主题">
+          <span v-for="tag in heroTags" :key="tag">{{ tag }}</span>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <figure class="blog-cover">
+          <img :src="blogCover" alt="青微的博客封面" decoding="async" fetchpriority="high" />
+        </figure>
+
+        <a
+          v-if="spotlight[0]"
+          class="hero-focus"
+          :href="spotlight[0].url"
+        >
+          <div class="hero-focus__meta">
+            <span>本期推荐</span>
+            <time :datetime="spotlight[0].date">{{ spotlight[0].date }}</time>
+          </div>
+          <strong>{{ spotlight[0].title }}</strong>
+          <span>{{ spotlight[0].description }}</span>
+          <span class="hero-focus__arrow" aria-hidden="true">
+            <FeatureIcon name="arrow-right" />
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <section class="feature-strip" aria-label="首页风格说明">
+      <article
+        v-for="feature in heroFeatures"
+        :key="feature.title"
+        class="feature-card"
+      >
+        <span class="feature-card__icon" aria-hidden="true">
+          <FeatureIcon :name="feature.icon" />
+        </span>
+        <div class="feature-card__copy">
+          <strong>{{ feature.title }}</strong>
+          <p>{{ feature.detail }}</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="content-section" aria-labelledby="spotlight-heading">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Spotlight</p>
+          <h2 id="spotlight-heading">近期值得看</h2>
+        </div>
+        <a class="section-link" href="/articles/">查看全部</a>
+      </div>
+
+      <div class="story-grid">
+        <a
+          v-for="(article, index) in spotlight"
+          :key="article.slug"
+          class="story-card"
+          :class="{ 'is-lead': index === 0 }"
+          :href="article.url"
+        >
+          <div class="story-media" :class="{ 'is-placeholder': !article.cover }">
+            <img v-if="article.cover" :src="article.cover" :alt="article.title" />
+            <div v-else class="visual-placeholder" aria-hidden="true">
+              <FeatureIcon name="book" />
             </div>
-            <dl class="hero-stats">
-              <div>
-                <dt>文章</dt>
-                <dd>{{ articles.length }}</dd>
-              </div>
-              <div>
-                <dt>标签</dt>
-                <dd>{{ totalTags }}</dd>
-              </div>
-              <div>
-                <dt>主题</dt>
-                <dd>{{ totalCategories }}</dd>
-              </div>
-            </dl>
           </div>
 
-          <div class="hero-visual">
-            <div class="mosaic">
-              <a
-                v-for="(article, index) in spotlight"
-                :key="article.slug"
-                class="mosaic-item"
-                :class="{ 'is-lead': index === 0 }"
-                :href="article.url"
+          <div class="story-body">
+            <div class="meta-row">
+              <time :datetime="article.date">{{ article.date }}</time>
+              <span v-if="article.categories[0]">{{ article.categories[0] }}</span>
+            </div>
+            <h3>{{ article.title }}</h3>
+            <p>{{ article.description }}</p>
+            <div class="tag-row">
+              <span
+                v-for="tag in article.tags.slice(0, 3)"
+                :key="tag"
+                class="mini-tag"
               >
-                <img v-if="article.cover" :src="article.cover" :alt="article.title" />
-                <div v-else class="mosaic-placeholder" aria-hidden="true">
-                  <FeatureIcon :name="index === 0 ? 'spark' : 'book'" />
-                </div>
-                <div class="mosaic-overlay">
-                  <span>{{ article.date }}</span>
-                  <strong>{{ article.title }}</strong>
-                </div>
-              </a>
-            </div>
-            <div class="hero-meta">
-              <strong>最近更新</strong>
-              <span>{{ latestLabel }}</span>
+                {{ tag }}
+              </span>
             </div>
           </div>
-        </section>
+        </a>
+      </div>
+    </section>
 
-        <section id="推荐文章" class="content-section">
-          <div class="section-head">
-            <div>
-              <p class="panel-kicker">推荐</p>
-              <h2>推荐文章</h2>
-            </div>
-            <a class="section-link" href="/articles/">查看全部</a>
+    <section class="home-split">
+      <div class="content-section panel-card">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Latest</p>
+            <h2>最新文章</h2>
           </div>
+        </div>
 
-          <div class="featured-grid">
-            <a
-              v-for="article in spotlight"
-              :key="article.slug"
-              class="featured-card"
-              :href="article.url"
-            >
-              <div class="featured-cover" :class="{ 'is-placeholder': !article.cover }">
-                <img v-if="article.cover" :src="article.cover" :alt="article.title" />
-                <div v-else class="featured-placeholder" aria-hidden="true">
-                  <FeatureIcon name="book" />
-                  <span>{{ article.categories[0] ?? '随笔' }}</span>
-                </div>
-              </div>
-              <div class="featured-body">
-                <div class="featured-meta">
-                  <time :datetime="article.date">{{ article.date }}</time>
-                  <span v-if="article.categories[0]">{{ article.categories[0] }}</span>
-                </div>
-                <h3>{{ article.title }}</h3>
-                <p>{{ article.description }}</p>
-                <div class="tag-row">
-                  <span
-                    v-for="tag in article.tags.slice(0, 3)"
-                    :key="tag"
-                    class="mini-tag"
-                  >
-                    {{ tag }}
-                  </span>
-                </div>
-              </div>
-            </a>
-          </div>
-        </section>
+        <div class="timeline-list">
+          <a
+            v-for="article in latest"
+            :key="`${article.slug}-latest`"
+            class="timeline-item"
+            :href="article.url"
+          >
+            <time :datetime="article.date">{{ article.date }}</time>
+            <strong>{{ article.title }}</strong>
+            <span>{{ article.description }}</span>
+          </a>
+        </div>
+      </div>
 
-        <section id="最新文章" class="content-section">
-          <div class="section-head">
-            <div>
-              <p class="panel-kicker">最新</p>
-              <h2>最新文章</h2>
-            </div>
-            <a class="section-link" href="/articles/">归档</a>
+      <div class="content-section panel-card">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Topics</p>
+            <h2>主题索引</h2>
           </div>
+        </div>
 
-          <div class="latest-list">
-            <a
-              v-for="article in latest"
-              :key="article.slug"
-              class="latest-card"
-              :href="article.url"
-            >
-              <div class="latest-copy">
-                <div class="latest-meta">
-                  <time :datetime="article.date">{{ article.date }}</time>
-                  <span v-if="article.categories[0]">{{ article.categories[0] }}</span>
-                </div>
-                <h3>{{ article.title }}</h3>
-                <p>{{ article.description }}</p>
-                <div class="tag-row">
-                  <span
-                    v-for="tag in article.tags.slice(0, 4)"
-                    :key="tag"
-                    class="mini-tag"
-                  >
-                    {{ tag }}
-                  </span>
-                </div>
-              </div>
-              <span class="latest-arrow" aria-hidden="true">→</span>
-            </a>
-          </div>
-        </section>
-      </main>
+        <div class="topic-stack">
+          <a
+            v-for="category in categoryStats"
+            :key="category.name"
+            class="topic-row"
+            href="/articles/"
+          >
+            <span>{{ category.name }}</span>
+            <strong>{{ category.count }} 篇</strong>
+          </a>
+        </div>
 
-      <aside class="home-sidebar home-aside">
-        <section class="panel profile-card">
-          <img class="avatar" src="/logo.svg" alt="青微的博客" />
-          <p class="panel-kicker">关于</p>
-          <h2>青微</h2>
-          <p class="profile-lead">技术博主 / 个人记录 / 生活与折腾</p>
-          <p class="profile-copy">
-            这里记录工具、经验和判断，尽量把复杂事情讲清楚。
-          </p>
-          <div class="profile-links">
-            <a href="/articles/">文章归档</a>
-            <a href="/about">关于我</a>
-            <a href="https://github.com/qingwei0326/qing-wei-blog" target="_blank" rel="noreferrer">
-              GitHub
-            </a>
-          </div>
-        </section>
-
-        <section class="panel">
-          <p class="panel-kicker">最近文章</p>
-          <div class="compact-list">
-            <a
-              v-for="article in latest"
-              :key="`${article.slug}-compact`"
-              class="compact-item"
-              :href="article.url"
-            >
-              <span>{{ article.date }}</span>
-              <strong>{{ article.title }}</strong>
-            </a>
-          </div>
-        </section>
-
-        <section id="标签云" class="panel">
-          <p class="panel-kicker">标签云</p>
-          <div class="topic-cloud">
-            <a v-for="tag in articleTags" :key="`aside-${tag}`" class="topic-chip" href="/articles/">
-              {{ tag }}
-            </a>
-          </div>
-        </section>
-      </aside>
-    </div>
+        <div class="tag-cloud" aria-label="标签云">
+          <a v-for="tag in articleTags" :key="tag" href="/articles/">
+            {{ tag }}
+          </a>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <style scoped>
 .home-board {
-  width: 100%;
+  --board-max-width: 1180px;
+  --hero-surface: color-mix(in srgb, var(--vp-c-bg-soft) 84%, transparent);
+  --hero-surface-strong: color-mix(in srgb, var(--vp-c-bg-soft) 92%, transparent);
+  --hero-surface-hover: color-mix(in srgb, var(--vp-c-bg-soft) 98%, transparent);
+  --hero-border: color-mix(in srgb, var(--vp-c-divider) 84%, transparent);
+  width: min(var(--board-max-width), calc(100vw - 48px));
+  margin: 0 auto;
+  padding: 34px 0 56px;
 }
 
-.home-grid {
+.home-hero {
+  position: relative;
+  overflow: hidden;
   display: grid;
-  grid-template-columns: 220px minmax(0, 1fr) 300px;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 360px);
   gap: 24px;
-  align-items: start;
-}
-
-.home-sidebar {
-  display: grid;
-  gap: 16px;
-}
-
-.panel {
-  padding: 16px;
+  align-items: center;
+  min-height: 430px;
+  padding: 40px;
   border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
-  background: var(--vp-c-bg-soft);
+  border-radius: 28px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--vp-c-brand) 10%, transparent), transparent 52%),
+    linear-gradient(160deg, var(--vp-c-bg-soft), var(--vp-c-bg-mute));
+  box-shadow: 0 24px 64px rgb(15 23 42 / 8%);
 }
 
-.sticky-panel {
-  position: sticky;
-  top: 96px;
+.hero-backdrop {
+  position: absolute;
+  inset: 0;
+  background-image: var(--home-cover-url);
+  background-position: center;
+  background-size: cover;
+  opacity: 0.08;
+  transform: scale(1.04);
 }
 
-.panel-kicker,
-.hero-kicker {
-  margin: 0 0 10px;
-  color: var(--vp-c-text-3);
+.hero-backdrop::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, var(--vp-c-bg-soft) 16%, rgb(255 255 255 / 70%) 44%, transparent 100%);
+}
+
+.hero-copy,
+.hero-side {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-copy {
+  display: grid;
+  gap: 20px;
+  align-content: center;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--vp-c-brand);
   font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 800;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.link-list {
-  display: grid;
-  gap: 10px;
-}
-
-.link-item {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  padding: 10px 0;
-  color: var(--vp-c-text-1);
-  text-decoration: none;
-}
-
-.link-item:hover {
-  text-decoration: none;
-}
-
-.link-icon {
-  display: inline-flex;
-  flex: 0 0 auto;
-  width: 32px;
-  height: 32px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid color-mix(in srgb, var(--vp-c-brand) 20%, transparent);
-  border-radius: 8px;
-  color: var(--vp-c-brand);
-  background: color-mix(in srgb, var(--vp-c-brand) 8%, transparent);
-}
-
-.link-copy {
-  display: grid;
-  gap: 2px;
-  min-width: 0;
-}
-
-.link-copy strong {
-  font-size: 0.95rem;
-  line-height: 1.3;
-}
-
-.link-copy small {
-  color: var(--vp-c-text-2);
-  font-size: 0.82rem;
-  line-height: 1.5;
-}
-
-.topic-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.topic-chip {
-  display: inline-flex;
-  align-items: center;
-  min-height: 30px;
-  padding: 0 12px;
-  border: 1px solid color-mix(in srgb, var(--vp-c-brand) 24%, transparent);
-  border-radius: 999px;
-  color: var(--vp-c-brand);
-  background: color-mix(in srgb, var(--vp-c-brand) 8%, transparent);
-  font-size: 0.82rem;
-  text-decoration: none;
-}
-
-.home-main {
-  display: grid;
-  gap: 24px;
-}
-
-.hero-band {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
-  gap: 24px;
-  align-items: start;
-  padding: 8px 0 4px;
-}
-
 .hero-copy h1 {
+  max-width: 10em;
   margin: 0;
-  font-size: clamp(2rem, 3vw, 3.2rem);
+  font-size: 3.25rem;
   line-height: 1.08;
   letter-spacing: 0;
 }
 
 .hero-lead {
-  margin: 14px 0 0;
+  max-width: 34rem;
+  margin: 0;
   color: var(--vp-c-text-2);
-  font-size: 1rem;
-  line-height: 1.8;
+  font-size: 1.05rem;
+  line-height: 1.9;
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 18px;
+  gap: 12px;
 }
 
 .action {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
-  padding: 0 14px;
+  min-height: 44px;
+  padding: 0 18px;
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: 10px;
+  font-size: 0.94rem;
+  font-weight: 700;
   text-decoration: none;
-  font-size: 0.92rem;
-  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.action:hover {
+  transform: translateY(-1px);
+  text-decoration: none;
 }
 
 .action-primary {
   color: #fff;
-  background: var(--vp-c-brand);
+  background: linear-gradient(135deg, var(--vp-c-brand), var(--vp-c-brand-dark));
+  box-shadow: 0 14px 26px rgb(22 119 255 / 18%);
 }
 
 .action-primary:hover {
-  background: var(--vp-c-brand-dark);
-  text-decoration: none;
+  color: #fff;
 }
 
 .action-secondary {
-  border-color: var(--vp-c-divider);
+  border-color: var(--hero-border);
   color: var(--vp-c-text-1);
-  background: var(--vp-c-bg-soft);
+  background: var(--hero-surface);
+}
+
+.action-secondary:hover {
+  color: var(--vp-c-brand-dark);
+  background: var(--hero-surface-hover);
 }
 
 .hero-stats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
   gap: 12px;
-  margin: 18px 0 0;
+  margin: 0;
 }
 
 .hero-stats div {
-  padding-top: 12px;
-  border-top: 1px solid var(--vp-c-divider);
+  padding: 14px;
+  border: 1px solid var(--hero-border);
+  border-radius: 14px;
+  background: var(--hero-surface);
+  backdrop-filter: blur(8px);
 }
 
 .hero-stats dt {
   color: var(--vp-c-text-3);
   font-size: 0.78rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.hero-stats dd {
-  margin: 6px 0 0;
-  color: var(--vp-c-text-1);
-  font-size: 1rem;
   font-weight: 700;
 }
 
-.hero-visual {
-  display: grid;
+.hero-stats dd {
+  margin: 5px 0 0;
+  color: var(--vp-c-text-1);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
-.mosaic {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  grid-template-rows: 140px 140px;
-  gap: 10px;
+.hero-tags span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 12px;
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand) 18%, var(--vp-c-divider));
+  border-radius: 999px;
+  color: var(--vp-c-brand);
+  background: color-mix(in srgb, var(--vp-c-brand) 6%, var(--hero-surface-strong));
+  font-size: 0.8rem;
+  font-weight: 700;
 }
 
-.mosaic-item {
-  position: relative;
+.hero-side {
+  display: grid;
+  gap: 16px;
+  align-content: center;
+}
+
+.blog-cover {
+  aspect-ratio: 16 / 11;
+  margin: 0;
   overflow: hidden;
-  border-radius: 8px;
   border: 1px solid var(--vp-c-divider);
+  border-radius: 22px;
   background: var(--vp-c-bg-soft);
-  text-decoration: none;
+  box-shadow: 0 20px 60px rgb(15 23 42 / 12%);
 }
 
-.mosaic-item.is-lead {
-  grid-row: span 2;
-}
-
-.mosaic-item img,
-.mosaic-placeholder {
+.blog-cover img {
+  display: block;
   width: 100%;
   height: 100%;
   margin: 0;
-}
-
-.mosaic-item img {
   object-fit: cover;
 }
 
-.mosaic-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--vp-c-brand);
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--vp-c-brand) 22%, transparent), transparent 62%),
-    var(--vp-c-bg-mute);
+.hero-focus {
+  display: grid;
+  gap: 10px;
+  padding: 18px;
+  border: 1px solid var(--hero-border);
+  border-radius: 18px;
+  background: var(--hero-surface);
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+  backdrop-filter: blur(12px);
 }
 
-.mosaic-placeholder :deep(svg) {
-  width: 52px;
-  height: 52px;
+.hero-focus:hover {
+  border-color: color-mix(in srgb, var(--vp-c-brand) 46%, var(--vp-c-divider));
+  text-decoration: none;
 }
 
-.mosaic-overlay {
-  position: absolute;
-  inset: auto 0 0;
-  padding: 14px;
-  color: #fff;
-  background: linear-gradient(180deg, rgb(0 0 0 / 0%), rgb(0 0 0 / 68%));
-}
-
-.mosaic-overlay span {
-  display: block;
-  font-size: 0.74rem;
-  opacity: 0.85;
-}
-
-.mosaic-overlay strong {
-  display: block;
-  margin-top: 4px;
-  font-size: 0.92rem;
-  line-height: 1.45;
-}
-
-.hero-meta {
+.hero-focus__meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 12px 14px;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
+  color: var(--vp-c-text-3);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.hero-focus strong {
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+
+.hero-focus > span {
+  color: var(--vp-c-text-2);
+  line-height: 1.8;
+}
+
+.hero-focus__arrow {
+  width: 18px;
+  height: 18px;
+  color: var(--vp-c-brand);
+}
+
+.feature-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.feature-card,
+.story-card,
+.panel-card {
+  border: 1px solid var(--hero-border);
   background: var(--vp-c-bg-soft);
 }
 
-.hero-meta strong {
-  font-size: 0.88rem;
+.feature-card {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 14px;
+  padding: 18px;
+  border-radius: 20px;
 }
 
-.hero-meta span {
+.feature-card__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  color: var(--vp-c-brand);
+  background: color-mix(in srgb, var(--vp-c-brand) 10%, var(--vp-c-bg-mute));
+}
+
+.feature-card__copy {
+  display: grid;
+  gap: 6px;
+}
+
+.feature-card__copy strong {
+  font-size: 1rem;
+}
+
+.feature-card__copy p {
+  margin: 0;
   color: var(--vp-c-text-2);
-  font-size: 0.84rem;
+  line-height: 1.7;
 }
 
 .content-section {
   display: grid;
-  gap: 14px;
+  gap: 16px;
+  margin-top: 42px;
 }
 
 .section-head {
   display: flex;
   align-items: end;
   justify-content: space-between;
-  gap: 16px;
+  gap: 18px;
 }
 
 .section-head h2 {
-  margin: 0;
-  font-size: 1.35rem;
-  line-height: 1.2;
+  margin: 6px 0 0;
+  font-size: 1.45rem;
+  line-height: 1.25;
+  letter-spacing: 0;
 }
 
 .section-link {
   color: var(--vp-c-brand);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
+  font-weight: 700;
   text-decoration: none;
 }
 
 .section-link:hover {
   color: var(--vp-c-brand-dark);
-  text-decoration: underline;
 }
 
-.featured-grid {
+.story-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  gap: 16px;
 }
 
-.featured-card {
+.story-card {
   display: grid;
-  gap: 12px;
   overflow: hidden;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
-  background: var(--vp-c-bg-soft);
+  border-radius: 22px;
   color: var(--vp-c-text-1);
   text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.featured-card:hover {
-  border-color: var(--vp-c-brand);
+.story-card:hover {
+  border-color: color-mix(in srgb, var(--vp-c-brand) 54%, var(--vp-c-divider));
+  box-shadow: 0 18px 50px rgb(15 23 42 / 9%);
+  transform: translateY(-2px);
   text-decoration: none;
 }
 
-.featured-cover {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 16 / 9;
+.story-card:not(.is-lead) {
+  grid-template-rows: 172px auto;
+}
+
+.story-card.is-lead {
+  grid-column: span 2;
+  grid-template-columns: minmax(260px, 0.92fr) minmax(0, 1fr);
+}
+
+.story-media {
+  position: relative;
   overflow: hidden;
   background: var(--vp-c-bg-mute);
 }
 
-.featured-cover.is-placeholder {
-  border-bottom: 1px solid color-mix(in srgb, var(--vp-c-brand) 16%, transparent);
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--vp-c-brand) 18%, transparent), transparent 60%),
-    var(--vp-c-bg-mute);
-}
-
-.featured-cover img {
+.story-media img {
+  display: block;
   width: 100%;
   height: 100%;
   margin: 0;
   object-fit: cover;
 }
 
-.featured-placeholder {
+.story-body {
   display: grid;
   gap: 10px;
-  justify-items: center;
-  color: var(--vp-c-brand);
+  align-content: center;
+  padding: 18px;
 }
 
-.featured-placeholder :deep(svg) {
-  width: 48px;
-  height: 48px;
-}
-
-.featured-placeholder span {
-  color: var(--vp-c-text-2);
-  font-size: 0.84rem;
-}
-
-.featured-body {
-  display: grid;
-  gap: 10px;
-  padding: 0 14px 14px;
-}
-
-.featured-meta,
-.latest-meta {
+.meta-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  color: var(--vp-c-text-2);
+  gap: 10px;
+  color: var(--vp-c-text-3);
   font-size: 0.8rem;
+  font-weight: 700;
 }
 
-.featured-body h3,
-.latest-copy h3 {
+.story-body h3 {
   margin: 0;
-  font-size: 1rem;
-  line-height: 1.45;
+  line-height: 1.35;
+  letter-spacing: 0;
 }
 
-.featured-body p,
-.latest-copy p,
-.profile-copy,
-.profile-lead {
+.story-body p {
   margin: 0;
   color: var(--vp-c-text-2);
-  font-size: 0.92rem;
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
-.tag-row {
+.tag-row,
+.tag-cloud {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
-.mini-tag {
+.mini-tag,
+.tag-cloud a {
   display: inline-flex;
   align-items: center;
-  min-height: 26px;
+  min-height: 28px;
   padding: 0 10px;
-  border: 1px solid color-mix(in srgb, var(--vp-c-brand) 18%, transparent);
-  border-radius: 999px;
-  color: var(--vp-c-brand);
-  background: color-mix(in srgb, var(--vp-c-brand) 7%, transparent);
-  font-size: 0.76rem;
-}
-
-.latest-list {
-  display: grid;
-  gap: 12px;
-}
-
-.latest-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 16px;
-  border: 1px solid var(--vp-c-divider);
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand) 18%, var(--vp-c-divider));
   border-radius: 8px;
-  background: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-1);
-  text-decoration: none;
-}
-
-.latest-card:hover {
-  border-color: var(--vp-c-brand);
-  text-decoration: none;
-}
-
-.latest-copy {
-  display: grid;
-  gap: 8px;
-  min-width: 0;
-}
-
-.latest-arrow {
-  flex: 0 0 auto;
   color: var(--vp-c-brand);
-  font-size: 1.15rem;
-  line-height: 1;
+  background: color-mix(in srgb, var(--vp-c-brand) 6%, var(--vp-c-bg-soft));
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
 }
 
-.profile-card {
+.home-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  gap: 20px;
+}
+
+.panel-card {
+  padding: 24px;
+  border-radius: 24px;
+}
+
+.timeline-list,
+.topic-stack {
   display: grid;
   gap: 10px;
 }
 
-.avatar {
-  width: 52px;
-  height: 52px;
-  margin: 0;
-  border-radius: 8px;
-  border: 1px solid var(--vp-c-divider);
-  background: var(--vp-c-bg-soft);
-}
-
-.profile-card h2 {
-  margin: 0;
-  font-size: 1.2rem;
-}
-
-.profile-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 4px;
-}
-
-.profile-links a {
-  color: var(--vp-c-brand);
-  font-size: 0.9rem;
-  text-decoration: none;
-}
-
-.profile-links a:hover {
-  color: var(--vp-c-brand-dark);
-  text-decoration: underline;
-}
-
-.compact-list {
+.timeline-item,
+.topic-row {
   display: grid;
-  gap: 12px;
-}
-
-.compact-item {
-  display: grid;
-  gap: 4px;
-  padding-bottom: 12px;
+  gap: 5px;
+  padding: 15px 0;
   border-bottom: 1px solid var(--vp-c-divider);
   color: var(--vp-c-text-1);
   text-decoration: none;
 }
 
-.compact-item:last-child {
-  padding-bottom: 0;
-  border-bottom: 0;
-}
-
-.compact-item:hover {
+.timeline-item:hover,
+.topic-row:hover {
   color: var(--vp-c-brand);
   text-decoration: none;
 }
 
-.compact-item span {
+.timeline-item time {
   color: var(--vp-c-text-3);
-  font-size: 0.76rem;
+  font-size: 0.78rem;
+  font-weight: 700;
 }
 
-.compact-item strong {
-  font-size: 0.9rem;
-  line-height: 1.55;
+.timeline-item strong {
+  font-size: 1rem;
+  line-height: 1.45;
 }
 
-.home-aside {
-  position: sticky;
-  top: 96px;
+.timeline-item span {
+  color: var(--vp-c-text-2);
+  font-size: 0.92rem;
+  line-height: 1.7;
 }
 
-@media (max-width: 1200px) {
-  .home-grid {
-    grid-template-columns: 200px minmax(0, 1fr);
-  }
+.topic-row {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
 
-  .home-aside {
-    position: static;
-    grid-column: span 2;
-  }
+.topic-row span {
+  font-weight: 800;
+}
 
-  .hero-band {
+.topic-row strong {
+  color: var(--vp-c-text-3);
+  font-size: 0.84rem;
+}
+
+.tag-cloud {
+  margin-top: 16px;
+}
+
+.visual-placeholder {
+  display: grid;
+  height: 100%;
+  min-height: 160px;
+  place-items: center;
+  color: var(--vp-c-brand);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--vp-c-brand) 16%, transparent), transparent 62%),
+    color-mix(in srgb, var(--vp-c-brand) 5%, var(--vp-c-bg-mute));
+}
+
+.visual-placeholder :deep(svg) {
+  width: 58px;
+  height: 58px;
+}
+
+@media (max-width: 1040px) {
+  .home-hero,
+  .home-split {
     grid-template-columns: minmax(0, 1fr);
   }
-}
 
-@media (max-width: 920px) {
-  .home-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .home-aside,
-  .home-sidebar {
-    grid-column: auto;
-  }
-
-  .sticky-panel,
-  .home-aside {
-    position: static;
-  }
-
-  .featured-grid {
+  .story-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-}
 
-@media (max-width: 640px) {
-  .featured-grid {
+  .story-card.is-lead {
+    grid-column: auto;
     grid-template-columns: minmax(0, 1fr);
   }
+}
 
-  .latest-card {
-    align-items: flex-start;
+@media (max-width: 820px) {
+  .home-board {
+    width: min(100% - 28px, 760px);
+    padding-top: 22px;
   }
 
-  .mosaic {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 120px 120px;
+  .home-hero {
+    min-height: 0;
+    padding: 28px;
   }
 
-  .mosaic-item.is-lead {
-    grid-row: span 1;
+  .hero-copy h1 {
+    max-width: none;
+    font-size: 2.4rem;
+  }
+
+  .feature-strip,
+  .story-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .home-board {
+    width: min(100% - 24px, 720px);
   }
 
   .hero-stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-actions,
+  .section-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .panel-card {
+    padding: 18px;
   }
 }
+</style>
 
+<style>
+html[data-teek-preset="doc"] .home-board {
+  --board-max-width: 980px;
+}
+
+html[data-teek-preset="doc"] .home-hero {
+  min-height: 0;
+  padding: 4px 0 8px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+html[data-teek-preset="doc"] .hero-backdrop,
+html[data-teek-preset="doc"] .hero-side,
+html[data-teek-preset="doc"] .hero-tags {
+  display: none;
+}
+
+html[data-teek-preset="doc"] .hero-copy h1 {
+  max-width: 11em;
+  font-size: 3rem;
+}
+
+html[data-teek-preset="doc"] .story-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+html[data-teek-preset="doc"] .story-card.is-lead {
+  grid-column: auto;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+html[data-teek-preset="doc"] .home-split {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+html[data-teek-preset="blog"] .home-board {
+  --board-max-width: 1180px;
+}
+
+html[data-teek-preset="compact"] .home-board {
+  --board-max-width: 1080px;
+}
+
+html[data-teek-preset="compact"] .home-hero {
+  min-height: 340px;
+  padding: 30px;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  border-radius: 24px;
+}
+
+html[data-teek-preset="compact"] .hero-copy h1 {
+  max-width: 12em;
+  font-size: 2.6rem;
+}
+
+html[data-teek-preset="compact"] .story-card.is-lead {
+  grid-column: auto;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+html[data-teek-preset="large"] .home-board {
+  --board-max-width: 1120px;
+}
+
+html[data-teek-preset="large"] .home-hero {
+  min-height: 520px;
+  padding: 52px;
+  grid-template-columns: minmax(0, 1fr) 390px;
+}
+
+html[data-teek-preset="large"] .hero-backdrop {
+  opacity: 0.18;
+}
+
+html[data-teek-preset="large"] .hero-copy h1 {
+  font-size: 3.6rem;
+}
+
+html[data-teek-preset="large"] .blog-cover {
+  aspect-ratio: 4 / 5;
+}
+
+html[data-teek-preset="wide"] .home-board {
+  --board-max-width: 1240px;
+  width: min(var(--board-max-width), calc(100vw - 24px));
+  padding-top: 0;
+}
+
+html[data-teek-preset="wide"] .home-hero {
+  min-height: calc(100vh - 92px);
+  padding: 72px 52px 58px;
+  border: 0;
+  border-radius: 0 0 32px 32px;
+  background: linear-gradient(130deg, rgb(7 16 34 / 82%), rgb(12 30 60 / 56%));
+  box-shadow: 0 34px 80px rgb(15 23 42 / 18%);
+}
+
+html[data-teek-preset="wide"] .hero-backdrop {
+  opacity: 0.48;
+  transform: scale(1.08);
+}
+
+html[data-teek-preset="wide"] .eyebrow,
+html[data-teek-preset="wide"] .hero-copy h1,
+html[data-teek-preset="wide"] .hero-stats dd,
+html[data-teek-preset="wide"] .hero-focus strong {
+  color: #fff;
+}
+
+html[data-teek-preset="wide"] .hero-lead,
+html[data-teek-preset="wide"] .hero-stats dt,
+html[data-teek-preset="wide"] .hero-focus__meta,
+html[data-teek-preset="wide"] .hero-focus > span {
+  color: rgb(255 255 255 / 78%);
+}
+
+html[data-teek-preset="wide"] .hero-stats div,
+html[data-teek-preset="wide"] .hero-tags span,
+html[data-teek-preset="wide"] .hero-focus {
+  border-color: rgb(255 255 255 / 18%);
+  background: rgb(255 255 255 / 10%);
+  box-shadow: none;
+  backdrop-filter: blur(14px);
+}
+
+html[data-teek-preset="wide"] .blog-cover {
+  display: none;
+}
+
+html[data-teek-preset="wide"] .action-secondary {
+  border-color: rgb(255 255 255 / 24%);
+  color: #fff;
+  background: rgb(255 255 255 / 10%);
+}
+
+html[data-teek-preset="wide"] .action-secondary:hover {
+  color: #fff;
+  background: rgb(255 255 255 / 16%);
+}
+
+html[data-teek-preset="wide"] .feature-strip {
+  position: relative;
+  z-index: 2;
+  margin-top: -34px;
+}
+
+html[data-teek-preset="card"] .home-board {
+  --board-max-width: 1020px;
+}
+
+html[data-teek-preset="card"] .home-hero {
+  overflow: visible;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+html[data-teek-preset="card"] .hero-backdrop {
+  display: none;
+}
+
+html[data-teek-preset="card"] .hero-copy,
+html[data-teek-preset="card"] .hero-side {
+  align-self: stretch;
+  padding: 30px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 24px;
+  background: var(--vp-c-bg-soft);
+  box-shadow: 0 20px 50px rgb(15 23 42 / 8%);
+}
+
+html[data-teek-preset="card"] .hero-side {
+  align-content: space-between;
+}
+
+html[data-teek-preset="card"] .blog-cover {
+  border: 0;
+  border-radius: 18px;
+  box-shadow: none;
+}
+
+html[data-teek-preset="card"] .feature-card,
+html[data-teek-preset="card"] .story-card,
+html[data-teek-preset="card"] .panel-card {
+  border-radius: 24px;
+  box-shadow: 0 18px 48px rgb(15 23 42 / 8%);
+}
+
+html[data-teek-preset="card"] .story-card.is-lead {
+  grid-column: auto;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (max-width: 820px) {
+  html[data-teek-preset="wide"] .home-board {
+    width: min(100%, 100vw);
+  }
+
+  html[data-teek-preset="wide"] .home-hero {
+    min-height: 0;
+    padding: 108px 22px 42px;
+    border-radius: 0 0 24px 24px;
+  }
+}
 </style>

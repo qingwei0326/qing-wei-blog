@@ -4,6 +4,7 @@ description: 远距离通勤的博弈：如何通过哈啰顺风车 + 优惠券�
 date: 2024-05-15
 tags: [省钱, 通勤, 出行优化, 生活质量]
 categories: [理财知识]
+cover: /covers/commute-value.svg
 ---
 
 # 用 9 块钱买回 1 小时睡眠
@@ -38,11 +39,11 @@ categories: [理财知识]
 
 ### 数字背后的真实收益
 
-![打车价格](https://cdn.jsdelivr.net/gh/qingwei0326/qing-wei-blog@main/docs/public/images/打车价格.jpg)
+![打车价格](/images/taxi-price.jpg)
 
 *P4｜下单页面*
 
-![顺风车价格](https://cdn.jsdelivr.net/gh/qingwei0326/qing-wei-blog@main/docs/public/images/顺风车价格.jpg)
+![顺风车价格](/images/ride-share-price.jpg)
 
 *P5｜账单页面（最终扣款）*
 
@@ -82,7 +83,7 @@ categories: [理财知识]
 1. **扫描学生专属券**
    - 获取基础福利（学生专属二维码）
 
-![学生优惠券](https://cdn.jsdelivr.net/gh/qingwei0326/qing-wei-blog@main/docs/public/images/学生优惠券.png)
+![学生优惠券](/images/student-coupon.png)
 
 *P1｜学生专属券入口*
    

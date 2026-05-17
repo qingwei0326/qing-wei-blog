@@ -1,6 +1,8 @@
 import { defineConfig } from 'vitepress'
 import { defineTeekConfig } from 'vitepress-theme-teek/config'
 
+const siteCover = '/images/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2.png'
+
 const teekConfig = defineTeekConfig({
   logo: '/logo.svg',
   siteTitle: '青微的博客',
@@ -45,10 +47,10 @@ export default defineConfig({
   head: [
     ['meta', { charset: 'UTF-8' }],
     ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }],
-    ['meta', { name: 'theme-color', content: '#FFF8F3' }],
+    ['meta', { name: 'theme-color', content: '#F7F9FC' }],
+    ['meta', { property: 'og:image', content: siteCover }],
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:image', content: siteCover }],
     ['link', { rel: 'icon', href: '/favicon.ico' }],
-    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
-    ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
-    ['link', { href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Lora:wght@400;500;600;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap', rel: 'stylesheet' }],
   ]
 })
