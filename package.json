@@ -6,13 +6,16 @@
   "scripts": {
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "import:article": "node scripts/import-article.mjs"
   },
   "dependencies": {
     "vitepress": "^1.0.0",
     "vue": "^3.4.0"
   },
   "devDependencies": {
+    "@vue/compiler-dom": "^3.5.34",
+    "vite": "^5.4.21",
     "vitepress-theme-teek": "^1.5.7"
   }
 }
