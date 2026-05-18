@@ -13,3 +13,16 @@ project_all.txt
 
 # 异常 shell 残留文件
 __manus_ec=*
+
+# Edge 调试缓存
+.edge-debug-profile/
+edge-dom.err.txt
+edge-dom.out.txt
+edge-shot.err.txt
+edge-shot.out.txt
+home-preview-cdp.png
+wide-dark-preview.png
+scripts/
+
+# pnpm 缓存 (Windows)
+AppData/
