@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import { useRoute } from 'vitepress'
 
 type Preset = {
   label: string
@@ -24,6 +25,8 @@ const legacyPresetMap: Record<string, string> = {
 }
 
 const activePreset = ref(defaultPreset)
+const route = useRoute()
+const isHome = computed(() => route.path === '/')
 
 const readPreset = () => {
   try {
@@ -61,10 +64,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="config-switch" aria-label="配置切换">
+  <section v-if="isHome" class="config-switch" aria-label="配置切换">
     <div class="config-switch__head">
       <span>配置切换</span>
-      <button class="config-switch__copy" type="button" @click="resetPreset">
+      <button class="config-switch__reset" type="button" @click="resetPreset">
         默认
       </button>
     </div>
@@ -105,7 +108,7 @@ onMounted(() => {
   font-weight: 600;
 }
 
-.config-switch__copy {
+.config-switch__reset {
   padding: 0;
   border: 0;
   color: var(--vp-c-text-2);
@@ -114,7 +117,7 @@ onMounted(() => {
   line-height: 1.4;
 }
 
-.config-switch__copy:hover {
+.config-switch__reset:hover {
   color: var(--vp-c-brand);
   background: transparent;
   transform: none;

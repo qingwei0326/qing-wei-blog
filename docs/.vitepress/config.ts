@@ -42,6 +42,7 @@ export default defineConfig({
   title: '青微的博客',
   description: '青微的个人博客，记录技术、生活与折腾',
   lang: 'zh-CN',
+  appearance: true,
   ignoreDeadLinks: true,
 
   head: [
