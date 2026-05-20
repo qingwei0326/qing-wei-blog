@@ -1,28 +1,47 @@
+# 构建产物
 node_modules/
+dist/
 docs/.vitepress/cache/
 docs/.vitepress/dist/
-pnpm-lock.yaml
+
+# 打包文件
+*.exe
+win-unpacked/
+
+# 开发缓存
 project_all.txt
-
-# 开发日志
 *.log
-.vitepress-dev.err.log
-.vitepress-dev.out.log
-.vitepress-dev-current.err.log
-.vitepress-dev-current.out.log
+.vitepress-dev*.log
+*.err.txt
+*.out.txt
 
-# 异常 shell 残留文件
+# 异常 shell 残留
 __manus_ec=*
 
-# Edge 调试缓存
+# Edge 调试
 .edge-debug-profile/
-edge-dom.err.txt
-edge-dom.out.txt
-edge-shot.err.txt
-edge-shot.out.txt
 home-preview-cdp.png
 wide-dark-preview.png
+
+# Electron / 桌面
 scripts/
+config.json
+index.html
+main.js
+preload.cjs
+renderer.js
+style.css
 
 # pnpm 缓存 (Windows)
+.pnpm-store/
 AppData/
+
+# 本地忽略的文件 — 只在 GitHub 上删了，本地保留
+DEPLOYMENT.md
+DEPLOY_STEPS.md
+IMAGE_GUIDE.md
+QUICKSTART.md
+QUICK_START.md
+SETUP_GUIDE.md
+todo.md
+pnpm-workspace.yaml
