@@ -36,43 +36,13 @@ const teekConfig = defineTeekConfig({
     slogan: '记录技术、生活与折腾'
   },
 
-  /* ===== 全站背景图 ===== */
   bodyBgImg: {
     imgSrc: '/images/博客封面.png',
-    imgOpacity: 0.3,      // 背景透明度 0.1 ~ 1
-    mask: true,           // 加遮罩让内容可读
+    imgOpacity: 0.3,
+    mask: true,
     maskBg: 'rgba(0, 0, 0, 0.15)',
   },
-
-  /* ===== 评论系统 (Giscus) ===== */
-  // 使用步骤：
-  // 1. 去 https://github.com/qingwei0326/qing-wei-blog/settings 开启 Discussions
-  // 2. 安装 Giscus App: https://github.com/apps/giscus
-  // 3. 去 https://giscus.app/zh-CN 填入仓库信息获取 repoId / categoryId
-  comment: {
-    provider: 'giscus',
-    options: {
-      repo: 'qingwei0326/qing-wei-blog',
-      repoId: 'R_kgDOxxxxxx',        // TODO: 替换为你的 repoId
-      category: 'Announcements',      // 或 General
-      categoryId: 'DIC_kwDOxxxxxx',   // TODO: 替换为你的 categoryId
-      mapping: 'pathname',
-      strict: '0',
-      reactionsEnabled: '1',
-      inputPosition: 'bottom',
-      lang: 'zh-CN',
-      theme: 'preferred_color_scheme',
-      loading: 'lazy',
-    },
-  },
-
-  /* ===== 统计分析 ===== */
-  siteAnalytics: [
-    // 百度统计 — 去 https://tongji.baidu.com/ 创建站点获取 ID
-    // { provider: 'baidu', options: { id: '你的百度统计ID' } },
-    // Google Analytics — 去 https://analytics.google.com/ 获取测量 ID
-    // { provider: 'google', options: { id: 'G-XXXXXXXXXX' } },
-  ],
+  comment: false,
 })
 
 export default defineConfig({
@@ -90,6 +60,6 @@ export default defineConfig({
     ['meta', { property: 'og:image', content: siteCover }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:image', content: siteCover }],
-    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['link', { rel: 'icon', href: '/logo.svg' }],
   ]
 })
