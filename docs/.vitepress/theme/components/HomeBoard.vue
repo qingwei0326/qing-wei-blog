@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { TkHomeMyCard } from 'vitepress-theme-teek'
+import BloggerSidebar from './BloggerSidebar.vue'
 import { articleCategories, articleTags, articles } from '../data/articles'
 
 const blogCover = '/images/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2.png'
@@ -45,7 +45,13 @@ const boardStyle = computed(() => ({
 <template>
   <div class="home-board" :style="boardStyle">
     <aside class="home-aside" aria-label="作者信息">
-      <TkHomeMyCard />
+      <BloggerSidebar
+        name="青微"
+        slogan="记录技术、生活与折腾"
+        avatar="/images/avatar.jpg"
+        email="qingwei0326@gmail.com"
+        github="https://github.com/qingwei0326/qing-wei-blog"
+      />
     </aside>
 
     <div class="home-main">
@@ -244,8 +250,6 @@ const boardStyle = computed(() => ({
 }
 
 .home-aside {
-  position: sticky;
-  top: 84px;
   align-self: start;
 }
 
