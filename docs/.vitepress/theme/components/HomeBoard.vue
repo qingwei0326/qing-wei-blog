@@ -70,21 +70,6 @@ const boardStyle = computed(() => ({
           <a class="action action-secondary" href="/about">关于作者</a>
         </div>
 
-        <dl class="hero-stats">
-          <div>
-            <dt>文章</dt>
-            <dd>{{ articles.length }}</dd>
-          </div>
-          <div>
-            <dt>标签</dt>
-            <dd>{{ totalTags }}</dd>
-          </div>
-          <div>
-            <dt>最近更新</dt>
-            <dd>{{ latestLabel }}</dd>
-          </div>
-        </dl>
-
         <div class="hero-tags" aria-label="站点主题">
           <span v-for="tag in heroTags" :key="tag">{{ tag }}</span>
         </div>
@@ -250,6 +235,8 @@ const boardStyle = computed(() => ({
 }
 
 .home-aside {
+  position: sticky;
+  top: 84px;
   align-self: start;
 }
 
