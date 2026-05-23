@@ -1,7 +1,14 @@
 import { defineConfig } from 'vitepress'
 import { defineTeekConfig } from 'vitepress-theme-teek/config'
+import { readFileSync } from 'node:fs'
+import { createRequire } from 'node:module'
 
+const require = createRequire(import.meta.url)
 const siteCover = '/images/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2.png'
+const teekIndexCss = require.resolve('vitepress-theme-teek/index.css')
+const teekIndexCssVirtualId = 'virtual:teek-index.css'
+const teekIconfontPattern =
+  /@font-face\{font-family:iconfont;src:url\(iconfont\.woff2\?t=\d+\) format\("woff2"\),url\(iconfont\.woff\?t=\d+\) format\("woff"\),url\(iconfont\.ttf\?t=\d+\) format\("truetype"\)\}/g
 
 const teekConfig = defineTeekConfig({
   logo: '/logo.svg',
@@ -36,12 +43,6 @@ const teekConfig = defineTeekConfig({
     slogan: '记录技术、生活与折腾'
   },
 
-  bodyBgImg: {
-    imgSrc: '/images/博客封面.png',
-    imgOpacity: 0.3,
-    mask: true,
-    maskBg: 'rgba(0, 0, 0, 0.15)',
-  },
   comment: false,
 })
 
@@ -51,7 +52,26 @@ export default defineConfig({
   description: '青微的个人博客，记录技术、生活与折腾',
   lang: 'zh-CN',
   appearance: true,
-  ignoreDeadLinks: true,
+  ignoreDeadLinks: false,
+
+  vite: {
+    plugins: [
+      {
+        name: 'strip-missing-teek-iconfont',
+        enforce: 'pre',
+        resolveId(id) {
+          return id === teekIndexCssVirtualId ? id : null
+        },
+        load(id) {
+          if (id !== teekIndexCssVirtualId) {
+            return null
+          }
+
+          return readFileSync(teekIndexCss, 'utf8').replace(teekIconfontPattern, '')
+        }
+      }
+    ]
+  },
 
   head: [
     ['meta', { charset: 'UTF-8' }],
