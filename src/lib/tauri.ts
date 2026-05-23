@@ -42,4 +42,6 @@ export const api = {
     invoke<{ relativePath: string; title: string }>('save_page', { payload }),
   publishPage: (payload: PublishPagePayload) =>
     invoke<void>('publish_page', { payload }),
+  readPublicAsset: (relativePath: string) =>
+    invoke<number[]>('read_public_asset', { relativePath }),
 };

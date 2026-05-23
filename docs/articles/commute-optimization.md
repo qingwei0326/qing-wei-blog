@@ -4,7 +4,7 @@ description: 远距离通勤的博弈：如何通过哈啰顺风车 + 优惠券�
 date: 2026-05-15
 tags: [省钱, 通勤, 出行优化, 生活质量]
 categories: [生活优化]
-cover: /images/ride-share-price.jpg
+cover: /covers/commute-value.svg
 ---
 
 # 用 9 块钱买回 1 小时睡眠

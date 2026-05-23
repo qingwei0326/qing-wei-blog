@@ -4,7 +4,7 @@ description: 多数消费陷阱不是"商家骗你"，而是"你没看见拆解"
 date: 2026-05-13
 tags: [消费智慧, 理性消费, 信息差]
 categories: [消费观察]
-cover: /images/alipay-coupons.jpg
+cover: /covers/consumption-traps.svg
 ---
 
 # 看穿套路

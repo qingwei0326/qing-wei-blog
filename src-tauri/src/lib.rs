@@ -899,6 +899,23 @@ async fn publish_page(
     Ok(())
 }
 
+#[tauri::command]
+async fn read_public_asset(
+    state: State<'_, AppState>,
+    relative_path: String,
+) -> Result<Vec<u8>, String> {
+    let cfg = current_config(&state)?;
+    let normalized = normalize_relative(&relative_path);
+    let public_root = PathBuf::from(&cfg.blog_path).join("docs").join("public");
+    let candidate = public_root.join(&normalized);
+    let candidate_canon = canonical_or_self(&candidate);
+    let root_canon = canonical_or_self(&public_root);
+    if !candidate_canon.starts_with(&root_canon) {
+        return Err("路径不在 docs/public 内".into());
+    }
+    std::fs::read(&candidate_canon).map_err(|e| e.to_string())
+}
+
 // ───────────────────────── Entry point ─────────────────────────
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -928,6 +945,7 @@ pub fn run() {
             read_page,
             save_page,
             publish_page,
+            read_public_asset,
         ])
         .run(tauri::generate_context!())
         .expect("启动 Tauri 失败");

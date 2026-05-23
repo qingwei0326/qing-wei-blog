@@ -4,7 +4,7 @@ description: 一次帮家人买手机的完整复盘——百亿补贴砍到 131
 date: 2026-05-23
 tags: [信息差, 闲鱼, 二手交易, 实战复盘]
 categories: [消费观察]
-cover: /images/neo7-xianyu-market.jpg
+cover: /covers/secondhand-phone-deal.svg
 ---
 
 # 被百亿补贴"盾"了之后

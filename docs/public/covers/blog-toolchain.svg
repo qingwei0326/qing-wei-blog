@@ -1,0 +1,50 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="cover-title">
+  <title id="cover-title">工具 · 博客折腾的算账</title>
+  <defs>
+    <linearGradient id="bg-paper" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F2F1EC"/>
+      <stop offset="1" stop-color="#E2E3DC"/>
+    </linearGradient>
+    <linearGradient id="block-deep" x1="700" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1A1F36"/>
+      <stop offset="1" stop-color="#080B1A"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg-paper)"/>
+
+  <!-- 右下深色斜切色块 -->
+  <path d="M780 0 L1200 0 L1200 675 L640 675 Z" fill="url(#block-deep)"/>
+
+  <!-- 上下细规则线 -->
+  <line x1="80" y1="92" x2="700" y2="92" stroke="#1A1F36" stroke-width="1.5" opacity="0.35"/>
+  <line x1="80" y1="595" x2="700" y2="595" stroke="#1A1F36" stroke-width="1.5" opacity="0.35"/>
+
+  <!-- 顶部 kicker -->
+  <text x="80" y="68" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="22" font-weight="800" letter-spacing="4" fill="#1A1F36" opacity="0.7">TOOLCHAIN · 05</text>
+
+  <!-- 主标题：工具 -->
+  <text x="80" y="340" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="240" font-weight="900" fill="#1A1F36" letter-spacing="-6">工具</text>
+
+  <!-- 副标题 -->
+  <text x="84" y="410" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="34" font-weight="600" fill="#1A1F36" opacity="0.78">从 VitePress 翻车到 Tauri 重写</text>
+  <text x="84" y="460" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="22" font-weight="500" fill="#1A1F36" opacity="0.55">折腾本身就是一笔账，关键算回得来</text>
+
+  <!-- 落款 -->
+  <text x="80" y="625" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="18" font-weight="700" letter-spacing="2" fill="#1A1F36" opacity="0.55">青微的博客 · 工具与效率</text>
+
+  <!-- 右侧深色块上：三段技术栈叠加，演进感 -->
+  <text x="820" y="235" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="56" font-weight="800" fill="#FFFFFF" opacity="0.35">VitePress</text>
+  <text x="820" y="325" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="56" font-weight="800" fill="#FFFFFF" opacity="0.65">Electron</text>
+  <text x="820" y="415" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="60" font-weight="900" fill="#FFC857">Tauri</text>
+
+  <!-- 演进箭头 -->
+  <line x1="850" y1="252" x2="850" y2="290" stroke="#FFFFFF" stroke-width="2" opacity="0.4"/>
+  <line x1="850" y1="342" x2="850" y2="380" stroke="#FFFFFF" stroke-width="2" opacity="0.7"/>
+
+  <!-- 底部分隔 + 数字注脚 -->
+  <line x1="820" y1="475" x2="1130" y2="475" stroke="#FFFFFF" stroke-width="1.5" opacity="0.4"/>
+  <text x="820" y="515" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="22" font-weight="700" fill="#FFFFFF" opacity="0.8">952 行 Rust</text>
+  <text x="820" y="548" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="22" font-weight="700" fill="#FFFFFF" opacity="0.8">2208 行 TypeScript</text>
+  <text x="820" y="581" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="22" font-weight="700" fill="#FFFFFF" opacity="0.8">15 个 IPC 命令</text>
+</svg>
