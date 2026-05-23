@@ -3,8 +3,8 @@ title: 用 9 块钱买回 1 小时睡眠——通勤出行的隐形成本优化
 description: 远距离通勤的博弈：如何通过哈啰顺风车 + 优惠券组合，在 11 元左右实现"公交便利度"与"打车舒适度"的平衡
 date: 2026-05-15
 tags: [省钱, 通勤, 出行优化, 生活质量]
-categories: [理财知识]
-cover: /covers/commute-value.svg
+categories: [生活优化]
+cover: /images/ride-share-price.jpg
 ---
 
 # 用 9 块钱买回 1 小时睡眠
@@ -39,11 +39,11 @@ cover: /covers/commute-value.svg
 
 ### 数字背后的真实收益
 
-![打车价格](/images/打车价格.jpg)
+![打车价格](/images/taxi-price.jpg)
 
 *P3｜打车价格页面（对照）*
 
-![哈啰顺风车车费明细：11.1 公里 1 个人，行程费用 22.2 元，优惠券抵扣 11.1 元，支付金额 11.1 元](/images/顺风车价格.jpg)
+![哈啰顺风车车费明细：11.1 公里 1 个人，行程费用 22.2 元，优惠券抵扣 11.1 元，支付金额 11.1 元](/images/ride-share-price.jpg)
 
 *P4｜车费明细页面*
 

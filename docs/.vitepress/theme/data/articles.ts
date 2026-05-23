@@ -87,9 +87,17 @@ export const articles = Object.entries(modules)
   .filter((item): item is ArticleEntry => item !== null)
   .sort((a, b) => b.timeValue - a.timeValue)
 
-export const articleTags = Array.from(
-  new Set(articles.flatMap((article) => article.tags))
-).slice(0, 12)
+const tagFrequency = articles.reduce<Map<string, number>>((acc, article) => {
+  for (const tag of article.tags) {
+    acc.set(tag, (acc.get(tag) ?? 0) + 1)
+  }
+  return acc
+}, new Map())
+
+export const articleTags = Array.from(tagFrequency.entries())
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'zh'))
+  .slice(0, 12)
+  .map(([tag]) => tag)
 
 export const articleCategories = Array.from(
   new Set(articles.flatMap((article) => article.categories))

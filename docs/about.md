@@ -9,7 +9,6 @@ description: 青微的个人博客与作者信息
   role="个人博客作者"
   email="qingwei0326@gmail.com"
   avatar="/images/avatar.jpg"
-  cover="/images/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2.png"
   github="https://github.com/qingwei0326/qing-wei-blog"
 />
 

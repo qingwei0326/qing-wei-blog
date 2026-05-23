@@ -4,8 +4,14 @@ dist/
 docs/.vitepress/cache/
 docs/.vitepress/dist/
 
+# Rust / Tauri
+src-tauri/target/
+src-tauri/gen/schemas/
+
 # 打包文件
 *.exe
+*.msi
+*.nsis
 win-unpacked/
 
 # 开发缓存
@@ -23,14 +29,8 @@ __manus_ec=*
 home-preview-cdp.png
 wide-dark-preview.png
 
-# Electron / 桌面
-scripts/
+# 桌面工具配置
 config.json
-index.html
-main.js
-preload.cjs
-renderer.js
-style.css
 
 # pnpm 缓存 (Windows)
 .pnpm-store/

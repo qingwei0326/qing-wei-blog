@@ -1,8 +1,83 @@
 <script setup lang="ts">
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { inBrowser, withBase } from 'vitepress'
 import { articleCategories, articleTags, articles } from '../data/articles'
 
 const total = articles.length
 const latestDate = articles[0]?.date ?? '持续更新'
+const currentSearch = ref('')
+
+const getFilterParam = (name: string) => {
+  currentSearch.value
+
+  if (!inBrowser) {
+    return ''
+  }
+
+  return new URLSearchParams(currentSearch.value).get(name)?.trim() ?? ''
+}
+
+const activeCategory = computed(() => getFilterParam('category'))
+const activeTag = computed(() => getFilterParam('tag'))
+const hasFilter = computed(() => Boolean(activeCategory.value || activeTag.value))
+
+const filteredArticles = computed(() =>
+  articles.filter((article) => {
+    const matchesCategory =
+      !activeCategory.value || article.categories.includes(activeCategory.value)
+    const matchesTag = !activeTag.value || article.tags.includes(activeTag.value)
+
+    return matchesCategory && matchesTag
+  })
+)
+
+const filterTitle = computed(() => {
+  if (activeCategory.value && activeTag.value) {
+    return `${activeCategory.value} / ${activeTag.value}`
+  }
+
+  return activeCategory.value || activeTag.value || 'All'
+})
+
+const filterHref = (type: 'category' | 'tag', value: string) => {
+  const params = new URLSearchParams()
+
+  if (type === 'category') {
+    params.set('category', value)
+    if (activeTag.value) params.set('tag', activeTag.value)
+  } else {
+    if (activeCategory.value) params.set('category', activeCategory.value)
+    params.set('tag', value)
+  }
+
+  return withBase(`/articles/?${params.toString()}`)
+}
+
+const clearHref = computed(() => withBase('/articles/'))
+
+const syncSearch = () => {
+  currentSearch.value = inBrowser ? window.location.search : ''
+}
+
+const applyFilter = (event: MouseEvent, href: string) => {
+  if (!inBrowser) {
+    return
+  }
+
+  event.preventDefault()
+  window.history.pushState({}, '', href)
+  syncSearch()
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+onMounted(() => {
+  syncSearch()
+  window.addEventListener('popstate', syncSearch)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('popstate', syncSearch)
+})
 </script>
 
 <template>
@@ -39,7 +114,9 @@ const latestDate = articles[0]?.date ?? '持续更新'
             <a
               v-for="category in articleCategories"
               :key="category"
-              href="/articles/"
+              :class="{ 'is-active': activeCategory === category }"
+              :href="filterHref('category', category)"
+              @click="applyFilter($event, filterHref('category', category))"
             >
               {{ category }}
             </a>
@@ -49,7 +126,13 @@ const latestDate = articles[0]?.date ?? '持续更新'
         <section class="side-panel">
           <p class="archive-kicker">Tags</p>
           <div class="tag-cloud">
-            <a v-for="tag in articleTags" :key="tag" href="/articles/">
+            <a
+              v-for="tag in articleTags"
+              :key="tag"
+              :class="{ 'is-active': activeTag === tag }"
+              :href="filterHref('tag', tag)"
+              @click="applyFilter($event, filterHref('tag', tag))"
+            >
               {{ tag }}
             </a>
           </div>
@@ -57,8 +140,17 @@ const latestDate = articles[0]?.date ?? '持续更新'
       </aside>
 
       <div class="archive-list">
+        <div v-if="hasFilter" class="archive-filter">
+          <div>
+            <p class="archive-kicker">Filtered</p>
+            <strong>{{ filterTitle }}</strong>
+            <span>{{ filteredArticles.length }} / {{ total }}</span>
+          </div>
+          <a :href="clearHref" @click="applyFilter($event, clearHref)">All articles</a>
+        </div>
+
         <a
-          v-for="article in articles"
+          v-for="article in filteredArticles"
           :key="article.slug"
           class="archive-card"
           :href="article.url"
@@ -83,6 +175,12 @@ const latestDate = articles[0]?.date ?? '持续更新'
             </div>
           </div>
         </a>
+
+        <div v-if="filteredArticles.length === 0" class="archive-empty">
+          <FeatureIcon name="book" />
+          <p>No matching articles.</p>
+          <a :href="clearHref" @click="applyFilter($event, clearHref)">Back to all articles</a>
+        </div>
       </div>
     </div>
   </section>
@@ -197,9 +295,73 @@ const latestDate = articles[0]?.date ?? '持续更新'
   text-decoration: none;
 }
 
+.topic-list a.is-active,
+.tag-cloud a.is-active {
+  border-color: var(--vp-c-brand);
+  color: #fff;
+  background: var(--vp-c-brand);
+}
+
 .archive-list {
   display: grid;
   gap: 16px;
+}
+
+.archive-filter,
+.archive-empty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+}
+
+.archive-filter div {
+  display: grid;
+  gap: 4px;
+}
+
+.archive-filter strong {
+  color: var(--vp-c-text-1);
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.archive-filter span {
+  color: var(--vp-c-text-3);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.archive-filter a,
+.archive-empty a {
+  flex: none;
+  color: var(--vp-c-brand);
+  font-size: 0.84rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.archive-empty {
+  display: grid;
+  justify-items: center;
+  min-height: 180px;
+  text-align: center;
+}
+
+.archive-empty :deep(svg) {
+  width: 44px;
+  height: 44px;
+  color: var(--vp-c-brand);
+}
+
+.archive-empty p {
+  margin: 0;
+  color: var(--vp-c-text-2);
+  font-weight: 700;
 }
 
 .archive-card {

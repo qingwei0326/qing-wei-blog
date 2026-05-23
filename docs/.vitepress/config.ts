@@ -39,11 +39,48 @@ const teekConfig = defineTeekConfig({
 
   blogger: {
     name: '青微',
-    avatar: '/logo.svg',
-    slogan: '记录技术、生活与折腾'
+    avatar: '/images/avatar.jpg',
+    slogan: '记录技术、生活与折腾',
+    shape: 'circle',
+    circleSize: 110,
   },
 
-  comment: false,
+  backTop: {
+    enabled: true,
+    content: 'progress',
+  },
+
+  articleShare: {
+    enabled: true,
+  },
+
+  codeBlock: {
+    overlay: true,
+  },
+
+  docAnalysis: {
+    wordCount: true,
+    readingTime: true,
+    statistics: {
+      provider: 'busuanzi',
+    },
+  },
+
+  comment: {
+    provider: 'giscus',
+    options: {
+      repo: 'qingwei0326/qing-wei-blog',
+      repoId: 'R_kgDOSeN0RQ',
+      category: 'Announcements',
+      categoryId: 'DIC_kwDOSeN0Rc4C9q2D',
+      mapping: 'pathname',
+      reactionsEnabled: '1',
+      inputPosition: 'top',
+      lang: 'zh-CN',
+      theme: 'preferred_color_scheme',
+      useOnline: true,
+    },
+  },
 })
 
 export default defineConfig({

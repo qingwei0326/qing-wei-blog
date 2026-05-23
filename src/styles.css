@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+}
+
+@layer components {
+  .markdown-body h1 {
+    @apply text-3xl font-bold mt-6 mb-4 leading-tight;
+  }
+  .markdown-body h2 {
+    @apply text-2xl font-semibold mt-8 mb-3 leading-snug;
+  }
+  .markdown-body h3 {
+    @apply text-xl font-semibold mt-6 mb-2 leading-snug;
+  }
+  .markdown-body p {
+    @apply my-4;
+    line-height: 1.8;
+  }
+  .markdown-body ul,
+  .markdown-body ol {
+    @apply my-3 pl-6;
+    line-height: 1.8;
+  }
+  .markdown-body ul {
+    @apply list-disc;
+  }
+  .markdown-body ol {
+    @apply list-decimal;
+  }
+  .markdown-body li {
+    @apply my-1;
+  }
+  .markdown-body blockquote {
+    @apply border-l-4 border-ink-200 dark:border-ink-500 pl-4 my-4 text-ink-400;
+  }
+  .markdown-body code:not(pre code) {
+    @apply rounded bg-ink-100 dark:bg-ink-600 px-1.5 py-0.5 text-[0.9em] font-mono;
+  }
+  .markdown-body pre {
+    @apply bg-ink-100 dark:bg-ink-600 rounded-lg p-4 overflow-x-auto my-4;
+  }
+  .markdown-body pre code {
+    @apply font-mono text-sm;
+    line-height: 1.6;
+  }
+  .markdown-body img {
+    @apply max-w-full rounded-lg my-3 mx-auto block;
+  }
+  .markdown-body table {
+    @apply border-collapse my-4 w-full text-sm;
+  }
+  .markdown-body th,
+  .markdown-body td {
+    @apply border border-ink-200 dark:border-ink-500 px-3 py-2;
+  }
+  .markdown-body th {
+    @apply bg-ink-100 dark:bg-ink-600 font-semibold;
+  }
+  .markdown-body a {
+    @apply text-accent dark:text-accent-dark underline underline-offset-2;
+  }
+  .markdown-body hr {
+    @apply my-8 border-ink-200 dark:border-ink-500;
+  }
+
+  /* 独占段落的 em 视作图注（由 formatDraft 自动插入的 *P1｜...*） */
+  .markdown-body p:has(> em:only-child) {
+    @apply text-center text-sm text-ink-400 my-2;
+  }
+  .markdown-body p:has(> em:only-child) > em {
+    @apply not-italic;
+  }
+}
+
+.cm-editor {
+  height: 100%;
+  font-size: 15px;
+}
+.cm-editor.cm-focused {
+  outline: none;
+}
+.cm-scroller {
+  font-family:
+    ui-monospace, SFMono-Regular, 'SF Mono', Consolas, Menlo, monospace;
+  line-height: 1.7;
+}

@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm -rf review/)",
+      "Bash(rm -f .vitepress-*.log)",
+      "Bash(rm -f DEPLOYMENT.md DEPLOY_STEPS.md IMAGE_GUIDE.md QUICKSTART.md QUICK_START.md SETUP_GUIDE.md todo.md)",
+      "Bash(node --check main.js)",
+      "Bash(node --check renderer.js)",
+      "Bash(cat)",
+      "Bash(node /tmp/test-format.mjs)",
+      "Bash(Get-ChildItem \"C:\\\\Users\\\\青微\\\\Downloads\\\\texts\" -ErrorAction SilentlyContinue)",
+      "Bash(Measure-Object)",
+      "Bash(Select-Object Count)",
+      "Bash(git check-ignore *)",
+      "Bash(grep -E \"^\\(main\\\\.js|renderer\\\\.js|index\\\\.html|preload\\\\.cjs|style\\\\.css\\)$\")",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "Bash(pnpm install *)",
+      "Bash(tasklist)",
+      "Bash(tasklist /v /fi \"imagename eq node.exe\" /fo csv)",
+      "Bash(pwsh *)",
+      "Bash(Get-ChildItem *)",
+      "Bash(pnpm exec *)",
+      "Bash(pnpm add *)",
+      "Bash(cargo check *)",
+      "Bash(pnpm tauri *)",
+      "Bash(python -c \"from PIL import Image, ImageDraw; print\\('PIL OK'\\)\")",
+      "Read(//d/wechat/xwechat_files/wxid_r406l4jfoqgc22_e498/temp/RWTemp/2026-05/**)",
+      "WebFetch(domain:unsplash.com)",
+      "Bash(pnpm docs:dev)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(tasklist /fi \"pid eq 12364\")",
+      "Bash(pnpm docs:build)",
+      "Bash(curl -sI http://127.0.0.1:4173/about.html)",
+      "Bash(netstat -ano)",
+      "Bash(curl -s http://127.0.0.1:4173/about)",
+      "Bash(git config *)",
+      "Bash(git add *)",
+      "Bash(git -c user.name=qingwei0326 -c user.email=qingwei0326@users.noreply.github.com commit -m ' *)"
+    ]
+  }
+}

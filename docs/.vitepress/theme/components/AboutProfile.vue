@@ -44,22 +44,6 @@
         </div>
       </div>
     </header>
-
-    <div class="profile-grid">
-      <article class="profile-card">
-        <h2>常写内容</h2>
-        <ul>
-          <li>省钱和消费判断</li>
-          <li>二手交易和实操记录</li>
-          <li>通勤、预算、效率工具</li>
-        </ul>
-      </article>
-
-      <article v-if="cover" class="profile-card profile-cover-card">
-        <h2>博客封面</h2>
-        <img class="profile-cover" :src="cover" alt="博客封面" />
-      </article>
-    </div>
   </section>
 </template>
 
@@ -72,7 +56,6 @@ const props = defineProps<{
   role: string
   email: string
   avatar: string
-  cover?: string
   github?: string
 }>()
 
@@ -95,7 +78,7 @@ const githubHandle = computed(() => {
   grid-template-columns: 160px minmax(0, 1fr);
   gap: 28px;
   align-items: start;
-  padding-bottom: 32px;
+  padding-bottom: 8px;
   border-bottom: 1px solid var(--vp-c-divider);
 }
 
@@ -223,44 +206,6 @@ const githubHandle = computed(() => {
   color: var(--vp-c-brand);
 }
 
-.profile-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 24px;
-}
-
-.profile-card {
-  padding: 20px;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 16px;
-  background: var(--vp-c-bg-soft);
-}
-
-.profile-card h2 {
-  margin: 0 0 12px;
-  font-size: 1.05rem;
-}
-
-.profile-card li {
-  margin: 4px 0 0;
-  color: var(--vp-c-text-2);
-  line-height: 1.8;
-}
-
-.profile-card ul {
-  margin: 0;
-  padding-left: 1.2rem;
-}
-
-.profile-cover {
-  display: block;
-  width: 100%;
-  margin-top: 4px;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 10px;
-}
-
 @media (max-width: 860px) {
   .about-profile {
     width: min(100% - 28px, 760px);
@@ -274,10 +219,6 @@ const githubHandle = computed(() => {
   .profile-avatar {
     width: 128px;
     height: 128px;
-  }
-
-  .profile-grid {
-    grid-template-columns: minmax(0, 1fr);
   }
 
   .profile-copy h1 {

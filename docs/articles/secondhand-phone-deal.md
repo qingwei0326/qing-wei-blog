@@ -3,8 +3,8 @@ title: 被百亿补贴"盾"了之后，1370 拿下一台二手 Neo7
 description: 一次帮家人买手机的完整复盘——百亿补贴砍到 1315.8 被风控拦截，转头去闲鱼 1370 蹲到一台含 22 个月延长保的好货。新机便宜不等于能买到。
 date: 2026-05-23
 tags: [信息差, 闲鱼, 二手交易, 实战复盘]
-categories: [理财知识]
-cover: /covers/consumption-traps.svg
+categories: [消费观察]
+cover: /images/neo7-xianyu-market.jpg
 ---
 
 # 被百亿补贴"盾"了之后

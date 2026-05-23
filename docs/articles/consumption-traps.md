@@ -3,8 +3,8 @@ title: 看穿套路——一个会算账的大学生的消费观察
 description: 多数消费陷阱不是"商家骗你"，而是"你没看见拆解"。从手机砍价到运营商话费套路，从闲鱼验机到校园卡失效，记录我作为习惯算账的人，看见的那些价格背后。
 date: 2026-05-13
 tags: [消费智慧, 理性消费, 信息差]
-categories: [理财知识]
-cover: /covers/consumption-traps.svg
+categories: [消费观察]
+cover: /images/alipay-coupons.jpg
 ---
 
 # 看穿套路

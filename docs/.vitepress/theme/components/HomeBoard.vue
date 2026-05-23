@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { TkHomeMyCard } from 'vitepress-theme-teek'
 import { articleCategories, articleTags, articles } from '../data/articles'
 
 const blogCover = '/images/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2.png'
 
-const spotlight = computed(() => articles.slice(0, 3))
-const latest = computed(() => articles.slice(0, 5))
+const heroPick = computed(() => articles[0])
+const spotlight = computed(() => articles.slice(1, 4))
+const latest = computed(() => articles.slice(4, 9))
 const latestLabel = computed(() => articles[0]?.date || '持续更新')
 const totalTags = computed(() => articleTags.length)
 const heroTags = computed(() => articleTags.slice(0, 6))
@@ -42,6 +44,11 @@ const boardStyle = computed(() => ({
 
 <template>
   <div class="home-board" :style="boardStyle">
+    <aside class="home-aside" aria-label="作者信息">
+      <TkHomeMyCard />
+    </aside>
+
+    <div class="home-main">
     <section class="home-hero">
       <div class="hero-backdrop" aria-hidden="true"></div>
 
@@ -79,20 +86,25 @@ const boardStyle = computed(() => ({
 
       <div class="hero-side">
         <figure class="blog-cover">
-          <img :src="blogCover" alt="青微的博客封面" decoding="async" fetchpriority="high" />
+          <img
+            :src="heroPick?.cover || blogCover"
+            :alt="heroPick?.title || '青微的博客封面'"
+            decoding="async"
+            fetchpriority="high"
+          />
         </figure>
 
         <a
-          v-if="spotlight[0]"
+          v-if="heroPick"
           class="hero-focus"
-          :href="spotlight[0].url"
+          :href="heroPick.url"
         >
           <div class="hero-focus__meta">
             <span>本期推荐</span>
-            <time :datetime="spotlight[0].date">{{ spotlight[0].date }}</time>
+            <time :datetime="heroPick.date">{{ heroPick.date }}</time>
           </div>
-          <strong>{{ spotlight[0].title }}</strong>
-          <span>{{ spotlight[0].description }}</span>
+          <strong>{{ heroPick.title }}</strong>
+          <span>{{ heroPick.description }}</span>
           <span class="hero-focus__arrow" aria-hidden="true">
             <FeatureIcon name="arrow-right" />
           </span>
@@ -162,12 +174,13 @@ const boardStyle = computed(() => ({
     </section>
 
     <section class="home-split">
-      <div class="content-section panel-card">
+      <div v-if="latest.length" class="content-section panel-card">
         <div class="section-head">
           <div>
             <p class="eyebrow">Latest</p>
-            <h2>最新文章</h2>
+            <h2>更多文章</h2>
           </div>
+          <a class="section-link" href="/articles/">全部归档</a>
         </div>
 
         <div class="timeline-list">
@@ -211,6 +224,7 @@ const boardStyle = computed(() => ({
         </div>
       </div>
     </section>
+    </div>
   </div>
 </template>
 
@@ -221,9 +235,33 @@ const boardStyle = computed(() => ({
   --hero-surface-strong: color-mix(in srgb, var(--vp-c-bg-soft) 92%, transparent);
   --hero-surface-hover: color-mix(in srgb, var(--vp-c-bg-soft) 98%, transparent);
   --hero-border: color-mix(in srgb, var(--vp-c-divider) 84%, transparent);
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 28px;
   width: min(var(--board-max-width), calc(100vw - 48px));
   margin: 0 auto;
   padding: 34px 0 56px;
+}
+
+.home-aside {
+  position: sticky;
+  top: 84px;
+  align-self: start;
+}
+
+.home-main {
+  min-width: 0;
+}
+
+@media (max-width: 1040px) {
+  .home-board {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .home-aside {
+    display: none;
+  }
 }
 
 .home-hero {
@@ -249,16 +287,9 @@ const boardStyle = computed(() => ({
   background-image: var(--home-cover-url);
   background-position: center;
   background-size: cover;
-  opacity: 0.08;
+  opacity: 0;
   transform: scale(1.04);
-}
-
-.hero-backdrop::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, var(--vp-c-bg-soft) 16%, rgb(255 255 255 / 70%) 44%, transparent 100%);
+  pointer-events: none;
 }
 
 .hero-copy,
@@ -414,6 +445,7 @@ const boardStyle = computed(() => ({
   height: 100%;
   margin: 0;
   object-fit: cover;
+  object-position: center top;
 }
 
 .hero-focus {
@@ -539,7 +571,7 @@ const boardStyle = computed(() => ({
 
 .story-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -564,7 +596,7 @@ const boardStyle = computed(() => ({
 }
 
 .story-card.is-lead {
-  grid-column: span 2;
+  grid-column: 1 / -1;
   grid-template-columns: minmax(260px, 0.92fr) minmax(0, 1fr);
 }
 
@@ -580,6 +612,7 @@ const boardStyle = computed(() => ({
   height: 100%;
   margin: 0;
   object-fit: cover;
+  object-position: center top;
 }
 
 .story-body {
