@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 
 const require = createRequire(import.meta.url)
-const siteCover = '/images/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2.png'
+const siteCover = '/images/og-cover.png'
 const teekIndexCss = require.resolve('vitepress-theme-teek/index.css')
 const teekIndexCssVirtualId = 'virtual:teek-index.css'
 const teekIconfontPattern =
@@ -90,6 +90,12 @@ export default defineConfig({
   lang: 'zh-CN',
   appearance: true,
   ignoreDeadLinks: false,
+  srcExclude: ['**/public/**'],
+
+  sitemap: {
+    hostname: 'https://blog.qing-wei.com',
+    transformItems: (items) => items.filter((item) => !item.url.includes('/public/')),
+  },
 
   vite: {
     plugins: [
@@ -114,8 +120,15 @@ export default defineConfig({
     ['meta', { charset: 'UTF-8' }],
     ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }],
     ['meta', { name: 'theme-color', content: '#F7F9FC' }],
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:site_name', content: '青微的博客' }],
+    ['meta', { property: 'og:title', content: '青微的博客' }],
+    ['meta', { property: 'og:description', content: '记录技术、生活和实际可复用的折腾结果。少一点口号，多一点能照着做的细节。' }],
+    ['meta', { property: 'og:url', content: 'https://blog.qing-wei.com' }],
     ['meta', { property: 'og:image', content: siteCover }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:title', content: '青微的博客' }],
+    ['meta', { name: 'twitter:description', content: '记录技术、生活和实际可复用的折腾结果。' }],
     ['meta', { name: 'twitter:image', content: siteCover }],
     ['link', { rel: 'icon', href: '/logo.svg' }],
   ]

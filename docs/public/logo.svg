@@ -1,10 +1,10 @@
 <svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">青微的博客 logo</title>
   <desc id="desc">A minimal note icon for the blog.</desc>
-  <rect x="22" y="18" width="84" height="92" rx="14" stroke="#D4A574" stroke-width="4" />
-  <path d="M38 44h34" stroke="#D4A574" stroke-width="4" stroke-linecap="round" />
-  <path d="M38 60h50" stroke="#D4A574" stroke-width="4" stroke-linecap="round" />
-  <path d="M38 76h36" stroke="#D4A574" stroke-width="4" stroke-linecap="round" />
-  <path d="M38 92h44" stroke="#D4A574" stroke-width="4" stroke-linecap="round" />
-  <path d="M70 18v18a6 6 0 0 0 6 6h18" stroke="#D4A574" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  <rect x="22" y="18" width="84" height="92" rx="14" stroke="#1677ff" stroke-width="4" />
+  <path d="M38 44h34" stroke="#1677ff" stroke-width="4" stroke-linecap="round" />
+  <path d="M38 60h50" stroke="#1677ff" stroke-width="4" stroke-linecap="round" />
+  <path d="M38 76h36" stroke="#1677ff" stroke-width="4" stroke-linecap="round" />
+  <path d="M38 92h44" stroke="#1677ff" stroke-width="4" stroke-linecap="round" />
+  <path d="M70 18v18a6 6 0 0 0 6 6h18" stroke="#1677ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
 </svg>
