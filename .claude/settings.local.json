@@ -36,7 +36,18 @@
       "Bash(curl -s http://127.0.0.1:4173/about)",
       "Bash(git config *)",
       "Bash(git add *)",
-      "Bash(git -c user.name=qingwei0326 -c user.email=qingwei0326@users.noreply.github.com commit -m ' *)"
+      "Bash(git -c user.name=qingwei0326 -c user.email=qingwei0326@users.noreply.github.com commit -m ' *)",
+      "Bash(curl -sI http://127.0.0.1:5174/)",
+      "Bash(curl -sI http://localhost:5174/)",
+      "Bash(curl -sI http://localhost:5173/)",
+      "Bash(pnpm docs:preview *)",
+      "Bash(grep -oE '\"title\":\"[^\"]{0,80}\"' docs/.vitepress/dist/assets/articles_beginner-guide.md.CNPyTRas.js)",
+      "Bash(awk '{print $5, $9}')",
+      "Bash(rtk grep *)",
+      "Bash(curl -sI http://localhost:4173/)",
+      "Bash(rtk read *)",
+      "Bash(curl -sI http://localhost:4173/covers/consumption-traps.svg)",
+      "Bash(curl -sI http://localhost:4173/covers/secondhand-phone-deal.svg)"
     ]
   }
 }
