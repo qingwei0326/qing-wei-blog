@@ -4,6 +4,7 @@ description: 学生党用支付宝青春特权 + 京东学生寄怎么省，含�
 date: 2026-05-24
 tags: [寄快递, 学生卡, 支付宝, 算账]
 categories: [省钱实操]
+cover: /covers/delivery-channels.svg
 permalink: /articles/guan-yu-ji-kuai-di/
 ---
 
