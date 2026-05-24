@@ -125,11 +125,48 @@ export default defineConfig({
     ['meta', { property: 'og:title', content: '青微的博客' }],
     ['meta', { property: 'og:description', content: '记录技术、生活和实际可复用的折腾结果。少一点口号，多一点能照着做的细节。' }],
     ['meta', { property: 'og:url', content: 'https://blog.qing-wei.com' }],
-    ['meta', { property: 'og:image', content: siteCover }],
+    ['meta', { property: 'og:image', content: `https://blog.qing-wei.com${siteCover}` }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:title', content: '青微的博客' }],
     ['meta', { name: 'twitter:description', content: '记录技术、生活和实际可复用的折腾结果。' }],
-    ['meta', { name: 'twitter:image', content: siteCover }],
+    ['meta', { name: 'twitter:image', content: `https://blog.qing-wei.com${siteCover}` }],
     ['link', { rel: 'icon', href: '/logo.svg' }],
-  ]
+  ],
+
+  transformPageData(pageData) {
+    const { frontmatter, relativePath } = pageData
+    const SITE_URL = 'https://blog.qing-wei.com'
+
+    // 只对单篇文章页注入（跳过 articles/index.md 和其他非文章页）
+    const isArticle =
+      relativePath.startsWith('articles/') &&
+      relativePath !== 'articles/index.md'
+
+    if (!isArticle) return
+
+    const articleTitle = frontmatter.title || '青微的博客'
+    const fullTitle = `${articleTitle} | 青微的博客`
+    const description =
+      frontmatter.description ||
+      '记录技术、生活和实际可复用的折腾结果。'
+    const coverPath = frontmatter.cover || siteCover
+    const coverUrl = coverPath.startsWith('http')
+      ? coverPath
+      : `${SITE_URL}${coverPath}`
+    const articleUrl = frontmatter.permalink
+      ? `${SITE_URL}${frontmatter.permalink}`
+      : `${SITE_URL}/${relativePath.replace(/\.md$/, '')}/`
+
+    frontmatter.head ??= []
+    frontmatter.head.push(
+      ['meta', { property: 'og:type', content: 'article' }],
+      ['meta', { property: 'og:title', content: fullTitle }],
+      ['meta', { property: 'og:description', content: description }],
+      ['meta', { property: 'og:image', content: coverUrl }],
+      ['meta', { property: 'og:url', content: articleUrl }],
+      ['meta', { name: 'twitter:title', content: fullTitle }],
+      ['meta', { name: 'twitter:description', content: description }],
+      ['meta', { name: 'twitter:image', content: coverUrl }],
+    )
+  }
 })
