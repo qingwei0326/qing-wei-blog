@@ -37,6 +37,21 @@ const heroFeatures = [
   }
 ]
 
+const startHerePicks = [
+  { slug: 'beginner-guide', step: '01', blurb: '先看懂"算账 ≠ 理财 ≠ 省钱"' },
+  { slug: 'secondhand-phone-deal', step: '02', blurb: '一个完整的实战案例' },
+  { slug: 'consumption-traps', step: '03', blurb: '怎么识破日常消费里的套路' }
+]
+
+const startHere = computed(() =>
+  startHerePicks
+    .map((pick) => {
+      const article = articles.find((a) => a.slug === pick.slug)
+      return article ? { ...pick, article } : null
+    })
+    .filter((x): x is { slug: string; step: string; blurb: string; article: typeof articles[number] } => x !== null)
+)
+
 const boardStyle = computed(() => ({
   '--home-cover-url': `url(${blogCover})`
 }))
@@ -117,6 +132,29 @@ const boardStyle = computed(() => ({
           <p>{{ feature.detail }}</p>
         </div>
       </article>
+    </section>
+
+    <section v-if="startHere.length" class="content-section start-here" aria-labelledby="starthere-heading">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Start Here</p>
+          <h2 id="starthere-heading">第一次来？读这三篇</h2>
+        </div>
+      </div>
+
+      <div class="start-grid">
+        <a
+          v-for="entry in startHere"
+          :key="entry.slug"
+          class="start-card"
+          :href="entry.article.url"
+        >
+          <p class="start-step">{{ entry.step }}</p>
+          <h3 class="start-title">{{ entry.article.title }}</h3>
+          <p class="start-blurb">{{ entry.blurb }}</p>
+          <p class="start-cta">开始读 →</p>
+        </a>
+      </div>
     </section>
 
     <section class="content-section" aria-labelledby="spotlight-heading">
@@ -201,7 +239,7 @@ const boardStyle = computed(() => ({
             v-for="category in categoryStats"
             :key="category.name"
             class="topic-row"
-            href="/articles/"
+            :href="`/categories/${encodeURIComponent(category.name)}`"
           >
             <span>{{ category.name }}</span>
             <strong>{{ category.count }} 篇</strong>
@@ -558,6 +596,72 @@ const boardStyle = computed(() => ({
 
 .section-link:hover {
   color: var(--vp-c-brand-dark);
+}
+
+.start-here .section-head {
+  margin-bottom: 12px;
+}
+
+.start-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.start-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px 24px 20px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 18px;
+  background: var(--vp-c-bg);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.start-card:hover {
+  border-color: var(--vp-c-brand);
+  box-shadow: 0 12px 32px rgb(15 23 42 / 8%);
+  transform: translateY(-2px);
+}
+
+.start-step {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--vp-c-brand);
+  opacity: 0.75;
+}
+
+.start-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--vp-c-text-1);
+}
+
+.start-blurb {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--vp-c-text-2);
+}
+
+.start-cta {
+  margin: auto 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vp-c-brand);
+}
+
+@media (max-width: 860px) {
+  .start-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .story-grid {

@@ -1,7 +1,10 @@
 import { defineConfig } from 'vitepress'
 import { defineTeekConfig } from 'vitepress-theme-teek/config'
-import { readFileSync } from 'node:fs'
+import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { createRequire } from 'node:module'
+import matter from 'gray-matter'
+import { Feed } from 'feed'
 
 const require = createRequire(import.meta.url)
 const siteCover = '/images/og-cover.png'
@@ -92,6 +95,13 @@ export default defineConfig({
   ignoreDeadLinks: false,
   srcExclude: ['**/public/**'],
 
+  themeConfig: {
+    outline: {
+      level: [2, 3],
+      label: '本文目录'
+    }
+  },
+
   sitemap: {
     hostname: 'https://blog.qing-wei.com',
     transformItems: (items) => items.filter((item) => !item.url.includes('/public/')),
@@ -131,6 +141,8 @@ export default defineConfig({
     ['meta', { name: 'twitter:description', content: '记录技术、生活和实际可复用的折腾结果。' }],
     ['meta', { name: 'twitter:image', content: `https://blog.qing-wei.com${siteCover}` }],
     ['link', { rel: 'icon', href: '/logo.svg' }],
+    ['link', { rel: 'alternate', type: 'application/rss+xml', title: '青微的博客 RSS', href: 'https://blog.qing-wei.com/feed.xml' }],
+    ['link', { rel: 'alternate', type: 'application/atom+xml', title: '青微的博客 Atom', href: 'https://blog.qing-wei.com/atom.xml' }],
   ],
 
   transformPageData(pageData) {
@@ -159,6 +171,7 @@ export default defineConfig({
 
     frontmatter.head ??= []
     frontmatter.head.push(
+      ['link', { rel: 'canonical', href: articleUrl }],
       ['meta', { property: 'og:type', content: 'article' }],
       ['meta', { property: 'og:title', content: fullTitle }],
       ['meta', { property: 'og:description', content: description }],
@@ -168,5 +181,71 @@ export default defineConfig({
       ['meta', { name: 'twitter:description', content: description }],
       ['meta', { name: 'twitter:image', content: coverUrl }],
     )
+  },
+
+  async buildEnd(siteConfig) {
+    const SITE_URL = 'https://blog.qing-wei.com'
+    const articlesDir = resolve(siteConfig.srcDir, 'articles')
+    const files = readdirSync(articlesDir).filter(
+      (f) => f.endsWith('.md') && f !== 'index.md'
+    )
+
+    const items = files
+      .map((file) => {
+        const raw = readFileSync(resolve(articlesDir, file), 'utf-8')
+        const { data } = matter(raw)
+        const slug = file.replace(/\.md$/, '')
+        const url = data.permalink
+          ? `${SITE_URL}${data.permalink}`
+          : `${SITE_URL}/articles/${slug}/`
+        return {
+          title: (data.title as string) || slug,
+          description: (data.description as string) || '',
+          date: data.date ? new Date(data.date) : new Date(),
+          url,
+          cover: data.cover
+            ? `${SITE_URL}${data.cover}`
+            : `${SITE_URL}${siteCover}`,
+          categories: (data.categories as string[]) || []
+        }
+      })
+      .sort((a, b) => b.date.getTime() - a.date.getTime())
+
+    const feed = new Feed({
+      title: '青微的博客',
+      description:
+        '记录技术、生活和实际可复用的折腾结果。少一点口号，多一点能照着做的细节。',
+      id: SITE_URL,
+      link: SITE_URL,
+      language: 'zh-CN',
+      image: `${SITE_URL}${siteCover}`,
+      favicon: `${SITE_URL}/logo.svg`,
+      copyright: `Copyright © ${new Date().getFullYear()} 青微`,
+      feedLinks: {
+        rss: `${SITE_URL}/feed.xml`,
+        atom: `${SITE_URL}/atom.xml`
+      },
+      author: {
+        name: '青微',
+        email: 'qingwei0326@gmail.com',
+        link: SITE_URL
+      }
+    })
+
+    items.forEach((item) => {
+      feed.addItem({
+        title: item.title,
+        id: item.url,
+        link: item.url,
+        description: item.description,
+        content: item.description,
+        date: item.date,
+        image: item.cover,
+        category: item.categories.map((c) => ({ name: c }))
+      })
+    })
+
+    writeFileSync(resolve(siteConfig.outDir, 'feed.xml'), feed.rss2(), 'utf-8')
+    writeFileSync(resolve(siteConfig.outDir, 'atom.xml'), feed.atom1(), 'utf-8')
   }
 })
