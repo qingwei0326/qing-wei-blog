@@ -435,8 +435,8 @@ const boardStyle = computed(() => ({
   width: 100%;
   height: 100%;
   margin: 0;
-  object-fit: cover;
-  object-position: center top;
+  object-fit: contain;
+  object-position: center;
 }
 
 .hero-focus {

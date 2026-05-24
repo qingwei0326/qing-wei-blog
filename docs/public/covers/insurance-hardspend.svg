@@ -1,0 +1,57 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="cover-title">
+  <title id="cover-title">兜底 · 保险不是理财，是硬支出</title>
+  <defs>
+    <linearGradient id="bg-mist" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F0EBF5"/>
+      <stop offset="1" stop-color="#DCD2E8"/>
+    </linearGradient>
+    <linearGradient id="block-violet" x1="700" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4A2D6E"/>
+      <stop offset="1" stop-color="#2A1640"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg-mist)"/>
+
+  <!-- 右下深色斜切色块 -->
+  <path d="M780 0 L1200 0 L1200 675 L640 675 Z" fill="url(#block-violet)"/>
+
+  <!-- 上下细规则线 -->
+  <line x1="80" y1="92" x2="700" y2="92" stroke="#4A2D6E" stroke-width="1.5" opacity="0.35"/>
+  <line x1="80" y1="595" x2="700" y2="595" stroke="#4A2D6E" stroke-width="1.5" opacity="0.35"/>
+
+  <!-- 顶部 kicker -->
+  <text x="80" y="68" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="22" font-weight="800" letter-spacing="4" fill="#4A2D6E" opacity="0.7">INSURANCE · 09</text>
+
+  <!-- 主标题：兜底 -->
+  <text x="80" y="340" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="240" font-weight="900" fill="#4A2D6E" letter-spacing="-6">兜底</text>
+
+  <!-- 副标题 -->
+  <text x="84" y="410" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="34" font-weight="600" fill="#4A2D6E" opacity="0.82">理财是加法</text>
+  <text x="84" y="460" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="34" font-weight="600" fill="#4A2D6E" opacity="0.82">保险是防减法</text>
+
+  <!-- 落款 -->
+  <text x="80" y="625" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="18" font-weight="700" letter-spacing="2" fill="#4A2D6E" opacity="0.55">青微的博客 · 省钱实操</text>
+
+  <!-- 右侧深色块：门诊险算账 -->
+  <text x="820" y="180" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="700" fill="#FFFFFF" letter-spacing="3" opacity="0.55">门诊险 · 去年一年</text>
+
+  <text x="820" y="245" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="22" font-weight="700" fill="#FFFFFF" opacity="0.55">保费</text>
+  <text x="1130" y="245" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="32" font-weight="900" fill="#FFFFFF" opacity="0.55" text-anchor="end">¥316.80</text>
+
+  <text x="820" y="300" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="22" font-weight="700" fill="#FFFFFF" opacity="0.7">报销</text>
+  <text x="1130" y="300" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="32" font-weight="900" fill="#FFFFFF" opacity="0.7" text-anchor="end">¥1315.43</text>
+
+  <line x1="820" y1="335" x2="1130" y2="335" stroke="#FFFFFF" stroke-width="1.5" opacity="0.4"/>
+
+  <text x="820" y="390" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="22" font-weight="700" fill="#FFFFFF" opacity="0.7">净收益</text>
+  <text x="1130" y="390" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="34" font-weight="900" fill="#FFC857" text-anchor="end">+¥998.63</text>
+
+  <line x1="820" y1="430" x2="1130" y2="430" stroke="#FFFFFF" stroke-width="1.5" opacity="0.4"/>
+
+  <text x="820" y="490" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="24" font-weight="800" fill="#FFC857">回本倍数</text>
+  <text x="1130" y="490" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="44" font-weight="900" fill="#FFC857" text-anchor="end">4.15×</text>
+
+  <!-- 小标注 -->
+  <text x="820" y="535" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="18" font-weight="600" fill="#FFFFFF" opacity="0.55">月 ¥26.40 起</text>
+</svg>
