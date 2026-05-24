@@ -1,11 +1,9 @@
 name: Deploy to Cloudflare Pages
 
-
 on:
   push:
     branches:
       - main
-
 
 jobs:
   build:
@@ -14,30 +12,25 @@ jobs:
       contents: read
       deployments: write
 
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
 
-
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
           version: latest
-
 
       - name: Get pnpm store directory
         id: pnpm-cache
         shell: bash
         run: |
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
 
       - name: Setup pnpm cache
         uses: actions/cache@v3
@@ -47,18 +40,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-
       - name: Install dependencies
-        run: pnpm install
-
-
-      - name: Approve builds
-        run: pnpm approve-builds
-
+        run: |
+          pnpm install --ignore-scripts
+          pnpm rebuild esbuild
 
       - name: Build
         run: pnpm run docs:build
 
+      - name: Pre-install wrangler (avoid pnpm 10 build-script deny)
+        run: npm install -g wrangler
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
