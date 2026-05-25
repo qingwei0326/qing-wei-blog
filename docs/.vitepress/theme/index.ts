@@ -3,6 +3,7 @@ import { h } from 'vue'
 import Teek from 'vitepress-theme-teek'
 import ArticleList from './components/ArticleList.vue'
 import ArticleNavigation from './components/ArticleNavigation.vue'
+import ArticleSummary from './components/ArticleSummary.vue'
 import AboutProfile from './components/AboutProfile.vue'
 import CategoryArchive from './components/CategoryArchive.vue'
 import ConfigSwitch from './components/ConfigSwitch.vue'
@@ -16,13 +17,13 @@ export default {
   extends: Teek,
   Layout() {
     return h(Teek.Layout, null, {
-      'teek-theme-enhance-bottom': () => h(ConfigSwitch),
-      'doc-after': () => h(ArticleNavigation)
+      'teek-theme-enhance-bottom': () => h(ConfigSwitch)
     })
   },
   enhanceApp({ app }) {
     app.component('ArticleList', ArticleList)
     app.component('ArticleNavigation', ArticleNavigation)
+    app.component('ArticleSummary', ArticleSummary)
     app.component('AboutProfile', AboutProfile)
     app.component('CategoryArchive', CategoryArchive)
     app.component('ConfigSwitch', ConfigSwitch)

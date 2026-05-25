@@ -69,6 +69,12 @@ const teekConfig = defineTeekConfig({
     },
   },
 
+  vitePlugins: {
+    sidebarOption: {
+      ignoreList: ['categories', /\.paths\.ts$/],
+    },
+  },
+
   comment: {
     provider: 'giscus',
     options: {
@@ -105,6 +111,22 @@ export default defineConfig({
   sitemap: {
     hostname: 'https://blog.qing-wei.com',
     transformItems: (items) => items.filter((item) => !item.url.includes('/public/')),
+  },
+
+  markdown: {
+    config(md) {
+      md.core.ruler.before('block', 'inject-article-extras', (state) => {
+        const env = state.env as { path?: string; relativePath?: string }
+        const articlePath = (env.relativePath || env.path || '').replace(/\\/g, '/')
+        const isArticle =
+          articlePath.includes('articles/') &&
+          !articlePath.endsWith('articles/index.md')
+
+        if (!isArticle) return
+
+        state.src = `<ArticleSummary />\n\n${state.src}\n\n<ArticleNavigation />\n`
+      })
+    }
   },
 
   vite: {

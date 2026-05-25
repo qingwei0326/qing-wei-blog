@@ -16,6 +16,7 @@
 ```bash
 pnpm install
 pnpm run docs:dev     # 开发 http://localhost:5173
+pnpm run docs:check   # 检查文章元数据、图片路径和 permalink
 pnpm run docs:build   # 构建
 ```
 

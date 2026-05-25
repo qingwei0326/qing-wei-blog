@@ -95,27 +95,26 @@ defineProps<{
 
 .blogger-card {
   display: grid;
-  gap: 16px;
-  padding: 24px 20px;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 20px;
-  background: var(--vp-c-bg-soft);
-  box-shadow: 0 18px 48px rgb(15 23 42 / 6%);
-  text-align: center;
+  gap: 15px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  text-align: left;
 }
 
 .blogger-avatar {
-  display: grid;
-  place-items: center;
+  display: block;
 }
 
 .blogger-avatar img {
-  width: 120px;
-  height: 120px;
+  width: 86px;
+  height: 86px;
   object-fit: cover;
-  border: 3px solid color-mix(in srgb, var(--vp-c-brand) 45%, transparent);
-  border-radius: 50%;
-  box-shadow: 0 12px 28px rgb(22 119 255 / 16%);
+  border: 2px solid color-mix(in srgb, var(--vp-c-brand) 28%, transparent);
+  border-radius: 8px;
+  box-shadow: none;
 }
 
 .blogger-identity {
@@ -125,7 +124,7 @@ defineProps<{
 
 .blogger-name {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 800;
   letter-spacing: 0;
 }
@@ -140,9 +139,9 @@ defineProps<{
 .blogger-stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 4px;
-  margin: 4px 0;
-  padding: 12px 0;
+  gap: 8px;
+  margin: 2px 0;
+  padding: 14px 0;
   border-top: 1px solid var(--vp-c-divider-light);
   border-bottom: 1px solid var(--vp-c-divider-light);
 }
@@ -168,7 +167,7 @@ defineProps<{
 
 .blogger-socials {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 10px;
 }
 
@@ -178,9 +177,9 @@ defineProps<{
   width: 36px;
   height: 36px;
   border: 1px solid var(--vp-c-divider);
-  border-radius: 10px;
+  border-radius: 8px;
   color: var(--vp-c-text-2);
-  background: var(--vp-c-bg-mute);
+  background: transparent;
   transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
@@ -199,13 +198,14 @@ defineProps<{
 .nav-btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 6px;
-  padding: 10px 14px;
+  padding: 9px 0;
   border: 1px solid var(--vp-c-divider);
-  border-radius: 10px;
+  border-width: 0 0 1px;
+  border-radius: 0;
   color: var(--vp-c-text-1);
-  background: var(--vp-c-bg-mute);
+  background: transparent;
   font-size: 0.92rem;
   font-weight: 700;
   text-decoration: none;
@@ -215,7 +215,7 @@ defineProps<{
 .nav-btn:hover {
   color: var(--vp-c-brand);
   border-color: color-mix(in srgb, var(--vp-c-brand) 50%, var(--vp-c-divider));
-  background: color-mix(in srgb, var(--vp-c-brand) 7%, var(--vp-c-bg-soft));
+  background: transparent;
   text-decoration: none;
 }
 </style>
