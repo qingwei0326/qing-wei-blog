@@ -4,7 +4,7 @@ description: 一个偏 INTJ 的人为什么会把 AI 当工具人：我不关心
 date: 2026-05-25
 tags: [AI Agent, 工具, 自动化, 博客, 编程]
 categories: [工具与效率]
-cover: /images/ai-agent-tool-image2.png
+cover: /covers/ai-agent-tool.svg
 permalink: /articles/ai-agent-tool/
 ---
 
@@ -13,6 +13,8 @@ permalink: /articles/ai-agent-tool/
 如果要用人格类型解释我为什么会这样用 AI，我大概是很典型的 **INTJ 式工具观**。
 
 我不太把 AI 当成陪聊对象，也不太在意它会不会给情绪价值。我更关心的是：它能不能进入系统、能不能减少重复劳动、能不能把结果交付出来。
+
+![AI Agent 工具人开发工作流](/images/ai-agent-tool-image2.png)
 
 ![AI Agent 工具人流程](/images/ai-agent-workflow.svg)
 
