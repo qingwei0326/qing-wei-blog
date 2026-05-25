@@ -16,7 +16,6 @@ permalink: /articles/ai-agent-tool/
 
 ![AI Agent 工具人开发工作流](/images/ai-agent-tool-image2.png)
 
-![AI Agent 工具人流程](/images/ai-agent-workflow.svg)
 
 对我来说，一个工具值不值得长期用，不看它多新，而看它能不能被纳入我的流程。
 
