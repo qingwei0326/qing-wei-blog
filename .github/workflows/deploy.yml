@@ -45,6 +45,9 @@ jobs:
           pnpm install --ignore-scripts
           pnpm rebuild esbuild
 
+      - name: Check blog content
+        run: pnpm run docs:check
+
       - name: Build
         run: pnpm run docs:build
 

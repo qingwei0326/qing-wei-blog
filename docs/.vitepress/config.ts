@@ -1,17 +1,87 @@
 import { defineConfig } from 'vitepress'
 import { defineTeekConfig } from 'vitepress-theme-teek/config'
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
-import { resolve } from 'node:path'
+import { basename, dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { createRequire } from 'node:module'
 import matter from 'gray-matter'
 import { Feed } from 'feed'
 
 const require = createRequire(import.meta.url)
+const configDir = dirname(fileURLToPath(import.meta.url))
+const docsRoot = resolve(configDir, '..')
+const articlesRoot = resolve(docsRoot, 'articles')
 const siteCover = '/images/og-cover.png'
 const teekIndexCss = require.resolve('vitepress-theme-teek/index.css')
 const teekIndexCssVirtualId = 'virtual:teek-index.css'
+const articleMetadataVirtualId = 'virtual:article-metadata'
+const resolvedArticleMetadataVirtualId = `\0${articleMetadataVirtualId}`
 const teekIconfontPattern =
   /@font-face\{font-family:iconfont;src:url\(iconfont\.woff2\?t=\d+\) format\("woff2"\),url\(iconfont\.woff\?t=\d+\) format\("woff"\),url\(iconfont\.ttf\?t=\d+\) format\("truetype"\)\}/g
+
+const toText = (value: unknown) => (typeof value === 'string' ? value.trim() : '')
+
+const toStringArray = (value: unknown) => {
+  if (!Array.isArray(value)) {
+    return []
+  }
+
+  return value
+    .map((item) => toText(item))
+    .filter((item) => item.length > 0)
+}
+
+const toDateLabel = (value: unknown) => {
+  if (value instanceof Date && !Number.isNaN(value.getTime())) {
+    return value.toISOString().slice(0, 10)
+  }
+
+  const text = toText(value)
+
+  if (!text) {
+    return ''
+  }
+
+  if (/^\d{4}-\d{2}-\d{2}/.test(text)) {
+    return text.slice(0, 10)
+  }
+
+  const time = Date.parse(text)
+  return Number.isNaN(time) ? text : new Date(time).toISOString().slice(0, 10)
+}
+
+const readArticleFiles = () =>
+  readdirSync(articlesRoot)
+    .filter((file) => file.endsWith('.md') && file !== 'index.md')
+    .sort()
+
+const readArticleMetadata = () =>
+  readArticleFiles()
+    .map((file) => {
+      const raw = readFileSync(resolve(articlesRoot, file), 'utf-8')
+      const { data } = matter(raw)
+      const slug = basename(file, '.md')
+      const title = toText(data.title) || slug
+      const description = toText(data.description)
+      const date = toDateLabel(data.date)
+      const tags = toStringArray(data.tags)
+      const categories = toStringArray(data.categories)
+      const cover = toText(data.cover) || undefined
+      const timeValue = Number.isNaN(Date.parse(date)) ? 0 : Date.parse(date)
+
+      return {
+        slug,
+        title,
+        description,
+        date,
+        tags,
+        categories,
+        url: `/articles/${slug}`,
+        timeValue,
+        ...(cover ? { cover } : {})
+      }
+    })
+    .sort((a, b) => b.timeValue - a.timeValue)
 
 const teekConfig = defineTeekConfig({
   logo: '/logo.svg',
@@ -143,6 +213,23 @@ export default defineConfig({
           }
 
           return readFileSync(teekIndexCss, 'utf8').replace(teekIconfontPattern, '')
+        }
+      },
+      {
+        name: 'article-metadata',
+        resolveId(id) {
+          return id === articleMetadataVirtualId ? resolvedArticleMetadataVirtualId : null
+        },
+        load(id) {
+          if (id !== resolvedArticleMetadataVirtualId) {
+            return null
+          }
+
+          for (const file of readArticleFiles()) {
+            this.addWatchFile(resolve(articlesRoot, file))
+          }
+
+          return `export const articleMetadata = ${JSON.stringify(readArticleMetadata())}`
         }
       }
     ]

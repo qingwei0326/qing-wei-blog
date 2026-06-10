@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import DOMPurify from 'dompurify';
 import { marked } from 'marked';
 import { api } from '@/lib/tauri';
 
@@ -39,6 +40,12 @@ function applySrcMap(html: string, map: Map<string, string>): string {
   return container.innerHTML;
 }
 
+function sanitizeMarkdownHtml(html: string): string {
+  return DOMPurify.sanitize(html, {
+    USE_PROFILES: { html: true },
+  });
+}
+
 function guessMime(path: string): string {
   const ext = path.toLowerCase().split('.').pop() || '';
   switch (ext) {
@@ -74,7 +81,8 @@ export function Preview({ content, blogPath }: PreviewProps) {
       );
       if (cancelled) return;
 
-      const srcs = extractLocalSrcs(rendered);
+      const sanitized = sanitizeMarkdownHtml(rendered);
+      const srcs = extractLocalSrcs(sanitized);
       const map = new Map<string, string>();
 
       await Promise.all(
@@ -107,7 +115,7 @@ export function Preview({ content, blogPath }: PreviewProps) {
       // Revoke previous batch only after the new HTML is committed
       const prev = blobUrlsRef.current;
       blobUrlsRef.current = newBlobUrls;
-      setHtml(applySrcMap(rendered, map));
+      setHtml(applySrcMap(sanitized, map));
       // Defer revoke so any in-flight <img> on the old html unmounts first
       requestAnimationFrame(() => {
         prev.forEach((u) => URL.revokeObjectURL(u));

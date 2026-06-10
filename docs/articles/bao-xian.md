@@ -86,7 +86,7 @@ permalink: /articles/bao-xian/
 
 历史上类似的延保服务记录（还有水具、口腔电器之类）：
 
-![历史延保服务记录](/images/bao-xian-20260524-a2f5c8.png)
+![历史延保服务记录](/images/bao-xian-20260524-a2f5c8.webp)
 
 ---
 

@@ -89,7 +89,7 @@ cover: /covers/commute-value.svg
 1. **扫描学生专属券**
    - 获取基础福利（学生专属二维码）
 
-![学生优惠券二维码页面，扫码可领取哈啰顺风车学生专属券](/images/student-coupon.png)
+![学生优惠券二维码页面，扫码可领取哈啰顺风车学生专属券](/images/student-coupon.webp)
 
 *P6｜学生专属券入口*
    
@@ -110,7 +110,7 @@ cover: /covers/commute-value.svg
    - 微信支付里的 **摇优惠** 也可以顺手看一眼，有时会出现可用优惠券
    - 支付宝里的 **消费券 / 大牌好券** 也可以看看，偶尔能领到出行相关或支付立减券
 
-![微信支付摇一摇优惠页面，可能出现可领取的优惠券](/images/wechat-shake-discount.png)
+![微信支付摇一摇优惠页面，可能出现可领取的优惠券](/images/wechat-shake-discount.webp)
 
 *P8｜微信支付摇优惠入口*
 
@@ -128,7 +128,7 @@ cover: /covers/commute-value.svg
 - 获取通用立减券
 - 下单时自动应用最优优惠
 
-![上班族哈啰顺风车大额立减券二维码，扫码可领取顺风车立减券](/images/上班族优惠券.png)
+![上班族哈啰顺风车大额立减券二维码，扫码可领取顺风车立减券](/images/上班族优惠券.webp)
 
 *P11｜上班族顺风车立减券入口*
 

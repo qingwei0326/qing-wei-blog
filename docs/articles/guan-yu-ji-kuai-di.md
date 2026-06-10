@@ -29,11 +29,11 @@ permalink: /articles/guan-yu-ji-kuai-di/
 
 入口：支付宝 → 青春特权 → 寄快递
 
-![青春特权入口](/images/guan-yu-ji-kuai-di-20260524-b73a0b.png)
+![青春特权入口](/images/guan-yu-ji-kuai-di-20260524-b73a0b.webp)
 
-![进入寄件页](/images/guan-yu-ji-kuai-di-20260524-3c05d0.png)
+![进入寄件页](/images/guan-yu-ji-kuai-di-20260524-3c05d0.webp)
 
-![学生卡 + 5 折券](/images/guan-yu-ji-kuai-di-20260524-e6f7fd.png)
+![学生卡 + 5 折券](/images/guan-yu-ji-kuai-di-20260524-e6f7fd.webp)
 
 你会发现**不止有学生卡，下面还会叠一张 5 折券**——5 折是有上限的，基本最多减 4 元，专门打首重的折扣。
 
@@ -95,7 +95,7 @@ permalink: /articles/guan-yu-ji-kuai-di/
 
 ### 支付完还会送一张券
 
-![支付完送的优惠券](/images/guan-yu-ji-kuai-di-20260524-427e59.png)
+![支付完送的优惠券](/images/guan-yu-ji-kuai-di-20260524-427e59.webp)
 
 这张券**所有群体都能用**——不限学生身份，下一单还能接着用。
 
@@ -105,7 +105,7 @@ permalink: /articles/guan-yu-ji-kuai-di/
 
 青春特权上班族用不了，但还是有路径——主走支付宝的**消费券 / 大牌好券**入口。
 
-![上班族消费券入口](/images/guan-yu-ji-kuai-di-20260524-d7719d.png)
+![上班族消费券入口](/images/guan-yu-ji-kuai-di-20260524-d7719d.webp)
 
 券种没学生那条线那么固定，但**同样的逻辑**：找到"固定窗口"在哪、什么时候上架、怎么叠——花两周观察一遍比每次寄件重新搜要省事得多。
 

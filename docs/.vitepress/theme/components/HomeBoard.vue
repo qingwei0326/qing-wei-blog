@@ -1488,6 +1488,75 @@ html[data-teek-preset="card"] .story-card.is-lead {
   grid-template-columns: minmax(0, 1fr);
 }
 
+.dark .home-board {
+  --hero-surface: rgb(24 36 55 / 88%);
+  --hero-surface-strong: rgb(28 42 64 / 94%);
+  --hero-surface-hover: rgb(34 50 75 / 98%);
+  --hero-border: rgb(107 132 166 / 38%);
+}
+
+.dark .home-aside {
+  border-right-color: rgb(107 132 166 / 28%);
+}
+
+.dark .home-hero {
+  border-bottom-color: rgb(107 132 166 / 28%);
+}
+
+.dark .hero-lead,
+.dark .feature-card__copy p,
+.dark .story-body p,
+.dark .timeline-item span {
+  color: #d5e0ee;
+}
+
+.dark .eyebrow,
+.dark .section-link,
+.dark .start-cta {
+  color: #a8c7ff;
+}
+
+.dark .action-primary {
+  color: #07111f;
+  background: #f4f8ff;
+}
+
+.dark .action-primary:hover {
+  color: #07111f;
+  background: #ffffff;
+}
+
+.dark .action-secondary,
+.dark .hero-side,
+.dark .start-card,
+.dark .story-card,
+.dark .panel-card {
+  border-color: var(--hero-border);
+  background: var(--hero-surface);
+}
+
+.dark .hero-tags span,
+.dark .mini-tag,
+.dark .tag-cloud a {
+  border-color: rgb(141 164 197 / 42%);
+  color: #c8d7ea;
+  background: rgb(141 164 197 / 10%);
+}
+
+.dark .hero-focus__meta,
+.dark .meta-row,
+.dark .timeline-item time,
+.dark .topic-row strong,
+.dark .start-step {
+  color: #afbdd1;
+}
+
+.dark .blogger-shell .nav-btn,
+.dark .blogger-social a {
+  border-color: rgb(107 132 166 / 38%);
+  color: #d0dbe9;
+}
+
 @media (max-width: 820px) {
   html[data-teek-preset="wide"] .home-board {
     width: min(100%, 100vw);

@@ -1,14 +1,10 @@
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { Suspense, lazy, useEffect, useState, useCallback, useRef } from 'react';
 import { listen, type UnlistenFn } from '@tauri-apps/api/event';
 import { api } from '@/lib/tauri';
 import { formatDraft } from '@/lib/formatDraft';
 import { Toolbar } from '@/components/Toolbar';
 import { Sidebar } from '@/components/Sidebar';
-import { Editor } from '@/components/Editor';
-import { Preview } from '@/components/Preview';
 import { LogDrawer } from '@/components/LogDrawer';
-import { NewArticleDialog } from '@/components/NewArticleDialog';
-import { RenameDialog } from '@/components/RenameDialog';
 import type {
   ArticleSummary,
   ArticleDetail,
@@ -17,6 +13,23 @@ import type {
   Tab,
   DocumentKind,
 } from '@/types';
+
+const Editor = lazy(() =>
+  import('@/components/Editor').then((module) => ({ default: module.Editor })),
+);
+const Preview = lazy(() =>
+  import('@/components/Preview').then((module) => ({ default: module.Preview })),
+);
+const NewArticleDialog = lazy(() =>
+  import('@/components/NewArticleDialog').then((module) => ({
+    default: module.NewArticleDialog,
+  })),
+);
+const RenameDialog = lazy(() =>
+  import('@/components/RenameDialog').then((module) => ({
+    default: module.RenameDialog,
+  })),
+);
 
 declare global {
   interface Window {
@@ -418,14 +431,18 @@ export default function App() {
           </div>
           <div className="flex flex-1 overflow-hidden bg-white dark:bg-ink-700">
             {tab === 'write' ? (
-              <Editor
-                value={editorValue}
-                onChange={setEditorValue}
-                onPasteImage={handlePasteImage}
-                onDropImages={handleDropImages}
-              />
+              <Suspense fallback={<PaneLoading label="编辑器加载中..." />}>
+                <Editor
+                  value={editorValue}
+                  onChange={setEditorValue}
+                  onPasteImage={handlePasteImage}
+                  onDropImages={handleDropImages}
+                />
+              </Suspense>
             ) : (
-              <Preview content={editorValue} blogPath={blogPath} />
+              <Suspense fallback={<PaneLoading label="预览加载中..." />}>
+                <Preview content={editorValue} blogPath={blogPath} />
+              </Suspense>
             )}
           </div>
         </section>
@@ -436,17 +453,33 @@ export default function App() {
         entries={logEntries}
         onClose={() => setLogOpen(false)}
       />
-      <NewArticleDialog
-        open={newDialogOpen}
-        onClose={() => setNewDialogOpen(false)}
-        onSubmit={handleCreateSubmit}
-      />
-      <RenameDialog
-        open={renameTarget !== null}
-        initialTitle={renameTarget?.title ?? ''}
-        onClose={() => setRenameTarget(null)}
-        onSubmit={handleRenameSubmit}
-      />
+      {newDialogOpen ? (
+        <Suspense fallback={null}>
+          <NewArticleDialog
+            open={newDialogOpen}
+            onClose={() => setNewDialogOpen(false)}
+            onSubmit={handleCreateSubmit}
+          />
+        </Suspense>
+      ) : null}
+      {renameTarget ? (
+        <Suspense fallback={null}>
+          <RenameDialog
+            open={renameTarget !== null}
+            initialTitle={renameTarget.title}
+            onClose={() => setRenameTarget(null)}
+            onSubmit={handleRenameSubmit}
+          />
+        </Suspense>
+      ) : null}
+    </div>
+  );
+}
+
+function PaneLoading({ label }: { label: string }) {
+  return (
+    <div className="flex h-full w-full items-center justify-center text-sm text-ink-400">
+      {label}
     </div>
   );
 }

@@ -25,17 +25,17 @@
 }
 
 .dark {
-  --vp-c-bg: #0f1724;
-  --vp-c-bg-soft: #151f2e;
-  --vp-c-bg-mute: #1d2a3b;
-  --vp-c-bg-alt: #121c2a;
+  --vp-c-bg: #101827;
+  --vp-c-bg-soft: #172438;
+  --vp-c-bg-mute: #223249;
+  --vp-c-bg-alt: #132033;
 
   --vp-c-text-1: #edf4ff;
-  --vp-c-text-2: #b8c6d8;
-  --vp-c-text-3: #8091a6;
+  --vp-c-text-2: #d0dbe9;
+  --vp-c-text-3: #a1b1c4;
 
-  --vp-c-divider: #27364a;
-  --vp-c-divider-light: #213047;
+  --vp-c-divider: #364964;
+  --vp-c-divider-light: #2b3d57;
 
   --vp-c-code-text: #ffb27c;
   --vp-c-code-bg: #352115;
