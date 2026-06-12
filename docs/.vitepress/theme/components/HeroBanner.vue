@@ -61,19 +61,9 @@ const heroTags = computed(() => articleTags.slice(0, 6))
 <style scoped>
 .home-hero {
   position: relative;
-  overflow: hidden;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 360px);
   gap: 24px;
   align-items: center;
-  min-height: 430px;
-  padding: 40px;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 28px;
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--vp-c-brand) 10%, transparent), transparent 52%),
-    linear-gradient(160deg, var(--vp-c-bg-soft), var(--vp-c-bg-mute));
-  box-shadow: 0 24px 64px rgb(15 23 42 / 8%);
 }
 
 .hero-backdrop {
@@ -95,32 +85,24 @@ const heroTags = computed(() => articleTags.slice(0, 6))
 
 .hero-copy {
   display: grid;
-  gap: 20px;
   align-content: center;
 }
 
 .eyebrow {
   margin: 0;
-  color: var(--vp-c-brand);
   font-size: 0.78rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .hero-copy h1 {
-  max-width: 10em;
   margin: 0;
-  font-size: 3.25rem;
-  line-height: 1.08;
   letter-spacing: 0;
 }
 
 .hero-lead {
-  max-width: 34rem;
   margin: 0;
   color: var(--vp-c-text-2);
-  font-size: 1.05rem;
   line-height: 1.9;
 }
 
@@ -134,10 +116,8 @@ const heroTags = computed(() => articleTags.slice(0, 6))
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
   padding: 0 18px;
   border: 1px solid transparent;
-  border-radius: 10px;
   font-size: 0.94rem;
   font-weight: 700;
   text-decoration: none;
@@ -151,7 +131,6 @@ const heroTags = computed(() => articleTags.slice(0, 6))
 
 .action-primary {
   color: #fff;
-  background: linear-gradient(135deg, var(--vp-c-brand), var(--vp-c-brand-dark));
   box-shadow: 0 14px 26px rgb(22 119 255 / 18%);
 }
 
@@ -202,36 +181,25 @@ const heroTags = computed(() => articleTags.slice(0, 6))
 .hero-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
 }
 
 .hero-tags span {
   display: inline-flex;
   align-items: center;
-  min-height: 30px;
   padding: 0 12px;
   border: 1px solid color-mix(in srgb, var(--vp-c-brand) 18%, var(--vp-c-divider));
-  border-radius: 999px;
-  color: var(--vp-c-brand);
-  background: color-mix(in srgb, var(--vp-c-brand) 6%, var(--hero-surface-strong));
   font-size: 0.8rem;
   font-weight: 700;
 }
 
 .hero-side {
   display: grid;
-  gap: 16px;
-  align-content: center;
 }
 
 .blog-cover {
-  aspect-ratio: 16 / 11;
   margin: 0;
   overflow: hidden;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 22px;
   background: var(--vp-c-bg-soft);
-  box-shadow: 0 20px 60px rgb(15 23 42 / 12%);
 }
 
 .blog-cover img {
@@ -245,18 +213,11 @@ const heroTags = computed(() => articleTags.slice(0, 6))
 
 .hero-focus {
   display: grid;
-  gap: 10px;
-  padding: 18px;
-  border: 1px solid var(--hero-border);
-  border-radius: 18px;
-  background: var(--hero-surface);
   color: var(--vp-c-text-1);
   text-decoration: none;
-  backdrop-filter: blur(12px);
 }
 
 .hero-focus:hover {
-  border-color: color-mix(in srgb, var(--vp-c-brand) 46%, var(--vp-c-divider));
   text-decoration: none;
 }
 
@@ -295,12 +256,6 @@ const heroTags = computed(() => articleTags.slice(0, 6))
 @media (max-width: 820px) {
   .home-hero {
     min-height: 0;
-    padding: 28px;
-  }
-
-  .hero-copy h1 {
-    max-width: none;
-    font-size: 2.4rem;
   }
 }
 
