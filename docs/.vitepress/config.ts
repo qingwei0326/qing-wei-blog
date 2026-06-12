@@ -4,7 +4,6 @@ import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
 import { basename, dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createRequire } from 'node:module'
-import matter from 'gray-matter'
 import { Feed } from 'feed'
 import { readAllArticles } from '../../packages/shared/src/articles'
 
@@ -269,31 +268,20 @@ export default defineConfig({
 
   async buildEnd(siteConfig) {
     const SITE_URL = 'https://blog.qing-wei.com'
-    const articlesDir = resolve(siteConfig.srcDir, 'articles')
-    const files = readdirSync(articlesDir).filter(
-      (f) => f.endsWith('.md') && f !== 'index.md'
-    )
+    const articles = readAllArticles()
 
-    const items = files
-      .map((file) => {
-        const raw = readFileSync(resolve(articlesDir, file), 'utf-8')
-        const { data } = matter(raw)
-        const slug = file.replace(/\.md$/, '')
-        const url = data.permalink
-          ? `${SITE_URL}${data.permalink}`
-          : `${SITE_URL}/articles/${slug}/`
-        return {
-          title: (data.title as string) || slug,
-          description: (data.description as string) || '',
-          date: data.date ? new Date(data.date) : new Date(),
-          url,
-          cover: data.cover
-            ? `${SITE_URL}${data.cover}`
-            : `${SITE_URL}${siteCover}`,
-          categories: (data.categories as string[]) || []
-        }
-      })
-      .sort((a, b) => b.date.getTime() - a.date.getTime())
+    const items = articles.map((article) => ({
+      title: article.title || article.slug,
+      description: article.description,
+      date: article.date ? new Date(article.date) : new Date(),
+      url: article.permalink
+        ? `${SITE_URL}${article.permalink}`
+        : `${SITE_URL}/articles/${article.slug}/`,
+      cover: article.cover
+        ? `${SITE_URL}${article.cover}`
+        : `${SITE_URL}${siteCover}`,
+      categories: article.categories
+    }))
 
     const feed = new Feed({
       title: '青微的博客',
