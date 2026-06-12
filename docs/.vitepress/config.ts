@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 import { createRequire } from 'node:module'
 import matter from 'gray-matter'
 import { Feed } from 'feed'
+import { readAllArticles } from '../../packages/shared/src/articles'
 
 const require = createRequire(import.meta.url)
 const configDir = dirname(fileURLToPath(import.meta.url))
@@ -50,38 +51,9 @@ const toDateLabel = (value: unknown) => {
   return Number.isNaN(time) ? text : new Date(time).toISOString().slice(0, 10)
 }
 
-const readArticleFiles = () =>
-  readdirSync(articlesRoot)
-    .filter((file) => file.endsWith('.md') && file !== 'index.md')
-    .sort()
-
-const readArticleMetadata = () =>
-  readArticleFiles()
-    .map((file) => {
-      const raw = readFileSync(resolve(articlesRoot, file), 'utf-8')
-      const { data } = matter(raw)
-      const slug = basename(file, '.md')
-      const title = toText(data.title) || slug
-      const description = toText(data.description)
-      const date = toDateLabel(data.date)
-      const tags = toStringArray(data.tags)
-      const categories = toStringArray(data.categories)
-      const cover = toText(data.cover) || undefined
-      const timeValue = Number.isNaN(Date.parse(date)) ? 0 : Date.parse(date)
-
-      return {
-        slug,
-        title,
-        description,
-        date,
-        tags,
-        categories,
-        url: `/articles/${slug}`,
-        timeValue,
-        ...(cover ? { cover } : {})
-      }
-    })
-    .sort((a, b) => b.timeValue - a.timeValue)
+function readArticleMetadata() {
+  return readAllArticles()
+}
 
 const teekConfig = defineTeekConfig({
   logo: '/logo.svg',
@@ -225,7 +197,10 @@ export default defineConfig({
             return null
           }
 
-          for (const file of readArticleFiles()) {
+          const articleFiles = readdirSync(articlesRoot)
+            .filter((file) => file.endsWith('.md') && file !== 'index.md')
+
+          for (const file of articleFiles) {
             this.addWatchFile(resolve(articlesRoot, file))
           }
 

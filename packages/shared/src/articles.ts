@@ -11,13 +11,15 @@ export interface ArticleMeta {
   cover: string
   slug: string
   permalink?: string
+  url: string
+  timeValue: number
 }
 
 // 使用 process.cwd() 确保在任何位置都能正确解析
 const articlesDir = path.resolve(process.cwd(), 'docs/articles')
 
 export function readAllArticles(): ArticleMeta[] {
-  const files = fs.readdirSync(articlesDir).filter((f) => f.endsWith('.md'))
+  const files = fs.readdirSync(articlesDir).filter((f) => f.endsWith('.md') && f !== 'index.md')
 
   return files
     .map((file) => {
@@ -25,15 +27,20 @@ export function readAllArticles(): ArticleMeta[] {
       const { data } = matter(content)
       const slug = file.replace(/\.md$/, '')
 
+      const dateStr = data.date || ''
+      const timeValue = Number.isNaN(Date.parse(dateStr)) ? 0 : Date.parse(dateStr)
+
       return {
         title: data.title || '',
         description: data.description || '',
-        date: data.date || '',
+        date: dateStr,
         tags: data.tags || [],
         categories: data.categories || [],
         cover: data.cover || '',
         slug,
-        permalink: data.permalink
+        permalink: data.permalink,
+        url: `/articles/${slug}`,
+        timeValue
       }
     })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
