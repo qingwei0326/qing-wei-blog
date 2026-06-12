@@ -156,7 +156,7 @@ onBeforeUnmount(() => {
           :href="article.url"
         >
           <div class="archive-cover" :class="{ 'is-placeholder': !article.cover }">
-            <img v-if="article.cover" :src="article.cover" :alt="article.title" />
+            <img v-if="article.cover" :src="article.cover" :alt="article.title" loading="lazy" />
             <div v-else class="cover-placeholder" aria-hidden="true">
               <FeatureIcon name="book" />
             </div>

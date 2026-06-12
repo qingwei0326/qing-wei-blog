@@ -2,7 +2,7 @@
   <aside class="blogger-sidebar" aria-label="博主信息">
     <div class="blogger-card">
       <div class="blogger-avatar">
-        <img :src="avatar" :alt="name" />
+        <img :src="avatar" :alt="name" loading="lazy" />
       </div>
 
       <div class="blogger-identity">

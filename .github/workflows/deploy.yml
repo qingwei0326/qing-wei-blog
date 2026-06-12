@@ -48,6 +48,9 @@ jobs:
       - name: Check blog content
         run: pnpm run docs:check
 
+      - name: Optimize images
+        run: pnpm optimize:images
+
       - name: Build
         run: pnpm run docs:build
 
