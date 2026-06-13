@@ -62,8 +62,11 @@ const heroTags = computed(() => articleTags.slice(0, 6))
 .home-hero {
   position: relative;
   display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
   gap: 24px;
   align-items: center;
+  min-height: 360px;
+  padding: 18px 0 38px;
 }
 
 .hero-backdrop {
@@ -97,10 +100,13 @@ const heroTags = computed(() => articleTags.slice(0, 6))
 
 .hero-copy h1 {
   margin: 0;
+  font-size: 3rem;
+  line-height: 1.1;
   letter-spacing: 0;
 }
 
 .hero-lead {
+  max-width: 31rem;
   margin: 0;
   color: var(--vp-c-text-2);
   line-height: 1.9;
@@ -207,7 +213,7 @@ const heroTags = computed(() => articleTags.slice(0, 6))
   width: 100%;
   height: 100%;
   margin: 0;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
 }
 
@@ -349,7 +355,7 @@ const heroTags = computed(() => articleTags.slice(0, 6))
 }
 
 .blog-cover img {
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
 }
 

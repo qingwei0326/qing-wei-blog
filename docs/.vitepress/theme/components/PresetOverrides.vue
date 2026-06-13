@@ -7,6 +7,11 @@
 </template>
 
 <style>
+/* 占位元素不参与任何布局 */
+.preset-overrides {
+  display: none;
+}
+
 /* ─── Teek 预设模式覆盖 ─── */
 
 html[data-teek-preset="doc"] .home-board {

@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 import { defineTeekConfig } from 'vitepress-theme-teek/config'
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
-import { basename, dirname, resolve } from 'node:path'
+import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createRequire } from 'node:module'
 import { Feed } from 'feed'
@@ -18,41 +18,6 @@ const articleMetadataVirtualId = 'virtual:article-metadata'
 const resolvedArticleMetadataVirtualId = `\0${articleMetadataVirtualId}`
 const teekIconfontPattern =
   /@font-face\{font-family:iconfont;src:url\(iconfont\.woff2\?t=\d+\) format\("woff2"\),url\(iconfont\.woff\?t=\d+\) format\("woff"\),url\(iconfont\.ttf\?t=\d+\) format\("truetype"\)\}/g
-
-const toText = (value: unknown) => (typeof value === 'string' ? value.trim() : '')
-
-const toStringArray = (value: unknown) => {
-  if (!Array.isArray(value)) {
-    return []
-  }
-
-  return value
-    .map((item) => toText(item))
-    .filter((item) => item.length > 0)
-}
-
-const toDateLabel = (value: unknown) => {
-  if (value instanceof Date && !Number.isNaN(value.getTime())) {
-    return value.toISOString().slice(0, 10)
-  }
-
-  const text = toText(value)
-
-  if (!text) {
-    return ''
-  }
-
-  if (/^\d{4}-\d{2}-\d{2}/.test(text)) {
-    return text.slice(0, 10)
-  }
-
-  const time = Date.parse(text)
-  return Number.isNaN(time) ? text : new Date(time).toISOString().slice(0, 10)
-}
-
-function readArticleMetadata() {
-  return readAllArticles()
-}
 
 const teekConfig = defineTeekConfig({
   logo: '/logo.svg',
@@ -203,7 +168,7 @@ export default defineConfig({
             this.addWatchFile(resolve(articlesRoot, file))
           }
 
-          return `export const articleMetadata = ${JSON.stringify(readArticleMetadata())}`
+          return `export const articleMetadata = ${JSON.stringify(readAllArticles())}`
         }
       }
     ]

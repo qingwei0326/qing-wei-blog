@@ -15,8 +15,28 @@ export interface ArticleMeta {
   timeValue: number
 }
 
-// 使用 process.cwd() 确保在任何位置都能正确解析
+// 注意：依赖从仓库根目录运行（pnpm docs:dev / docs:build 均满足）
 const articlesDir = path.resolve(process.cwd(), 'docs/articles')
+
+// gray-matter 会把 YAML 日期解析成 Date 对象，统一规范化为 YYYY-MM-DD
+function toDateLabel(value: unknown): string {
+  if (value instanceof Date && !Number.isNaN(value.getTime())) {
+    return value.toISOString().slice(0, 10)
+  }
+
+  const text = typeof value === 'string' ? value.trim() : ''
+
+  if (!text) {
+    return ''
+  }
+
+  if (/^\d{4}-\d{2}-\d{2}/.test(text)) {
+    return text.slice(0, 10)
+  }
+
+  const time = Date.parse(text)
+  return Number.isNaN(time) ? text : new Date(time).toISOString().slice(0, 10)
+}
 
 export function readAllArticles(): ArticleMeta[] {
   const files = fs.readdirSync(articlesDir).filter((f) => f.endsWith('.md') && f !== 'index.md')
@@ -27,13 +47,13 @@ export function readAllArticles(): ArticleMeta[] {
       const { data } = matter(content)
       const slug = file.replace(/\.md$/, '')
 
-      const dateStr = data.date || ''
-      const timeValue = Number.isNaN(Date.parse(dateStr)) ? 0 : Date.parse(dateStr)
+      const date = toDateLabel(data.date)
+      const timeValue = Number.isNaN(Date.parse(date)) ? 0 : Date.parse(date)
 
       return {
         title: data.title || '',
         description: data.description || '',
-        date: dateStr,
+        date,
         tags: data.tags || [],
         categories: data.categories || [],
         cover: data.cover || '',
@@ -43,7 +63,7 @@ export function readAllArticles(): ArticleMeta[] {
         timeValue
       }
     })
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .sort((a, b) => b.timeValue - a.timeValue)
 }
 
 export function getArticleBySlug(slug: string): ArticleMeta | null {

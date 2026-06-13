@@ -49,8 +49,9 @@ const startHere = computed(() =>
 </script>
 
 <template>
+  <!-- PresetOverrides 只承载全局样式，必须放在 .home-board 网格外，否则会占用网格槽位 -->
+  <PresetOverrides />
   <div class="home-board">
-    <PresetOverrides />
     <aside class="home-aside" aria-label="作者信息">
       <BloggerSidebar
         name="青微"
@@ -338,7 +339,7 @@ const startHere = computed(() =>
 
 .home-split {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 20px;
 }
 

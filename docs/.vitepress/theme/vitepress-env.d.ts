@@ -1,5 +1,5 @@
 declare module 'virtual:article-metadata' {
-  import type { ArticleEntry } from './data/articles'
+  import type { ArticleMeta } from '../../../packages/shared/src/articles'
 
-  export const articleMetadata: ArticleEntry[]
+  export const articleMetadata: ArticleMeta[]
 }
