@@ -75,6 +75,14 @@ const checkMarkdownImages = (content, file) => {
     const resolved = join(publicDir, pathWithoutHash)
     if (!existsSync(resolved)) {
       errors.push(`${file}: image target does not exist: ${src}`)
+      continue
+    }
+
+    if (['.jpg', '.jpeg', '.png'].includes(ext)) {
+      const webpPath = pathWithoutHash.replace(/\.(jpe?g|png)$/i, '.webp')
+      if (existsSync(join(publicDir, webpPath))) {
+        warnings.push(`${file}: image can use existing WebP version: ${src} -> ${webpPath}`)
+      }
     }
   }
 }

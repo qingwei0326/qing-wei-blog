@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const imagesDir = path.resolve(__dirname, '../docs/public/images')
+const checkOnly = process.argv.includes('--check')
 
 async function optimizeImages() {
   const sharp = (await import('sharp')).default
@@ -28,6 +29,12 @@ async function optimizeImages() {
       continue
     }
 
+    if (checkOnly) {
+      console.error(`missing webp ${file} -> ${path.basename(outputPath)}`)
+      optimized++
+      continue
+    }
+
     try {
       await sharp(inputPath)
         .webp({ quality: 80 })
@@ -41,6 +48,9 @@ async function optimizeImages() {
   }
 
   console.log(`\nDone: ${optimized} optimized, ${skipped} skipped`)
+  if (checkOnly && optimized > 0) {
+    process.exit(1)
+  }
 }
 
 optimizeImages()
