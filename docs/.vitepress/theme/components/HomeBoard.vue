@@ -5,7 +5,7 @@ import HeroBanner from './HeroBanner.vue'
 import StoryCardList from './StoryCardList.vue'
 import PresetOverrides from './PresetOverrides.vue'
 import { articleCategories, articleTags, articles } from '../data/articles'
-import { articleFilterHref, articleHref, categoryHref } from '../utils/links'
+import { articleFilterHref, articleHref, categoryHref, siteLink } from '../utils/links'
 
 const totalTags = computed(() => articleTags.length)
 const categoryStats = computed(() =>
@@ -38,6 +38,33 @@ const startHerePicks = [
   { slug: 'secondhand-phone-deal', step: '02', blurb: '一个完整的实战案例' },
   { slug: 'consumption-traps', step: '03', blurb: '怎么识破日常消费里的套路' }
 ]
+
+const holidayPicks = [
+  {
+    slug: 'commute-optimization',
+    label: '返乡出行',
+    hook: '带行李回家前，先算清楚公交、打车和顺风车的真实成本。'
+  },
+  {
+    slug: 'guan-yu-ji-kuai-di',
+    label: '寄件行李',
+    hook: '寄书、寄衣服、寄闲置，把学生券和平台券先叠起来。'
+  },
+  {
+    slug: 'systematic-money-saving',
+    label: '假期消费',
+    hook: '出门、网购、订阅续费前，用一套流程少花冤枉钱。'
+  }
+]
+
+const holidaySpecial = computed(() =>
+  holidayPicks
+    .map((pick) => {
+      const article = articles.find((a) => a.slug === pick.slug)
+      return article ? { ...pick, article } : null
+    })
+    .filter((x): x is { slug: string; label: string; hook: string; article: typeof articles[number] } => x !== null)
+)
 
 const startHere = computed(() =>
   startHerePicks
@@ -80,6 +107,42 @@ const startHere = computed(() =>
           <p>{{ feature.detail }}</p>
         </div>
       </article>
+    </section>
+
+    <section v-if="holidaySpecial.length" class="content-section holiday-special" aria-labelledby="holiday-heading">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Holiday Picks</p>
+          <h2 id="holiday-heading">放假前先看这 3 篇</h2>
+        </div>
+        <a class="section-link" :href="siteLink('/articles/')">全部文章</a>
+      </div>
+
+      <div class="holiday-grid">
+        <a
+          v-for="entry in holidaySpecial"
+          :key="entry.slug"
+          class="holiday-card"
+          :href="articleHref(entry.article.url)"
+        >
+          <div class="holiday-media" :class="{ 'is-placeholder': !entry.article.cover }">
+            <img
+              v-if="entry.article.cover"
+              :src="entry.article.cover"
+              :alt="entry.article.title"
+              loading="lazy"
+            />
+            <span v-else aria-hidden="true">
+              <FeatureIcon name="spark" />
+            </span>
+          </div>
+          <div class="holiday-body">
+            <p class="holiday-label">{{ entry.label }}</p>
+            <h3>{{ entry.article.title }}</h3>
+            <p>{{ entry.hook }}</p>
+          </div>
+        </a>
+      </div>
     </section>
 
     <section v-if="startHere.length" class="content-section start-here" aria-labelledby="starthere-heading">
@@ -252,6 +315,90 @@ const startHere = computed(() =>
   color: var(--vp-c-brand-dark);
 }
 
+.holiday-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.holiday-card {
+  display: grid;
+  grid-template-rows: 148px minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--vp-c-divider) 84%, transparent);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.holiday-card:hover {
+  border-color: color-mix(in srgb, var(--vp-c-brand) 54%, var(--vp-c-divider));
+  box-shadow: 0 14px 34px rgb(15 23 42 / 7%);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.holiday-media {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--vp-c-brand) 8%, transparent), transparent 58%),
+    color-mix(in srgb, var(--vp-c-bg-mute) 78%, var(--vp-c-bg-soft));
+}
+
+.holiday-media img {
+  display: block;
+  width: calc(100% - 18px);
+  height: calc(100% - 18px);
+  margin: 0;
+  border-radius: 6px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.holiday-media span {
+  display: grid;
+  place-items: center;
+  color: var(--vp-c-brand);
+}
+
+.holiday-media :deep(svg) {
+  width: 44px;
+  height: 44px;
+}
+
+.holiday-body {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  padding: 16px;
+}
+
+.holiday-label {
+  margin: 0;
+  color: var(--vp-c-brand);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.holiday-body h3 {
+  margin: 0;
+  color: var(--vp-c-text-1);
+  font-size: 1rem;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+
+.holiday-body p:not(.holiday-label) {
+  margin: 0;
+  color: var(--vp-c-text-2);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
 .start-here .section-head {
   margin-bottom: 12px;
 }
@@ -313,8 +460,13 @@ const startHere = computed(() =>
 }
 
 @media (max-width: 860px) {
+  .holiday-grid,
   .start-grid {
     grid-template-columns: 1fr;
+  }
+
+  .holiday-card {
+    grid-template-rows: 190px minmax(0, 1fr);
   }
 }
 
