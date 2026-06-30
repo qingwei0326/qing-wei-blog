@@ -32,6 +32,10 @@ __manus_ec=*
 home-preview-cdp.png
 wide-dark-preview.png
 
+# 本地预览/截图
+.codex-screenshots/
+readability-preview-*.html
+
 # 桌面工具配置
 config.json
 

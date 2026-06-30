@@ -386,18 +386,24 @@ onBeforeUnmount(() => {
 }
 
 .archive-cover {
-  display: flex;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 10;
   min-height: 156px;
   overflow: hidden;
   border-radius: 8px;
-  background: var(--vp-c-bg-mute);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--vp-c-brand) 8%, transparent), transparent 58%),
+    color-mix(in srgb, var(--vp-c-bg-mute) 78%, var(--vp-c-bg-soft));
 }
 
 .archive-cover img {
-  width: 100%;
-  height: 100%;
+  display: block;
+  width: calc(100% - 18px);
+  height: calc(100% - 18px);
   margin: 0;
-  object-fit: cover;
+  object-fit: contain;
+  border-radius: 6px;
 }
 
 .cover-placeholder {
@@ -492,6 +498,7 @@ onBeforeUnmount(() => {
 
   .archive-cover {
     min-height: 190px;
+    aspect-ratio: 16 / 9;
   }
 }
 </style>

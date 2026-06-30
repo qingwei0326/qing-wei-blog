@@ -1,13 +1,17 @@
 ---
-title: 给博客也算一笔账——从 VitePress 翻车到写一个 Tauri 桌面工具
-description: 6 次构建失败、3 次主题重构、最后写了个 952 行 Rust + 2208 行 TS 的桌面写作助手。一个"几小时就能搭好"的博客，怎么把我拖进半年的折腾。
+title: 一个个人博客，为什么最后被我做成了桌面写作工具
+description: 从 VitePress 建站、Cloudflare Pages 构建失败，到重写 Tauri 桌面写作助手。复盘一个个人博客如何变成 CI/CD、Rust 和写作流的练手项目。
 date: 2026-05-23
 tags: [折腾, 工具, 算账, Tauri, VitePress]
 categories: [工具与效率]
 cover: /covers/blog-toolchain.svg
 ---
 
-# 给博客也算一笔账——从 VitePress 翻车到写一个 Tauri 桌面工具
+# 一个个人博客，为什么最后被我做成了桌面写作工具
+
+先说结论：这个博客最贵的不是域名、服务器或主题，而是我为了让它顺手，顺路把 CI/CD、主题重构、Tauri 和 Rust 都折腾了一遍。
+
+如果你也觉得"搭博客不就是选个主题写 markdown 吗"，这篇就是一份反面账单：它最后被我做成了一个桌面写作工具。
 
 一开始我以为博客是这样的：
 

@@ -131,6 +131,17 @@ export default defineConfig({
 
         if (!isArticle) return
 
+        const firstH1Match = state.src.match(/^(\s*)(# .+(?:\r?\n|$))/)
+
+        if (firstH1Match?.[2]) {
+          const leadingWhitespace = firstH1Match[1] ?? ''
+          const firstH1 = firstH1Match[2].trimEnd()
+          const rest = state.src.slice(firstH1Match[0].length)
+
+          state.src = `${leadingWhitespace}${firstH1}\n\n<ArticleSummary />\n\n${rest}\n\n<ArticleNavigation />\n`
+          return
+        }
+
         state.src = `<ArticleSummary />\n\n${state.src}\n\n<ArticleNavigation />\n`
       })
     }

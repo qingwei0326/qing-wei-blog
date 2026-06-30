@@ -146,18 +146,23 @@ const latestLabel = computed(() => articles[0]?.date || '持续更新')
 }
 
 .story-media {
+  display: grid;
+  place-items: center;
   position: relative;
   overflow: hidden;
-  background: var(--vp-c-bg-mute);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--vp-c-brand) 8%, transparent), transparent 58%),
+    color-mix(in srgb, var(--vp-c-bg-mute) 78%, var(--vp-c-bg-soft));
 }
 
 .story-media img {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
   margin: 0;
-  object-fit: cover;
-  object-position: center top;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 6px;
 }
 
 .story-body {
