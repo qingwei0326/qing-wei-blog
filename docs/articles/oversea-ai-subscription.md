@@ -1,6 +1,6 @@
 ---
-title: ¥80 月费用上 Claude / ChatGPT——苹果渠道的海外订阅算账
-description: 国区没有官方支付路径，走 App Store + 海外区 Apple ID + 礼品卡：Claude 尼区 ¥86、Codex 土区 ¥76-80，比美区原价 $20 省一半。
+title: Claude / ChatGPT 海外订阅怎么省：我用苹果渠道把月费压到 ¥80
+description: 国内订 Claude / ChatGPT 没有稳定官方支付路径。我用海外区 Apple ID + iTunes 礼品卡走 App Store 内购，把月费从美区 $20 压到约 ¥80。
 date: 2026-05-24
 tags: [AI 工具, 工具, 算账]
 categories: [工具与效率]
@@ -8,9 +8,23 @@ cover: /covers/ai-subscription.svg
 permalink: /articles/oversea-ai-subscription/
 ---
 
+# Claude / ChatGPT 海外订阅怎么省：我用苹果渠道把月费压到 ¥80
+
 > **这篇受众有偏**——不是写给"大学生通用算账"的，是写给已经在用 Claude / Codex 做开发或重度内容工作的人。日常没用 AI 工具的话，这一篇可以跳过。
 
 （下面我把 ChatGPT 都叫 **Codex**，发音顺一点。）
+
+<TakeawayCard>
+
+**先说结论：**我走的是海外区 Apple ID + iTunes 礼品卡 + App Store 内购。优点是链路正规、比美区便宜；缺点是账号、礼品卡、IP 都要维护，价格和风控也会变。
+
+</TakeawayCard>
+
+## 这篇先看哪几段
+
+- 想知道值不值：看「算账：到底省多少」
+- 想照着做：看「苹果 ID」「买礼品卡」「充值 + 订阅」
+- 怕风险：看「网络这块」和「中转站 freemodel」
 
 ---
 
@@ -44,12 +58,21 @@ Claude / ChatGPT 在国内**都没有官方支付路径**——你拿张国内�
 
 **前置**：必须有一台苹果设备（iPhone / iPad / Mac 都行），国内卡国内手机号也行，**不需要苹果生态全套**。
 
-1. 电脑端注册一个新的 **谷歌邮箱**（手机号填国内 +86 都可以）
-2. 用这个 Google 邮箱在电脑端注册新 **Apple ID**
-   - 买 **Claude → 选尼日利亚区**
-   - 买 **Codex → 选土耳其区**
-   - Google 邮箱的地区 ≠ 苹果 ID 地区也没关系
-3. **养号 1-2 天**：心理安慰为主——苹果走的是正规消费链路，封号率本身就很低
+<RouteCard title="苹果渠道订阅先按这 4 步走">
+
+1. 准备一个新邮箱，注册对应地区的 Apple ID。
+2. 按目标工具选区：Claude 看尼日利亚区，ChatGPT / Codex 看土耳其区。
+3. 买对应地区 iTunes 礼品卡，确认不是买错成别的卡种。
+4. 充值到账后，用 App Store 内购订阅，余额够就自动续。
+
+</RouteCard>
+
+几个细节我会注意：
+
+- 电脑端注册新 Google 邮箱，手机号填国内 +86 也可以。
+- 用这个邮箱注册新 Apple ID，Google 邮箱地区和 Apple ID 地区不用一致。
+- 买 Claude 选尼日利亚区，买 ChatGPT / Codex 选土耳其区。
+- 养号 1-2 天更多是心理安慰，苹果走正规消费链路，本身封号率没那么高。
 
 ---
 
