@@ -77,8 +77,9 @@ const teekConfig = defineTeekConfig({
 
   vitePlugins: {
     sidebarOption: {
-      ignoreList: ['categories', /\.paths\.ts$/],
+      ignoreList: ['categories', 'superpowers', /\.paths\.ts$/],
     },
+    fileContentLoaderIgnore: ['superpowers/**', '**/superpowers/**'],
   },
 
   comment: {
@@ -105,7 +106,7 @@ export default defineConfig({
   lang: 'zh-CN',
   appearance: true,
   ignoreDeadLinks: false,
-  srcExclude: ['**/public/**'],
+  srcExclude: ['**/public/**', 'superpowers/**'],
 
   themeConfig: {
     outline: {

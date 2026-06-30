@@ -21,6 +21,8 @@ project_all.txt
 .vitepress-dev*.log
 *.err.txt
 *.out.txt
+.superpowers/
+docs/superpowers/
 
 # 异常 shell 残留
 __manus_ec=*
