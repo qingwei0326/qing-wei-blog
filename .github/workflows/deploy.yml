@@ -54,6 +54,9 @@ jobs:
       - name: Build
         run: pnpm run docs:build
 
+      - name: Check built links
+        run: pnpm run docs:links
+
       - name: Pre-install wrangler (avoid pnpm 10 build-script deny)
         run: npm install -g wrangler
 
