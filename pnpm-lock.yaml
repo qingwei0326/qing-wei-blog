@@ -112,6 +112,12 @@ importers:
         specifier: ^3.4.0
         version: 3.5.34(typescript@5.9.3)
 
+  packages/shared:
+    dependencies:
+      gray-matter:
+        specifier: ^4.0.3
+        version: 4.0.3
+
 packages:
 
   '@algolia/abtesting@1.18.1':

@@ -1,0 +1,10 @@
+packages:
+  - packages/*
+
+allowBuilds:
+  electron-winstaller: true
+  esbuild: true
+  workerd: true
+onlyBuiltDependencies:
+  - esbuild
+  - workerd
