@@ -38,6 +38,21 @@ function toDateLabel(value: unknown): string {
   return Number.isNaN(time) ? text : new Date(time).toISOString().slice(0, 10)
 }
 
+function normalizePermalink(value: unknown): string | undefined {
+  if (typeof value !== 'string') return undefined
+
+  const trimmed = value.trim()
+  if (!trimmed || !trimmed.startsWith('/') || !trimmed.endsWith('/')) {
+    return undefined
+  }
+
+  return trimmed
+}
+
+function articleUrlFor(slug: string, permalink: unknown): string {
+  return normalizePermalink(permalink) ?? `/articles/${slug}/`
+}
+
 export function readAllArticles(): ArticleMeta[] {
   const files = fs.readdirSync(articlesDir).filter((f) => f.endsWith('.md') && f !== 'index.md')
 
@@ -49,6 +64,7 @@ export function readAllArticles(): ArticleMeta[] {
 
       const date = toDateLabel(data.date)
       const timeValue = Number.isNaN(Date.parse(date)) ? 0 : Date.parse(date)
+      const permalink = normalizePermalink(data.permalink)
 
       return {
         title: data.title || '',
@@ -58,8 +74,8 @@ export function readAllArticles(): ArticleMeta[] {
         categories: data.categories || [],
         cover: data.cover || '',
         slug,
-        permalink: data.permalink,
-        url: `/articles/${slug}`,
+        permalink,
+        url: articleUrlFor(slug, permalink),
         timeValue
       }
     })
