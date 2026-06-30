@@ -11,7 +11,7 @@ const require = createRequire(import.meta.url)
 const configDir = dirname(fileURLToPath(import.meta.url))
 const docsRoot = resolve(configDir, '..')
 const articlesRoot = resolve(docsRoot, 'articles')
-const siteCover = '/images/og-cover.png'
+const siteCover = '/images/og-cover.webp'
 const teekIndexCss = require.resolve('vitepress-theme-teek/index.css')
 const teekIndexCssVirtualId = 'virtual:teek-index.css'
 const articleMetadataVirtualId = 'virtual:article-metadata'
@@ -48,7 +48,7 @@ const teekConfig = defineTeekConfig({
 
   blogger: {
     name: '青微',
-    avatar: '/images/avatar.jpg',
+    avatar: '/images/avatar.webp',
     slogan: '记录技术、生活与折腾',
     shape: 'circle',
     circleSize: 110,

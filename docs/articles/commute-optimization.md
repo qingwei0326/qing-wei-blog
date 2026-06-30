@@ -55,15 +55,15 @@ cover: /covers/holiday-commute-value.webp
 
 ### 数字背后的真实收益
 
-![打车价格](/images/taxi-price.jpg)
+![打车价格](/images/taxi-price.webp)
 
 *P3｜打车价格页面（对照）*
 
-![哈啰顺风车车费明细：11.1 公里 1 个人，行程费用 22.2 元，优惠券抵扣 11.1 元，支付金额 11.1 元](/images/ride-share-price.jpg)
+![哈啰顺风车车费明细：11.1 公里 1 个人，行程费用 22.2 元，优惠券抵扣 11.1 元，支付金额 11.1 元](/images/ride-share-price.webp)
 
 *P4｜车费明细页面*
 
-![哈啰顺风车账单详情：订单金额 11.10 元，农业银行立减金 0.77 元，实际扣款 10.33 元，支付时间 2026-05-06 11:50:45](/images/final-payment.jpg)
+![哈啰顺风车账单详情：订单金额 11.10 元，农业银行立减金 0.77 元，实际扣款 10.33 元，支付时间 2026-05-06 11:50:45](/images/final-payment.webp)
 
 *P5｜账单页面（最终扣款）*
 
@@ -123,7 +123,7 @@ cover: /covers/holiday-commute-value.webp
    - 在出行权益里找到【哈啰顺风车 5 折支付券】
    - 领取 **哈啰顺风车 5 折支付券**
 
-![支付宝青春特权页面：哈啰顺风车权益，包含 5 折新人专享券和哈啰顺风车全场券](/images/青春特权.jpg)
+![支付宝青春特权页面：哈啰顺风车权益，包含 5 折新人专享券和哈啰顺风车全场券](/images/青春特权.webp)
 
 *P7｜支付宝青春特权里的哈啰顺风车权益*
    
@@ -139,11 +139,11 @@ cover: /covers/holiday-commute-value.webp
 
 *P8｜微信支付摇优惠入口*
 
-![支付宝消费券页面，包含大牌好券和出行相关优惠入口](/images/alipay-coupons.jpg)
+![支付宝消费券页面，包含大牌好券和出行相关优惠入口](/images/alipay-coupons.webp)
 
 *P9｜支付宝消费券 / 大牌好券入口*
 
-![支付宝优惠详情页面，展示具体优惠券的有效期和使用规则](/images/alipay-coupon-detail.jpg)
+![支付宝优惠详情页面，展示具体优惠券的有效期和使用规则](/images/alipay-coupon-detail.webp)
 
 *P10｜支付宝优惠详情*
 

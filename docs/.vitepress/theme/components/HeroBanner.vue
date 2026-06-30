@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { articleTags, articles } from '../data/articles'
 import { articleHref, siteLink } from '../utils/links'
 
-const blogCover = '/images/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2.png'
+const blogCover = '/images/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2.webp'
 
 const heroPick = computed(() => articles[0])
 const heroTags = computed(() => articleTags.slice(0, 6))

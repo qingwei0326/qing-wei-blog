@@ -147,7 +147,7 @@ Claude 有个叫 "**cowork**" 的协作功能——但我看到过有人开了�
 
 🔗 [freemodel.dev/invite/FRE-48c15256](https://freemodel.dev/invite/FRE-48c15256)
 
-![freemodel 中转站](/images/oversea-ai-subscription-20260524-545483.png)
+![freemodel 中转站](/images/oversea-ai-subscription-20260524-545483.webp)
 
 ---
 

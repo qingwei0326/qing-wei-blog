@@ -97,7 +97,7 @@ const startHere = computed(() =>
       <BloggerSidebar
         name="青微"
         slogan="记录技术、生活与折腾"
-        avatar="/images/avatar.jpg"
+        avatar="/images/avatar.webp"
         email="qingwei0326@gmail.com"
         github="https://github.com/qingwei0326/qing-wei-blog"
       />

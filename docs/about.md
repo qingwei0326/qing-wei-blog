@@ -8,7 +8,7 @@ description: 青微的个人博客与作者信息
   name="青微"
   role="个人博客作者"
   email="qingwei0326@gmail.com"
-  avatar="/images/avatar.jpg"
+  avatar="/images/avatar.webp"
   github="https://github.com/qingwei0326/qing-wei-blog"
 />
 

@@ -73,9 +73,9 @@ permalink: /articles/guan-yu-ji-kuai-di/
 | 顺丰学生标快 | ¥22 起 |
 | 京东快递学生寄 | ¥20 原价 → **实付 ¥10** |
 
-![顺丰学生标快 2kg 笔记本](/images/guan-yu-ji-kuai-di-20260524-4750e0.jpg)
+![顺丰学生标快 2kg 笔记本](/images/guan-yu-ji-kuai-di-20260524-4750e0.webp)
 
-![京东学生寄 2kg 游戏机](/images/guan-yu-ji-kuai-di-20260524-dd7ac2.jpg)
+![京东学生寄 2kg 游戏机](/images/guan-yu-ji-kuai-di-20260524-dd7ac2.webp)
 
 同样的 2kg、同样隔天到——**京东价格不到顺丰一半**。时效和服务的差距远没有价格差大。
 
@@ -85,7 +85,7 @@ permalink: /articles/guan-yu-ji-kuai-di/
 
 这套组合不是永远稳定的。**京东学生寄的 5 折以前是真 5 折**，多重多减——我之前寄过一单 7.2kg，基础运费 ¥24，5 折直接减 ¥12，**实付 ¥12**：
 
-![以前的京东学生寄账单（7.2kg 减 12）](/images/guan-yu-ji-kuai-di-20260524-5953d7.jpg)
+![以前的京东学生寄账单（7.2kg 减 12）](/images/guan-yu-ji-kuai-di-20260524-5953d7.webp)
 
 现在不一样了：**5 折设了上限 -10 元**。
 
@@ -100,7 +100,7 @@ permalink: /articles/guan-yu-ji-kuai-di/
 
 ## 我自己的账单
 
-![我的寄件账单](/images/guan-yu-ji-kuai-di-20260524-c8e692.png)
+![我的寄件账单](/images/guan-yu-ji-kuai-di-20260524-c8e692.webp)
 
 我[爱折腾出闲置](./secondhand-phone-deal.md)，所以寄件**绝大多数是首重小包裹**——刚好踩在青春特权 + 5 折券的甜点区。
 
