@@ -7,7 +7,20 @@ import PresetOverrides from './PresetOverrides.vue'
 import { articleCategories, articleTags, articles } from '../data/articles'
 import { articleFilterHref, articleHref, categoryHref, siteLink } from '../utils/links'
 
-const totalTags = computed(() => articleTags.length)
+const coreTagNames = [
+  '省钱',
+  '算账',
+  '信息差',
+  'AI 工具',
+  '工具',
+  '消费',
+  '学生理财',
+  '副业',
+  '通勤',
+  '寄快递'
+]
+
+const homeTags = computed(() => coreTagNames.filter((tag) => articleTags.includes(tag)))
 const categoryStats = computed(() =>
   articleCategories.map((category) => ({
     name: category,
@@ -192,7 +205,7 @@ const startHere = computed(() =>
         </div>
 
         <div class="tag-cloud" aria-label="标签云">
-          <a v-for="tag in articleTags" :key="tag" :href="articleFilterHref({ tag })">
+          <a v-for="tag in homeTags" :key="tag" :href="articleFilterHref({ tag })">
             {{ tag }}
           </a>
         </div>
