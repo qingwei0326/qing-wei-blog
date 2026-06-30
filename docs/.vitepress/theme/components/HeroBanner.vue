@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { articleTags, articles } from '../data/articles'
+import { articleHref, siteLink } from '../utils/links'
 
 const blogCover = '/images/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2.png'
 
@@ -20,8 +21,8 @@ const heroTags = computed(() => articleTags.slice(0, 6))
       </p>
 
       <div class="hero-actions">
-        <a class="action action-primary" href="/articles/">浏览文章</a>
-        <a class="action action-secondary" href="/about">关于作者</a>
+        <a class="action action-primary" :href="siteLink('/articles/')">浏览文章</a>
+        <a class="action action-secondary" :href="siteLink('/about')">关于作者</a>
       </div>
 
       <div class="hero-tags" aria-label="站点主题">
@@ -42,7 +43,7 @@ const heroTags = computed(() => articleTags.slice(0, 6))
       <a
         v-if="heroPick"
         class="hero-focus"
-        :href="heroPick.url"
+        :href="articleHref(heroPick.url)"
       >
         <div class="hero-focus__meta">
           <span>本期推荐</span>

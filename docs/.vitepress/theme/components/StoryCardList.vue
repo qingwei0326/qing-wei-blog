@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { articles } from '../data/articles'
+import { articleHref, siteLink } from '../utils/links'
 
 const spotlight = computed(() => articles.slice(1, 4))
 const latest = computed(() => articles.slice(4, 9))
@@ -15,7 +16,7 @@ const latestLabel = computed(() => articles[0]?.date || '持续更新')
           <p class="eyebrow">Spotlight</p>
           <h2 id="spotlight-heading">近期值得看</h2>
         </div>
-        <a class="section-link" href="/articles/">查看全部</a>
+        <a class="section-link" :href="siteLink('/articles/')">查看全部</a>
       </div>
 
       <div class="story-grid">
@@ -24,7 +25,7 @@ const latestLabel = computed(() => articles[0]?.date || '持续更新')
           :key="article.slug"
           class="story-card"
           :class="{ 'is-lead': index === 0 }"
-          :href="article.url"
+          :href="articleHref(article.url)"
         >
           <div class="story-media" :class="{ 'is-placeholder': !article.cover }">
             <img v-if="article.cover" :src="article.cover" :alt="article.title" loading="lazy" />
@@ -60,7 +61,7 @@ const latestLabel = computed(() => articles[0]?.date || '持续更新')
           <p class="eyebrow">Latest</p>
           <h2 id="latest-heading">更多文章</h2>
         </div>
-        <a class="section-link" href="/articles/">全部归档</a>
+        <a class="section-link" :href="siteLink('/articles/')">全部归档</a>
       </div>
 
       <div class="timeline-list">
@@ -68,7 +69,7 @@ const latestLabel = computed(() => articles[0]?.date || '持续更新')
           v-for="article in latest"
           :key="`${article.slug}-latest`"
           class="timeline-item"
-          :href="article.url"
+          :href="articleHref(article.url)"
         >
           <time :datetime="article.date">{{ article.date }}</time>
           <strong>{{ article.title }}</strong>

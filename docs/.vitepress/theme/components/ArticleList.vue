@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { inBrowser, withBase } from 'vitepress'
+import { inBrowser } from 'vitepress'
 import { articleCategories, articleTags, articles } from '../data/articles'
+import { articleFilterHref, articleHref } from '../utils/links'
 
 const total = articles.length
 const latestDate = articles[0]?.date ?? '持续更新'
@@ -40,20 +41,20 @@ const filterTitle = computed(() => {
 })
 
 const filterHref = (type: 'category' | 'tag', value: string) => {
-  const params = new URLSearchParams()
-
   if (type === 'category') {
-    params.set('category', value)
-    if (activeTag.value) params.set('tag', activeTag.value)
-  } else {
-    if (activeCategory.value) params.set('category', activeCategory.value)
-    params.set('tag', value)
+    return articleFilterHref({
+      category: value,
+      tag: activeTag.value || undefined
+    })
   }
 
-  return withBase(`/articles/?${params.toString()}`)
+  return articleFilterHref({
+    category: activeCategory.value || undefined,
+    tag: value
+  })
 }
 
-const clearHref = computed(() => withBase('/articles/'))
+const clearHref = computed(() => articleFilterHref({}))
 
 const syncSearch = () => {
   currentSearch.value = inBrowser ? window.location.search : ''
@@ -153,7 +154,7 @@ onBeforeUnmount(() => {
           v-for="article in filteredArticles"
           :key="article.slug"
           class="archive-card"
-          :href="article.url"
+          :href="articleHref(article.url)"
         >
           <div class="archive-cover" :class="{ 'is-placeholder': !article.cover }">
             <img v-if="article.cover" :src="article.cover" :alt="article.title" loading="lazy" />

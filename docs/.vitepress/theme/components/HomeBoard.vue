@@ -5,6 +5,7 @@ import HeroBanner from './HeroBanner.vue'
 import StoryCardList from './StoryCardList.vue'
 import PresetOverrides from './PresetOverrides.vue'
 import { articleCategories, articleTags, articles } from '../data/articles'
+import { articleFilterHref, articleHref, categoryHref } from '../utils/links'
 
 const totalTags = computed(() => articleTags.length)
 const categoryStats = computed(() =>
@@ -94,7 +95,7 @@ const startHere = computed(() =>
           v-for="entry in startHere"
           :key="entry.slug"
           class="start-card"
-          :href="entry.article.url"
+          :href="articleHref(entry.article.url)"
         >
           <p class="start-step">{{ entry.step }}</p>
           <h3 class="start-title">{{ entry.article.title }}</h3>
@@ -120,7 +121,7 @@ const startHere = computed(() =>
             v-for="category in categoryStats"
             :key="category.name"
             class="topic-row"
-            :href="`/categories/${encodeURIComponent(category.name)}`"
+            :href="categoryHref(category.name)"
           >
             <span>{{ category.name }}</span>
             <strong>{{ category.count }} 篇</strong>
@@ -128,7 +129,7 @@ const startHere = computed(() =>
         </div>
 
         <div class="tag-cloud" aria-label="标签云">
-          <a v-for="tag in articleTags" :key="tag" href="/articles/">
+          <a v-for="tag in articleTags" :key="tag" :href="articleFilterHref({ tag })">
             {{ tag }}
           </a>
         </div>

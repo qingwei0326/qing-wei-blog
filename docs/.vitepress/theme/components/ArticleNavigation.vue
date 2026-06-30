@@ -2,6 +2,7 @@
 import { useData } from 'vitepress'
 import { computed } from 'vue'
 import { articles } from '../data/articles'
+import { articleHref } from '../utils/links'
 
 const { page } = useData()
 
@@ -54,7 +55,7 @@ const showAnything = computed(
     <div v-if="navigation.prev || navigation.next" class="nav-row">
       <a
         v-if="navigation.prev"
-        :href="navigation.prev.url"
+        :href="articleHref(navigation.prev.url)"
         class="nav-card prev"
       >
         <div class="nav-label">← 上一篇</div>
@@ -64,7 +65,7 @@ const showAnything = computed(
 
       <a
         v-if="navigation.next"
-        :href="navigation.next.url"
+        :href="articleHref(navigation.next.url)"
         class="nav-card next"
       >
         <div class="nav-label">下一篇 →</div>
@@ -79,7 +80,7 @@ const showAnything = computed(
         <a
           v-for="article in related"
           :key="article.slug"
-          :href="article.url"
+          :href="articleHref(article.url)"
           class="related-card"
         >
           <div v-if="article.cover" class="related-cover">

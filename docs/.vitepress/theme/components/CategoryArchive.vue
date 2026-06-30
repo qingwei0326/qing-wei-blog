@@ -2,6 +2,7 @@
 import { useData } from 'vitepress'
 import { computed } from 'vue'
 import { articles } from '../data/articles'
+import { articleHref } from '../utils/links'
 
 const { params } = useData()
 
@@ -27,7 +28,7 @@ const filteredArticles = computed(() =>
       <a
         v-for="article in filteredArticles"
         :key="article.slug"
-        :href="article.url"
+        :href="articleHref(article.url)"
         class="cat-card"
       >
         <div v-if="article.cover" class="cat-cover">

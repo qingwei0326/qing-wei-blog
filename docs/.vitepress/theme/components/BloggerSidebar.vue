@@ -57,13 +57,13 @@
       </div>
 
       <nav class="blogger-nav">
-        <a href="/articles/" class="nav-btn">
+        <a :href="siteLink('/articles/')" class="nav-btn">
           <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
             <path fill="currentColor" d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM5 5h14v3H5V5zm0 14V10h14v9H5zm2-7h10v2H7v-2zm0 3h7v2H7v-2z"/>
           </svg>
           文章
         </a>
-        <a href="/about" class="nav-btn">
+        <a :href="siteLink('/about')" class="nav-btn">
           <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
             <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
           </svg>
@@ -76,6 +76,7 @@
 
 <script setup lang="ts">
 import { articleCategories, articleTags, articles } from '../data/articles'
+import { siteLink } from '../utils/links'
 
 defineProps<{
   name: string
