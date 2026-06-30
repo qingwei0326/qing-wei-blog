@@ -17,7 +17,8 @@
     "docs:check": "node scripts/validate-blog.mjs",
     "optimize:images": "node scripts/optimize-images.mjs",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "verify": "pnpm run docs:check && pnpm run lint && pnpm run docs:build && pnpm run docs:links && pnpm run build"
   },
   "dependencies": {
     "@codemirror/commands": "^6.6.0",
