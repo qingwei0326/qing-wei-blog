@@ -2,7 +2,7 @@
 title: 我为什么相信信息差变现
 description: 信息差不是玄学，也不是割韭菜。对普通人来说，它更多是看见规则、跑通流程、承担麻烦，然后把结果交付给没时间研究的人。
 date: 2026-05-25
-tags: [信息差, 副业, 赚钱, 个人观察]
+tags: [信息差, 副业, 个人观察]
 categories: [副业观察]
 cover: /images/information-gap-money-image2.webp
 permalink: /articles/information-gap-money/

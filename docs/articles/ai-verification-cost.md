@@ -2,7 +2,7 @@
 title: 没验证就汇报，是 AI 协作里最贵的坏习惯
 description: 一次博客改版里我踩出来的账：构建通过不等于页面可用，截图生成不等于视觉正确。AI 协作真正省时间的前提，是把验证做完再开口。
 date: 2026-05-25
-tags: [AI 协作, 验证, 工具, 算账, 博客]
+tags: [AI 工具, 工具, 算账]
 categories: [工具与效率]
 cover: /images/ai-verification-cost-image2.webp
 permalink: /articles/ai-verification-cost/

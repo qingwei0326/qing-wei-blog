@@ -2,7 +2,7 @@
 title: 大学生别急着理财，先学会这套算账方法
 description: 理财、省钱、算账是三件不同的事。对本金不多的大学生来说，最先该练的不是买基金，而是每笔钱花出去前多想一步。
 date: 2026-05-15
-tags: [算账, 大学生理财, 信息差]
+tags: [算账, 学生理财, 信息差]
 categories: [理财基础]
 cover: /covers/finance-beginner.svg
 ---

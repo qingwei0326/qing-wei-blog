@@ -2,7 +2,7 @@
 title: 保险不是理财，是硬支出——三种我每年都续的保险
 description: 月 26 块的门诊险一年报销 1315、京东延保 2.95 元退回一把伞、闲鱼附带的手机保障让我没花钱修了 5458 元的零件。
 date: 2026-05-24
-tags: [保险, 硬支出, 算账, 反共识]
+tags: [保险, 省钱, 算账]
 categories: [省钱实操]
 cover: /covers/insurance-hardspend.svg
 permalink: /articles/bao-xian/

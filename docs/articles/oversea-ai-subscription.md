@@ -2,7 +2,7 @@
 title: ¥80 月费用上 Claude / ChatGPT——苹果渠道的海外订阅算账
 description: 国区没有官方支付路径，走 App Store + 海外区 Apple ID + 礼品卡：Claude 尼区 ¥86、Codex 土区 ¥76-80，比美区原价 $20 省一半。
 date: 2026-05-24
-tags: [AI 工具, Claude, ChatGPT, 苹果订阅, 算账]
+tags: [AI 工具, 工具, 算账]
 categories: [工具与效率]
 cover: /covers/ai-subscription.svg
 permalink: /articles/oversea-ai-subscription/

@@ -2,7 +2,7 @@
 title: 给自己当一次穷鬼——一个大学生的预算结构
 description: 预算的核心不是控制支出，是给每一笔钱分配权。包含长途出行、周转金、礼物基金等普通模板里没有的科目。
 date: 2026-05-14
-tags: [预算规划, 理财基础, 学生理财]
+tags: [学生理财, 算账]
 categories: [理财基础]
 cover: /covers/budget-plan.svg
 ---

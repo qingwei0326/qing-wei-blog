@@ -2,7 +2,7 @@
 title: 一个个人博客，为什么最后被我做成了桌面写作工具
 description: 从 VitePress 建站、Cloudflare Pages 构建失败，到重写 Tauri 桌面写作助手。复盘一个个人博客如何变成 CI/CD、Rust 和写作流的练手项目。
 date: 2026-05-23
-tags: [折腾, 工具, 算账, Tauri, VitePress]
+tags: [工具, 算账]
 categories: [工具与效率]
 cover: /covers/blog-toolchain.svg
 ---

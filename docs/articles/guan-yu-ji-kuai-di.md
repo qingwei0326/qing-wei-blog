@@ -2,7 +2,7 @@
 title: 放假寄行李怎么省：学生寄快递可以这样叠券
 description: 学生党寒暑假寄行李、寄闲置、寄大件时怎么省钱：支付宝青春特权、学生卡、京东学生寄、5 折券怎么选，附真实账单和踩过的变化。
 date: 2026-05-24
-tags: [寄快递, 学生卡, 支付宝, 算账]
+tags: [寄快递, 省钱, 算账]
 categories: [省钱实操]
 cover: /covers/student-delivery-savings.webp
 permalink: /articles/guan-yu-ji-kuai-di/
