@@ -166,6 +166,24 @@ fn image_dir(blog_path: &str) -> PathBuf {
         .join("images")
 }
 
+fn referenced_public_assets(content: &str) -> Vec<String> {
+    use std::collections::BTreeSet;
+
+    let re = regex::Regex::new(r#"/(?P<kind>images|covers)/(?P<name>[^)\s"']+)"#)
+        .expect("valid public asset regex");
+    let mut paths = BTreeSet::new();
+
+    for caps in re.captures_iter(content) {
+        let kind = caps.name("kind").map(|m| m.as_str()).unwrap_or_default();
+        let name = caps.name("name").map(|m| m.as_str()).unwrap_or_default();
+        if !kind.is_empty() && !name.is_empty() {
+            paths.insert(format!("docs/public/{}/{}", kind, name));
+        }
+    }
+
+    paths.into_iter().collect()
+}
+
 fn normalize_relative(p: &str) -> String {
     p.replace('\\', "/").trim_start_matches('/').to_string()
 }
@@ -653,6 +671,50 @@ async fn run_git(
     Ok(())
 }
 
+async fn run_git_owned(app: &AppHandle, cwd: &str, args: Vec<String>) -> Result<(), String> {
+    let refs: Vec<&str> = args.iter().map(String::as_str).collect();
+    run_git(app, cwd, &refs).await
+}
+
+async fn git_has_staged_changes(cwd: &str) -> Result<bool, String> {
+    use tokio::process::Command;
+
+    let status = Command::new("git")
+        .args(["diff", "--cached", "--quiet"])
+        .current_dir(cwd)
+        .status()
+        .await
+        .map_err(|e| format!("检查 staged diff 失败：{e}"))?;
+
+    match status.code() {
+        Some(0) => Ok(false),
+        Some(1) => Ok(true),
+        _ => Err("git diff --cached --quiet 执行失败".to_string()),
+    }
+}
+
+async fn commit_staged_if_needed(
+    app: &AppHandle,
+    cwd: &str,
+    message: String,
+) -> Result<(), String> {
+    if !git_has_staged_changes(cwd).await? {
+        return Err("没有可提交的变更".to_string());
+    }
+
+    run_git(app, cwd, &["commit", "-m", &message]).await
+}
+
+async fn stage_exact_paths(app: &AppHandle, cwd: &str, paths: Vec<String>) -> Result<(), String> {
+    if paths.is_empty() {
+        return Err("没有需要 stage 的文件".to_string());
+    }
+
+    let mut args = vec!["add".to_string(), "--".to_string()];
+    args.extend(paths);
+    run_git_owned(app, cwd, args).await
+}
+
 #[tauri::command]
 async fn publish_article(
     app: AppHandle,
@@ -671,16 +733,13 @@ async fn publish_article(
     });
     let relative = to_posix_relative(&cfg.blog_path, &absolute);
 
-    run_git(
+    let mut paths = vec![relative.clone()];
+    paths.extend(referenced_public_assets(&payload.content));
+    stage_exact_paths(&app, &cfg.blog_path, paths).await?;
+    commit_staged_if_needed(
         &app,
         &cfg.blog_path,
-        &["add", &relative, "docs/public/images/"],
-    )
-    .await?;
-    run_git(
-        &app,
-        &cfg.blog_path,
-        &["commit", "-m", &format!("feat: add article {}", title)],
+        format!("feat: add article {}", title),
     )
     .await?;
     run_git(&app, &cfg.blog_path, &["push", "origin", "main"]).await?;
@@ -707,11 +766,16 @@ async fn delete_article(
         });
     std::fs::remove_file(&absolute).map_err(|e| e.to_string())?;
 
-    run_git(&app, &cfg.blog_path, &["add", "-A"]).await?;
-    run_git(
+    stage_exact_paths(
         &app,
         &cfg.blog_path,
-        &["commit", "-m", &format!("chore: delete article {}", title)],
+        vec![normalize_relative(&relative_path)],
+    )
+    .await?;
+    commit_staged_if_needed(
+        &app,
+        &cfg.blog_path,
+        format!("chore: delete article {}", title),
     )
     .await?;
     run_git(&app, &cfg.blog_path, &["push", "origin", "main"]).await?;
@@ -773,15 +837,13 @@ async fn rename_article(
         std::fs::remove_file(&old_absolute).map_err(|e| e.to_string())?;
     }
 
-    run_git(&app, &cfg.blog_path, &["add", "-A"]).await?;
-    run_git(
+    let old_relative = to_posix_relative(&cfg.blog_path, &old_absolute);
+    let new_relative = to_posix_relative(&cfg.blog_path, &new_absolute);
+    stage_exact_paths(&app, &cfg.blog_path, vec![old_relative, new_relative]).await?;
+    commit_staged_if_needed(
         &app,
         &cfg.blog_path,
-        &[
-            "commit",
-            "-m",
-            &format!("refactor: rename article {} -> {}", old_stem, final_slug),
-        ],
+        format!("refactor: rename article {} -> {}", old_stem, final_slug),
     )
     .await?;
     run_git(&app, &cfg.blog_path, &["push", "origin", "main"]).await?;
@@ -888,11 +950,11 @@ async fn publish_page(
         })
     });
     let relative = to_posix_relative(&cfg.blog_path, &absolute);
-    run_git(&app, &cfg.blog_path, &["add", &relative]).await?;
-    run_git(
+    stage_exact_paths(&app, &cfg.blog_path, vec![relative]).await?;
+    commit_staged_if_needed(
         &app,
         &cfg.blog_path,
-        &["commit", "-m", &format!("chore: update page {}", title)],
+        format!("chore: update page {}", title),
     )
     .await?;
     run_git(&app, &cfg.blog_path, &["push", "origin", "main"]).await?;

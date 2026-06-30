@@ -2926,6 +2926,7 @@ dependencies = [
  "pinyin",
  "pulldown-cmark",
  "rand 0.8.6",
+ "regex",
  "serde",
  "serde_json",
  "serde_yaml",
