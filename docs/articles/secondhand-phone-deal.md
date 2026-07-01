@@ -3,7 +3,7 @@ title: 百亿补贴砍单后，我怎么用 1370 买到一台二手准新机
 description: 一次帮家人买真我 Neo7 的完整复盘：1315.8 的百亿补贴低价被风控砍单，转头在闲鱼 1370 买到一台含 22 个月延长保的二手准新机。
 date: 2026-05-23
 tags: [信息差, 消费, 算账]
-categories: [消费观察]
+categories: [消费实战]
 cover: /covers/secondhand-phone-deal.svg
 ---
 

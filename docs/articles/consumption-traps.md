@@ -3,7 +3,7 @@ title: 买手机、办卡、闲鱼：我踩过的消费套路清单
 description: 手机多渠道比价、运营商话费权益、拼多多百亿补贴、闲鱼验机、校园卡失效：学生党最容易忽略的消费套路，核心都是没把账拆开。
 date: 2026-05-13
 tags: [消费, 信息差, 算账]
-categories: [消费观察]
+categories: [消费实战]
 cover: /covers/consumption-traps.svg
 ---
 

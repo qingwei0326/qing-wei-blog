@@ -3,7 +3,7 @@ title: 信息差不是割韭菜：普通人怎么靠流程赚钱
 description: 信息差变现不是玄学，也不是卖焦虑。普通人能赚到的钱，往往来自看见规则、跑通流程、承担麻烦，再把靠谱结果交付给没时间研究的人。
 date: 2026-05-25
 tags: [信息差, 副业, 个人观察]
-categories: [副业观察]
+categories: [个人复盘]
 cover: /images/information-gap-money-image2.webp
 permalink: /articles/information-gap-money/
 ---

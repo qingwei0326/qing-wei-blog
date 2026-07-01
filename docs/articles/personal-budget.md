@@ -3,7 +3,7 @@ title: 大学生预算怎么分：给每一笔钱先安排去处
 description: 一个大学生的真实预算结构：吃饭、长途出行、话费、周转金、礼物、应急和储蓄怎么拆。预算不是哭穷，是提前拿回分配权。
 date: 2026-05-14
 tags: [学生理财, 算账]
-categories: [理财基础]
+categories: [算账省钱]
 cover: /covers/budget-plan.svg
 ---
 

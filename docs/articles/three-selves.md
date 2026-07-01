@@ -3,7 +3,7 @@ title: 三个我
 description: 一天里我对三个人说了三种话——朋友、长辈、家姐。同一个人,半小时内,三套语气。做副业之后我才意识到,这不是虚伪,是关系的物理特性。
 date: 2026-05-23
 tags: [副业, 个人观察]
-categories: [个人观察]
+categories: [个人复盘]
 cover: /covers/three-selves.svg
 ---
 

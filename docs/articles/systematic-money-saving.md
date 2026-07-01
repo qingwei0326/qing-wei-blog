@@ -3,7 +3,7 @@ title: 暑假想少花冤枉钱，先建立这套省钱流程
 description: 返利、优惠券、会员、比价、风控，看起来都是小事。但真正做久了会发现，省钱不是抠，而是给假期出行、网购、订阅和日常消费建立一套决策系统。
 date: 2026-05-25
 tags: [省钱, 消费, 算账]
-categories: [省钱方法]
+categories: [算账省钱]
 cover: /covers/summer-saving-system.webp
 permalink: /articles/systematic-money-saving/
 ---

@@ -3,7 +3,7 @@ title: 从聊天记录里看见我的做事方式
 description: 翻完几年的微信记录，我发现自己真正稳定的习惯不是“努力”，而是守住底线、拆开惯例、找到入口，把事情更快做成。
 date: 2026-05-25
 tags: [个人观察, AI 工具]
-categories: [个人观察]
+categories: [个人复盘]
 cover: /images/chat-log-working-style-image2.webp
 permalink: /articles/chat-log-working-style/
 ---

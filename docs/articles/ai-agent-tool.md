@@ -3,7 +3,7 @@ title: AI Agent 不是玩具，是工具人
 description: 一个偏 INTJ 的人为什么会把 AI 当工具人：我不关心它会不会说漂亮话，我更关心它能不能查文件、改代码、跑命令、构建、验证、推送。能进入工作流，才叫生产力。
 date: 2026-05-25
 tags: [AI 工具, 工具]
-categories: [工具与效率]
+categories: [工具效率]
 cover: /images/ai-agent-tool-image2.webp
 permalink: /articles/ai-agent-tool/
 ---

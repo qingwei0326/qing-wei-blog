@@ -3,7 +3,7 @@ title: Claude / ChatGPT 海外订阅怎么省：我用苹果渠道把月费压�
 description: 国内订 Claude / ChatGPT 没有稳定官方支付路径。我用海外区 Apple ID + iTunes 礼品卡走 App Store 内购，把月费从美区 $20 压到约 ¥80。
 date: 2026-05-24
 tags: [AI 工具, 工具, 算账]
-categories: [工具与效率]
+categories: [工具效率]
 cover: /covers/ai-subscription.svg
 permalink: /articles/oversea-ai-subscription/
 ---

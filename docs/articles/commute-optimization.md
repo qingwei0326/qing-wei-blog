@@ -3,7 +3,7 @@ title: 放假返乡别只会打车：我用 9 块钱换回 1 小时睡眠
 description: 放假返乡、跨城回家、带行李出门时，公交太折腾，打车又太贵。复盘我怎么用哈啰顺风车 + 优惠券，把 11km 出行压到 10.33 元。
 date: 2026-05-15
 tags: [省钱, 通勤, 算账]
-categories: [生活优化]
+categories: [算账省钱]
 cover: /covers/holiday-commute-value.webp
 ---
 

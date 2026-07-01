@@ -17,7 +17,7 @@ const heroTags = computed(() => articleTags.slice(0, 6))
       <p class="eyebrow">青微的博客</p>
       <h1>把日常选择写成可复用的判断。</h1>
       <p class="hero-lead">
-        记录理财、消费、通勤和工具使用里的真实经验。少一点口号，多一点可以照着做的细节。
+        记录算账省钱、消费实战、工具效率和个人复盘里的真实经验。少一点口号，多一点可以照着做的细节。
       </p>
 
       <div class="hero-actions">

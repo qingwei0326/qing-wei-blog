@@ -88,7 +88,7 @@ onBeforeUnmount(() => {
         <p class="archive-kicker">Archive</p>
         <h1>文章归档</h1>
         <p class="archive-lead">
-          {{ total }} 篇记录，围绕理财、消费、通勤和生活效率整理。先看真实经验，再看可执行的方法。
+          {{ total }} 篇记录，围绕算账省钱、消费实战、工具效率和个人复盘整理。先看真实经验，再看可执行的方法。
         </p>
       </div>
       <dl class="archive-stats">

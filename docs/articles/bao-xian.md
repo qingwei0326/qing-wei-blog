@@ -3,7 +3,7 @@ title: 保险不是理财，是硬支出——三种我每年都续的保险
 description: 大学生保险怎么选：门诊险、京东延保、二手手机保障这三类我真的用上过。重点不是理财回报，而是用低成本给生活兜底。
 date: 2026-05-24
 tags: [保险, 省钱, 算账]
-categories: [省钱实操]
+categories: [算账省钱]
 cover: /covers/insurance-hardspend.svg
 permalink: /articles/bao-xian/
 ---

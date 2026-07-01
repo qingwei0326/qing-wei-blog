@@ -8,12 +8,13 @@ import { articleCategories, articleTags, articles } from '../data/articles'
 import { articleFilterHref, articleHref, categoryHref, siteLink } from '../utils/links'
 
 const coreTagNames = [
-  '省钱',
   '算账',
+  '省钱',
   '信息差',
+  '消费',
   'AI 工具',
   '工具',
-  '消费',
+  '个人观察',
   '学生理财',
   '副业',
   '通勤',
@@ -31,25 +32,25 @@ const categoryStats = computed(() =>
 const heroFeatures = [
   {
     icon: 'spark',
-    title: '真实账单',
-    detail: '把省钱、通勤和消费判断写成能重复执行的方法。'
+    title: '算账省钱',
+    detail: '把预算、通勤、保险和订阅拆成能复用的决策。'
   },
   {
     icon: 'clock',
-    title: '持续更新',
-    detail: '优先整理最近仍然有效、还能直接照着做的方案。'
+    title: '消费实战',
+    detail: '用真实订单和踩坑记录判断什么钱该花。'
   },
   {
     icon: 'archive',
-    title: '文章归档',
-    detail: '从新手理财到日常效率，把经验沉淀成长期可查的清单。'
+    title: '工具与复盘',
+    detail: '整理 AI 工具、自动化流程和个人做事方式。'
   }
 ]
 
 const startHerePicks = [
   { slug: 'beginner-guide', step: '01', blurb: '先看懂"算账 ≠ 理财 ≠ 省钱"' },
   { slug: 'secondhand-phone-deal', step: '02', blurb: '一个完整的实战案例' },
-  { slug: 'consumption-traps', step: '03', blurb: '怎么识破日常消费里的套路' }
+  { slug: 'ai-verification-cost', step: '03', blurb: '工具要先进入验证闭环' }
 ]
 
 const holidayPicks = [
@@ -125,8 +126,8 @@ const startHere = computed(() =>
     <section v-if="holidaySpecial.length" class="content-section holiday-special" aria-labelledby="holiday-heading">
       <div class="section-head">
         <div>
-          <p class="eyebrow">Holiday Picks</p>
-          <h2 id="holiday-heading">放假前先看这 3 篇</h2>
+          <p class="eyebrow">Money Routes</p>
+          <h2 id="holiday-heading">学生生活成本优化</h2>
         </div>
         <a class="section-link" :href="siteLink('/articles/')">全部文章</a>
       </div>
@@ -162,7 +163,7 @@ const startHere = computed(() =>
       <div class="section-head">
         <div>
           <p class="eyebrow">Start Here</p>
-          <h2 id="starthere-heading">第一次来？读这三篇</h2>
+          <h2 id="starthere-heading">第一次来？按这三步读</h2>
         </div>
       </div>
 
@@ -188,7 +189,7 @@ const startHere = computed(() =>
         <div class="section-head">
           <div>
             <p class="eyebrow">Topics</p>
-            <h2>主题索引</h2>
+            <h2>四条内容主线</h2>
           </div>
         </div>
 
