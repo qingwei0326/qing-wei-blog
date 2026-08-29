@@ -125,7 +125,7 @@ html[data-teek-preset="card"] .panel-card {
     margin-right: auto !important;
     margin-left: auto !important;
     padding-top: 24px !important;
-    overflow-x: clip;
+    overflow-x: visible !important;
   }
 
   html .home-main,

@@ -4,7 +4,7 @@ description: 大学生保险怎么选：门诊险、京东延保、二手手机�
 date: 2026-05-24
 tags: [保险, 省钱, 算账]
 categories: [算账省钱]
-cover: /covers/insurance-hardspend.svg
+cover: /covers/insurance-safety-net.webp
 permalink: /articles/bao-xian/
 ---
 

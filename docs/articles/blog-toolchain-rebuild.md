@@ -4,7 +4,7 @@ description: 从 VitePress 建站、Cloudflare Pages 构建失败，到重写 Ta
 date: 2026-05-23
 tags: [工具, 算账]
 categories: [工具效率]
-cover: /covers/blog-toolchain.svg
+cover: /covers/blog-toolchain.webp
 ---
 
 # 一个个人博客，为什么最后被我做成了桌面写作工具

@@ -406,7 +406,7 @@ const heroTags = computed(() => articleTags.slice(0, 6))
     max-width: 100%;
     gap: 18px;
     padding-top: 24px;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .hero-copy {
@@ -766,7 +766,7 @@ html[data-teek-preset="card"] .blog-cover {
     max-width: 100%;
     gap: 18px;
     padding-top: 24px;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .hero-copy {

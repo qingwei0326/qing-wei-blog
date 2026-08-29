@@ -4,7 +4,7 @@ description: 信息差变现不是玄学，也不是卖焦虑。普通人能赚�
 date: 2026-05-25
 tags: [信息差, 副业, 个人观察]
 categories: [个人复盘]
-cover: /images/information-gap-money-image2.webp
+cover: /covers/information-gap-workflow.webp
 permalink: /articles/information-gap-money/
 ---
 

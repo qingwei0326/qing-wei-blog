@@ -4,7 +4,7 @@ description: 一个大学生的真实预算结构：吃饭、长途出行、话�
 date: 2026-05-14
 tags: [学生理财, 算账]
 categories: [算账省钱]
-cover: /covers/budget-plan.svg
+cover: /covers/student-budget-system.webp
 ---
 
 # 大学生预算怎么分：给每一笔钱先安排去处

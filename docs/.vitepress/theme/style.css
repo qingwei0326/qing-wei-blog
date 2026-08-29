@@ -114,6 +114,8 @@ button,
   color: var(--vp-c-text-1);
   font-size: 16px;
   line-height: 1.86;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .vp-doc h1,
@@ -150,6 +152,8 @@ button,
 .vp-doc p {
   margin: 18px 0;
   color: var(--vp-c-text-2);
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .vp-doc strong {
@@ -173,6 +177,8 @@ button,
 .vp-doc ul,
 .vp-doc ol {
   padding-left: 1.35rem;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .vp-doc li + li {
@@ -195,6 +201,16 @@ button,
   border: 1px solid var(--vp-c-divider-light);
   border-radius: 8px;
   box-shadow: 0 16px 42px rgb(15 23 42 / 10%);
+}
+
+.vp-doc :where(h1, h2, h3, h4, h5, h6, p, li, blockquote, table, pre, code) {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.vp-doc :where(h1, h2, h3, h4, h5, h6, li, blockquote) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .vp-doc img + em,
@@ -287,6 +303,33 @@ button,
 }
 
 @media (max-width: 768px) {
+  .VPDoc .container,
+  .VPDoc .content,
+  .VPDoc .content-container,
+  .VPDoc .main,
+  .VPDoc .vp-doc {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .tk-article-info,
+  .tk-article-info__info,
+  .tk-article-info .article,
+  .tk-article-info .top,
+  .tk-article-info .bottom {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex-wrap: wrap !important;
+    overflow: visible !important;
+    white-space: normal !important;
+  }
+
+  .tk-article-info :where(span, a, time) {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
   .vp-doc {
     font-size: 15.5px;
   }

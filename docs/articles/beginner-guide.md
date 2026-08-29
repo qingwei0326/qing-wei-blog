@@ -4,7 +4,7 @@ description: 理财、省钱、算账是三件不同的事。对本金不多的�
 date: 2026-05-15
 tags: [算账, 学生理财, 信息差]
 categories: [算账省钱]
-cover: /covers/finance-beginner.svg
+cover: /covers/finance-beginner-method.webp
 ---
 
 # 大学生别急着理财，先学会这套算账方法

@@ -15,6 +15,7 @@
     "docs:preview": "vitepress preview docs",
     "docs:links": "node scripts/validate-built-links.mjs",
     "docs:check": "node scripts/validate-blog.mjs",
+    "docs:render-check": "node scripts/check-rendered-site.mjs",
     "optimize:images": "node scripts/optimize-images.mjs",
     "lint": "eslint .",
     "format": "prettier --write .",
@@ -34,7 +35,6 @@
     "react-dom": "^18.3.0"
   },
   "devDependencies": {
-    "@iconify/vue": "^5.0.1",
     "@tauri-apps/cli": "^2",
     "@types/node": "^25.9.1",
     "@types/react": "^18.3.0",

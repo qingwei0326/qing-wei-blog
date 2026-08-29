@@ -189,7 +189,8 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .article-archive {
-  width: min(1100px, calc(100vw - 48px));
+  box-sizing: border-box;
+  width: min(100%, 1100px);
   margin: 0 auto;
   padding: 34px 0 56px;
 }
@@ -470,7 +471,7 @@ onBeforeUnmount(() => {
 
 @media (max-width: 960px) {
   .article-archive {
-    width: min(100% - 28px, 760px);
+    width: min(100%, 760px);
   }
 
   .archive-hero,

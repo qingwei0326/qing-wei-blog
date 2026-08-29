@@ -1,3 +1,5 @@
+import type { ResolvedTheme, ThemeMode } from '@/lib/theme';
+
 interface ToolbarProps {
   busy: boolean;
   onNew: () => void;
@@ -5,6 +7,9 @@ interface ToolbarProps {
   onPublish: () => void;
   onInsertImage: () => void;
   onFormat: () => void;
+  themeMode: ThemeMode;
+  resolvedTheme: ResolvedTheme;
+  onThemeModeChange: (mode: ThemeMode) => void;
   onRefresh: () => void;
 }
 
@@ -17,6 +22,16 @@ const outline =
 const primary =
   'h-8 rounded-md px-3.5 text-sm font-medium text-white bg-accent transition hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-50 dark:bg-accent-dark dark:hover:bg-accent-darkHover';
 
+const themeOptions: Array<{
+  mode: ThemeMode;
+  label: string;
+  title: string;
+}> = [
+  { mode: 'system', label: '跟随', title: '跟随系统颜色' },
+  { mode: 'light', label: '浅色', title: '使用浅色模式' },
+  { mode: 'dark', label: '深色', title: '使用深色模式' },
+];
+
 export function Toolbar({
   busy,
   onNew,
@@ -24,6 +39,9 @@ export function Toolbar({
   onPublish,
   onInsertImage,
   onFormat,
+  themeMode,
+  resolvedTheme,
+  onThemeModeChange,
   onRefresh,
 }: ToolbarProps) {
   return (
@@ -54,6 +72,29 @@ export function Toolbar({
       </button>
 
       <div className="flex-1" />
+
+      <div
+        className="flex h-8 shrink-0 items-center rounded-md border border-ink-200 bg-ink-50 p-0.5 dark:border-ink-500 dark:bg-ink-600"
+        aria-label={`颜色模式，当前为${resolvedTheme === 'dark' ? '深色' : '浅色'}`}
+      >
+        {themeOptions.map((option) => (
+          <button
+            key={option.mode}
+            type="button"
+            title={option.title}
+            aria-pressed={themeMode === option.mode}
+            onClick={() => onThemeModeChange(option.mode)}
+            className={[
+              'h-7 min-w-11 rounded px-2 text-xs transition',
+              themeMode === option.mode
+                ? 'bg-white text-ink-700 shadow-soft dark:bg-ink-700 dark:text-ink-50 dark:shadow-none'
+                : 'text-ink-400 hover:text-ink-700 dark:text-ink-300 dark:hover:text-ink-50',
+            ].join(' ')}
+          >
+            {option.label}
+          </button>
+        ))}
+      </div>
 
       <button type="button" onClick={onRefresh} disabled={busy} className={ghost}>
         刷新

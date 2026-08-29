@@ -89,6 +89,8 @@
 .cm-editor {
   height: 100%;
   font-size: 15px;
+  background: transparent;
+  color: inherit;
 }
 .cm-editor.cm-focused {
   outline: none;
@@ -97,4 +99,24 @@
   font-family:
     ui-monospace, SFMono-Regular, 'SF Mono', Consolas, Menlo, monospace;
   line-height: 1.7;
+}
+.cm-gutters {
+  background: transparent !important;
+  border-right-color: #d2d2d7 !important;
+  color: #6e6e73 !important;
+}
+.cm-activeLine,
+.cm-activeLineGutter {
+  background: rgba(0, 0, 0, 0.04) !important;
+}
+.cm-cursor {
+  border-left-color: currentColor !important;
+}
+.dark .cm-gutters {
+  border-right-color: #3a3a3c !important;
+  color: #a1a1a6 !important;
+}
+.dark .cm-activeLine,
+.dark .cm-activeLineGutter {
+  background: rgba(255, 255, 255, 0.06) !important;
 }

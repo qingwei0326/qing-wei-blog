@@ -658,7 +658,7 @@ const startHere = computed(() =>
     max-width: calc(100vw - 24px);
     margin-right: auto;
     margin-left: auto;
-    overflow-x: hidden;
+    overflow-x: visible;
   }
 
   .home-main {

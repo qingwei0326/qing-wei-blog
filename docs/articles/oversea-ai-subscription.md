@@ -4,7 +4,7 @@ description: 国内订 Claude / ChatGPT 没有稳定官方支付路径。我用�
 date: 2026-05-24
 tags: [AI 工具, 工具, 算账]
 categories: [工具效率]
-cover: /covers/ai-subscription.svg
+cover: /covers/ai-subscription-appstore.webp
 permalink: /articles/oversea-ai-subscription/
 ---
 

@@ -17,6 +17,9 @@ defineProps<{
 .route-card {
   display: grid;
   gap: 12px;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
   margin: 20px 0 28px;
   padding: 16px;
   border: 1px solid color-mix(in srgb, var(--vp-c-brand) 24%, var(--vp-c-divider-light));
@@ -31,6 +34,13 @@ defineProps<{
   color: var(--vp-c-text-1);
   font-size: 1rem;
   line-height: 1.45;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.route-card__body {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .route-card__body :deep(ol) {
@@ -44,11 +54,14 @@ defineProps<{
 .route-card__body :deep(li) {
   position: relative;
   min-height: 28px;
+  min-width: 0;
   margin: 0;
   padding-left: 40px;
   color: var(--vp-c-text-2);
   font-size: 0.9rem;
   line-height: 1.72;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .route-card__body :deep(li)::before {
@@ -69,5 +82,20 @@ defineProps<{
 
 .route-card__body :deep(strong) {
   color: var(--vp-c-text-1);
+}
+
+@media (max-width: 560px) {
+  .route-card {
+    padding: 14px;
+  }
+
+  .route-card__body :deep(li) {
+    padding-left: 34px;
+  }
+
+  .route-card__body :deep(li)::before {
+    width: 24px;
+    height: 24px;
+  }
 }
 </style>

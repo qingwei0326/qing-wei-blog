@@ -19,6 +19,11 @@ const resolvedArticleMetadataVirtualId = `\0${articleMetadataVirtualId}`
 const teekIconfontPattern =
   /@font-face\{font-family:iconfont;src:url\(iconfont\.woff2\?t=\d+\) format\("woff2"\),url\(iconfont\.woff\?t=\d+\) format\("woff"\),url\(iconfont\.ttf\?t=\d+\) format\("truetype"\)\}/g
 
+function cleanPublicPath(value: string): string {
+  if (value === '/') return value
+  return value.replace(/\/+$/, '')
+}
+
 const teekConfig = defineTeekConfig({
   logo: '/logo.svg',
   siteTitle: '青微的博客',
@@ -105,6 +110,7 @@ export default defineConfig({
   description: '青微的个人博客，记录技术、生活与折腾',
   lang: 'zh-CN',
   appearance: true,
+  cleanUrls: true,
   ignoreDeadLinks: false,
   srcExclude: ['**/public/**', 'superpowers/**'],
 
@@ -225,9 +231,10 @@ export default defineConfig({
     const coverUrl = coverPath.startsWith('http')
       ? coverPath
       : `${SITE_URL}${coverPath}`
-    const articleUrl = frontmatter.permalink
-      ? `${SITE_URL}${frontmatter.permalink}`
-      : `${SITE_URL}/${relativePath.replace(/\.md$/, '')}/`
+    const articlePath = frontmatter.permalink
+      ? cleanPublicPath(frontmatter.permalink)
+      : `/${relativePath.replace(/\.md$/, '')}`
+    const articleUrl = `${SITE_URL}${articlePath}`
 
     frontmatter.head ??= []
     frontmatter.head.push(
@@ -251,9 +258,7 @@ export default defineConfig({
       title: article.title || article.slug,
       description: article.description,
       date: article.date ? new Date(article.date) : new Date(),
-      url: article.permalink
-        ? `${SITE_URL}${article.permalink}`
-        : `${SITE_URL}/articles/${article.slug}/`,
+      url: `${SITE_URL}${article.url}`,
       cover: article.cover
         ? `${SITE_URL}${article.cover}`
         : `${SITE_URL}${siteCover}`,
@@ -296,5 +301,34 @@ export default defineConfig({
 
     writeFileSync(resolve(siteConfig.outDir, 'feed.xml'), feed.rss2(), 'utf-8')
     writeFileSync(resolve(siteConfig.outDir, 'atom.xml'), feed.atom1(), 'utf-8')
+
+    const staticUrls = ['/', '/articles/', '/about', ...articleCategoriesFrom(articles)]
+    const sitemapUrls = [
+      ...staticUrls.map((path) => `${SITE_URL}${path}`),
+      ...items.map((item) => item.url)
+    ]
+    const sitemap = [
+      '<?xml version="1.0" encoding="UTF-8"?>',
+      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+      ...Array.from(new Set(sitemapUrls)).map((url) => `  <url><loc>${escapeXml(url)}</loc></url>`),
+      '</urlset>',
+      ''
+    ].join('\n')
+
+    writeFileSync(resolve(siteConfig.outDir, 'sitemap.xml'), sitemap, 'utf-8')
   }
 })
+
+function articleCategoriesFrom(articles: ReturnType<typeof readAllArticles>) {
+  return [...new Set(articles.flatMap((article) => article.categories))]
+    .sort()
+    .map((category) => `/categories/${encodeURIComponent(category)}`)
+}
+
+function escapeXml(value: string) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+}

@@ -64,6 +64,9 @@ const dateLabel = computed(() => {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 220px;
   gap: 22px;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
   margin: 0 0 34px;
   padding: 20px;
   border: 1px solid var(--vp-c-divider-light);
@@ -88,12 +91,15 @@ const dateLabel = computed(() => {
   font-size: 1rem;
   font-weight: 650;
   line-height: 1.76;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .summary-meta {
   display: grid;
   gap: 12px;
   align-content: start;
+  min-width: 0;
   margin: 0;
   padding: 0;
 }
@@ -121,6 +127,7 @@ const dateLabel = computed(() => {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  min-width: 0;
 }
 
 .summary-tags span {
@@ -142,7 +149,23 @@ const dateLabel = computed(() => {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .summary-meta div:last-child,
   .summary-tags {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .article-summary {
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .summary-meta {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .summary-meta div {
     grid-column: 1 / -1;
   }
 }

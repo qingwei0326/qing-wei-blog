@@ -2,6 +2,15 @@ import { Suspense, lazy, useEffect, useState, useCallback, useRef } from 'react'
 import { listen, type UnlistenFn } from '@tauri-apps/api/event';
 import { api } from '@/lib/tauri';
 import { formatDraft } from '@/lib/formatDraft';
+import {
+  applyThemeMode,
+  getStoredThemeMode,
+  persistThemeMode,
+  resolveThemeMode,
+  subscribeToSystemTheme,
+  type ResolvedTheme,
+  type ThemeMode,
+} from '@/lib/theme';
 import { Toolbar } from '@/components/Toolbar';
 import { Sidebar } from '@/components/Sidebar';
 import { LogDrawer } from '@/components/LogDrawer';
@@ -53,6 +62,12 @@ export default function App() {
   const [newDialogOpen, setNewDialogOpen] = useState(false);
   const [renameTarget, setRenameTarget] = useState<ArticleSummary | null>(null);
   const [blogPath, setBlogPath] = useState('');
+  const [themeMode, setThemeMode] = useState<ThemeMode>(() =>
+    getStoredThemeMode(),
+  );
+  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(() =>
+    resolveThemeMode(getStoredThemeMode()),
+  );
 
   const dirty = editorValue !== savedValue;
   const dirtyRef = useRef(dirty);
@@ -143,6 +158,17 @@ export default function App() {
       unlisten?.();
     };
   }, []);
+
+  useEffect(() => {
+    persistThemeMode(themeMode);
+    setResolvedTheme(applyThemeMode(themeMode));
+
+    if (themeMode !== 'system') return undefined;
+
+    return subscribeToSystemTheme(() => {
+      setResolvedTheme(applyThemeMode('system'));
+    });
+  }, [themeMode]);
 
   const currentSlug = () => {
     if (!current) return '';
@@ -375,6 +401,9 @@ export default function App() {
         onPublish={handlePublish}
         onInsertImage={handleInsertImage}
         onFormat={handleFormat}
+        themeMode={themeMode}
+        resolvedTheme={resolvedTheme}
+        onThemeModeChange={setThemeMode}
         onRefresh={async () => {
           await Promise.all([refreshArticles(), refreshPages()]);
           if (current) {

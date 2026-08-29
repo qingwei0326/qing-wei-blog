@@ -5,7 +5,7 @@ import reactHooksPlugin from 'eslint-plugin-react-hooks'
 
 export default [
   {
-    ignores: ['dist/', 'node_modules/', 'src-tauri/', 'docs/.vitepress/cache/'],
+    ignores: ['dist/', 'node_modules/', 'src-tauri/', '.vitepress/cache/', 'docs/.vitepress/cache/'],
   },
   {
     files: ['**/*.{ts,tsx}'],

@@ -42,15 +42,20 @@ function normalizePermalink(value: unknown): string | undefined {
   if (typeof value !== 'string') return undefined
 
   const trimmed = value.trim()
-  if (!trimmed || !trimmed.startsWith('/') || !trimmed.endsWith('/')) {
+  if (!trimmed || !trimmed.startsWith('/')) {
     return undefined
   }
 
   return trimmed
 }
 
+function cleanPublicPath(value: string): string {
+  if (value === '/') return value
+  return value.replace(/\/+$/, '')
+}
+
 function articleUrlFor(slug: string, permalink: unknown): string {
-  return normalizePermalink(permalink) ?? `/articles/${slug}/`
+  return cleanPublicPath(normalizePermalink(permalink) ?? `/articles/${slug}`)
 }
 
 export function readAllArticles(): ArticleMeta[] {

@@ -1,6 +1,7 @@
 # 构建产物
 node_modules/
 dist/
+.vitepress/cache/
 docs/.vitepress/cache/
 docs/.vitepress/dist/
 tsconfig.tsbuildinfo
