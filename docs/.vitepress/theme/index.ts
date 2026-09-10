@@ -7,6 +7,7 @@ import ArticleSummary from './components/ArticleSummary.vue'
 import AboutProfile from './components/AboutProfile.vue'
 import CalcCard from './components/CalcCard.vue'
 import CategoryArchive from './components/CategoryArchive.vue'
+import CommentSection from './components/CommentSection.vue'
 import ConfigSwitch from './components/ConfigSwitch.vue'
 import EvidenceCard from './components/EvidenceCard.vue'
 import FeatureIcon from './components/FeatureIcon.vue'
@@ -22,7 +23,8 @@ export default {
   extends: Teek,
   Layout() {
     return h(Teek.Layout, null, {
-      'teek-theme-enhance-bottom': () => h(ConfigSwitch)
+      'teek-theme-enhance-bottom': () => h(ConfigSwitch),
+      'teek-comment': () => h(CommentSection)
     })
   },
   enhanceApp({ app }) {

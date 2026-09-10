@@ -107,6 +107,7 @@ const checkDate = (value, file) => {
 
 const permalinkMap = new Map()
 let articleCount = 0
+const articleBodies = new Map()
 
 for (const name of readArticleFiles()) {
   articleCount += 1
@@ -114,6 +115,7 @@ for (const name of readArticleFiles()) {
   const file = toPosix(relative(root, fullPath))
   const raw = readFileSync(fullPath, 'utf8')
   const { data, content } = matter(raw)
+  articleBodies.set(name, content)
 
   for (const field of requiredFields) {
     if (data[field] == null) {
@@ -140,6 +142,31 @@ for (const name of readArticleFiles()) {
   }
 
   checkMarkdownImages(content, file)
+
+  const h1Count = (content.match(/^\s*#\s+/gm) || []).length
+  if (h1Count !== 1) {
+    errors.push(`${file}: expected exactly one top-level heading, got ${h1Count}`)
+  }
+
+  for (const marker of ['[category]', '[tag]']) {
+    if (raw.includes(marker)) errors.push(`${file}: contains internal placeholder ${marker}`)
+  }
+}
+
+const secondhandBody = articleBodies.get('secondhand-phone-deal.md') || ''
+for (const phrase of [
+  '实际支付金额是 1368.82',
+  '卖家最终到账金额还会受平台结算规则影响',
+  '不能把挂牌价直接当成成交价'
+]) {
+  if (!secondhandBody.includes(phrase)) {
+    errors.push(`docs/articles/secondhand-phone-deal.md: missing editorial boundary: ${phrase}`)
+  }
+}
+for (const phrase of ['卖家实收 1368.82', '平台风控系统认定我"薅得太狠"']) {
+  if (secondhandBody.includes(phrase)) {
+    errors.push(`docs/articles/secondhand-phone-deal.md: retains unsupported wording: ${phrase}`)
+  }
 }
 
 for (const message of warnings) {

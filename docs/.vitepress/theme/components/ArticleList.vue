@@ -6,16 +6,16 @@ import { articleFilterHref, articleHref } from '../utils/links'
 
 const total = articles.length
 const latestDate = articles[0]?.date ?? '持续更新'
-const currentSearch = ref('')
+const currentSearch = ref(inBrowser ? window.location.search : '')
+const isHydrated = ref(false)
 
 const getFilterParam = (name: string) => {
-  currentSearch.value
-
   if (!inBrowser) {
     return ''
   }
 
-  return new URLSearchParams(currentSearch.value).get(name)?.trim() ?? ''
+  const search = currentSearch.value || window.location.search
+  return new URLSearchParams(search).get(name)?.trim() ?? ''
 }
 
 const activeCategory = computed(() => getFilterParam('category'))
@@ -73,6 +73,7 @@ const applyFilter = (event: MouseEvent, href: string) => {
 
 onMounted(() => {
   syncSearch()
+  isHydrated.value = true
   window.addEventListener('popstate', syncSearch)
 })
 
@@ -85,7 +86,7 @@ onBeforeUnmount(() => {
   <section class="article-archive">
     <header class="archive-hero">
       <div>
-        <p class="archive-kicker">Archive</p>
+        <p class="archive-kicker">文章归档</p>
         <h1>文章归档</h1>
         <p class="archive-lead">
           {{ total }} 篇记录，围绕算账省钱、消费实战、工具效率和个人复盘整理。先看真实经验，再看可执行的方法。
@@ -110,12 +111,12 @@ onBeforeUnmount(() => {
     <div class="archive-shell">
       <aside class="archive-aside">
         <section class="side-panel">
-          <p class="archive-kicker">Topics</p>
+          <p class="archive-kicker">内容分类</p>
           <div class="topic-list">
             <a
               v-for="category in articleCategories"
               :key="category"
-              :class="{ 'is-active': activeCategory === category }"
+              :class="{ 'is-active': isHydrated && activeCategory === category }"
               :href="filterHref('category', category)"
               @click="applyFilter($event, filterHref('category', category))"
             >
@@ -125,12 +126,12 @@ onBeforeUnmount(() => {
         </section>
 
         <section class="side-panel">
-          <p class="archive-kicker">Tags</p>
+          <p class="archive-kicker">文章标签</p>
           <div class="tag-cloud">
             <a
               v-for="tag in articleTags"
               :key="tag"
-              :class="{ 'is-active': activeTag === tag }"
+              :class="{ 'is-active': isHydrated && activeTag === tag }"
               :href="filterHref('tag', tag)"
               @click="applyFilter($event, filterHref('tag', tag))"
             >
@@ -143,11 +144,11 @@ onBeforeUnmount(() => {
       <div class="archive-list">
         <div v-if="hasFilter" class="archive-filter">
           <div>
-            <p class="archive-kicker">Filtered</p>
+            <p class="archive-kicker">筛选结果</p>
             <strong>{{ filterTitle }}</strong>
             <span>{{ filteredArticles.length }} / {{ total }}</span>
           </div>
-          <a :href="clearHref" @click="applyFilter($event, clearHref)">All articles</a>
+          <a :href="clearHref" @click="applyFilter($event, clearHref)">全部文章</a>
         </div>
 
         <a
@@ -179,8 +180,8 @@ onBeforeUnmount(() => {
 
         <div v-if="filteredArticles.length === 0" class="archive-empty">
           <FeatureIcon name="book" />
-          <p>No matching articles.</p>
-          <a :href="clearHref" @click="applyFilter($event, clearHref)">Back to all articles</a>
+          <p>没有符合条件的文章。</p>
+          <a :href="clearHref" @click="applyFilter($event, clearHref)">返回全部文章</a>
         </div>
       </div>
     </div>

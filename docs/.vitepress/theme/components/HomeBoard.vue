@@ -4,81 +4,21 @@ import BloggerSidebar from './BloggerSidebar.vue'
 import HeroBanner from './HeroBanner.vue'
 import StoryCardList from './StoryCardList.vue'
 import PresetOverrides from './PresetOverrides.vue'
-import { articleCategories, articleTags, articles } from '../data/articles'
-import { articleFilterHref, articleHref, categoryHref, siteLink } from '../utils/links'
+import { articleCategories, articles } from '../data/articles'
+import { articleHref, categoryHref } from '../utils/links'
 
-const coreTagNames = [
-  '算账',
-  '省钱',
-  '信息差',
-  '消费',
-  'AI 工具',
-  '工具',
-  '个人观察',
-  '学生理财',
-  '副业',
-  '通勤',
-  '寄快递'
-]
-
-const homeTags = computed(() => coreTagNames.filter((tag) => articleTags.includes(tag)))
 const categoryStats = computed(() =>
-  articleCategories.map((category) => ({
-    name: category,
-    count: articles.filter((article) => article.categories.includes(category)).length
+  articleCategories.map((name) => ({
+    name,
+    count: articles.filter((article) => article.categories.includes(name)).length
   }))
 )
-
-const heroFeatures = [
-  {
-    icon: 'spark',
-    title: '算账省钱',
-    detail: '把预算、通勤、保险和订阅拆成能复用的决策。'
-  },
-  {
-    icon: 'clock',
-    title: '消费实战',
-    detail: '用真实订单和踩坑记录判断什么钱该花。'
-  },
-  {
-    icon: 'archive',
-    title: '工具与复盘',
-    detail: '整理 AI 工具、自动化流程和个人做事方式。'
-  }
-]
 
 const startHerePicks = [
   { slug: 'beginner-guide', step: '01', blurb: '先看懂"算账 ≠ 理财 ≠ 省钱"' },
   { slug: 'secondhand-phone-deal', step: '02', blurb: '一个完整的实战案例' },
   { slug: 'ai-verification-cost', step: '03', blurb: '工具要先进入验证闭环' }
 ]
-
-const holidayPicks = [
-  {
-    slug: 'commute-optimization',
-    label: '返乡出行',
-    hook: '带行李回家前，先算清楚公交、打车和顺风车的真实成本。'
-  },
-  {
-    slug: 'guan-yu-ji-kuai-di',
-    label: '寄件行李',
-    hook: '寄书、寄衣服、寄闲置，把学生券和平台券先叠起来。'
-  },
-  {
-    slug: 'systematic-money-saving',
-    label: '假期消费',
-    hook: '出门、网购、订阅续费前，用一套流程少花冤枉钱。'
-  }
-]
-
-const holidaySpecial = computed(() =>
-  holidayPicks
-    .map((pick) => {
-      const article = articles.find((a) => a.slug === pick.slug)
-      return article ? { ...pick, article } : null
-    })
-    .filter((x): x is { slug: string; label: string; hook: string; article: typeof articles[number] } => x !== null)
-)
 
 const startHere = computed(() =>
   startHerePicks
@@ -105,113 +45,55 @@ const startHere = computed(() =>
     </aside>
 
     <div class="home-main">
-    <HeroBanner />
+      <HeroBanner />
 
-    <section class="feature-strip" aria-label="首页风格说明">
-      <article
-        v-for="feature in heroFeatures"
-        :key="feature.title"
-        class="feature-card"
-      >
-        <span class="feature-card__icon" aria-hidden="true">
-          <FeatureIcon :name="feature.icon" />
-        </span>
-        <div class="feature-card__copy">
-          <strong>{{ feature.title }}</strong>
-          <p>{{ feature.detail }}</p>
-        </div>
-      </article>
-    </section>
-
-    <section v-if="holidaySpecial.length" class="content-section holiday-special" aria-labelledby="holiday-heading">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Money Routes</p>
-          <h2 id="holiday-heading">学生生活成本优化</h2>
-        </div>
-        <a class="section-link" :href="siteLink('/articles/')">全部文章</a>
-      </div>
-
-      <div class="holiday-grid">
-        <a
-          v-for="entry in holidaySpecial"
-          :key="entry.slug"
-          class="holiday-card"
-          :href="articleHref(entry.article.url)"
-        >
-          <div class="holiday-media" :class="{ 'is-placeholder': !entry.article.cover }">
-            <img
-              v-if="entry.article.cover"
-              :src="entry.article.cover"
-              :alt="entry.article.title"
-              loading="lazy"
-            />
-            <span v-else aria-hidden="true">
-              <FeatureIcon name="spark" />
-            </span>
-          </div>
-          <div class="holiday-body">
-            <p class="holiday-label">{{ entry.label }}</p>
-            <h3>{{ entry.article.title }}</h3>
-            <p>{{ entry.hook }}</p>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section v-if="startHere.length" class="content-section start-here" aria-labelledby="starthere-heading">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Start Here</p>
-          <h2 id="starthere-heading">第一次来？按这三步读</h2>
-        </div>
-      </div>
-
-      <div class="start-grid">
-        <a
-          v-for="entry in startHere"
-          :key="entry.slug"
-          class="start-card"
-          :href="articleHref(entry.article.url)"
-        >
-          <p class="start-step">{{ entry.step }}</p>
-          <h3 class="start-title">{{ entry.article.title }}</h3>
-          <p class="start-blurb">{{ entry.blurb }}</p>
-          <p class="start-cta">开始读 →</p>
-        </a>
-      </div>
-    </section>
-
-    <StoryCardList />
-
-    <section class="home-split">
-      <div class="content-section panel-card">
+      <section v-if="startHere.length" class="content-section start-here" aria-labelledby="starthere-heading">
         <div class="section-head">
           <div>
-            <p class="eyebrow">Topics</p>
-            <h2>四条内容主线</h2>
+            <p class="eyebrow">新读者入口</p>
+            <h2 id="starthere-heading">第一次来？按这三步读</h2>
           </div>
         </div>
 
-        <div class="topic-stack">
+        <div class="start-grid">
           <a
-            v-for="category in categoryStats"
-            :key="category.name"
-            class="topic-row"
-            :href="categoryHref(category.name)"
+            v-for="entry in startHere"
+            :key="entry.slug"
+            class="start-card"
+            :href="articleHref(entry.article.url)"
           >
-            <span>{{ category.name }}</span>
-            <strong>{{ category.count }} 篇</strong>
+            <p class="start-step">{{ entry.step }}</p>
+            <h3 class="start-title">{{ entry.article.title }}</h3>
+            <p class="start-blurb">{{ entry.blurb }}</p>
+            <p class="start-cta">开始读 →</p>
           </a>
         </div>
+      </section>
 
-        <div class="tag-cloud" aria-label="标签云">
-          <a v-for="tag in homeTags" :key="tag" :href="articleFilterHref({ tag })">
-            {{ tag }}
-          </a>
+      <StoryCardList />
+
+      <section class="home-split">
+        <div class="content-section panel-card">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">内容分类</p>
+              <h2>四条内容主线</h2>
+            </div>
+          </div>
+
+          <div class="topic-stack">
+            <a
+              v-for="category in categoryStats"
+              :key="category.name"
+              class="topic-row"
+              :href="categoryHref(category.name)"
+            >
+              <span>{{ category.name }}</span>
+              <strong>{{ category.count }} 篇</strong>
+            </a>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
     </div>
   </div>
 </template>
@@ -220,7 +102,6 @@ const startHere = computed(() =>
 .home-board {
   --board-max-width: 1180px;
   --hero-surface: color-mix(in srgb, var(--vp-c-bg-soft) 84%, transparent);
-  --hero-surface-strong: color-mix(in srgb, var(--vp-c-bg-soft) 92%, transparent);
   --hero-surface-hover: color-mix(in srgb, var(--vp-c-bg-soft) 98%, transparent);
   --hero-border: color-mix(in srgb, var(--vp-c-divider) 84%, transparent);
   display: grid;
@@ -252,50 +133,9 @@ const startHere = computed(() =>
   }
 }
 
-.feature-strip {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 22px;
-}
-
-.feature-card,
 .panel-card {
   border: 1px solid var(--hero-border);
   background: var(--vp-c-bg-soft);
-}
-
-.feature-card {
-  display: grid;
-  grid-template-columns: 44px minmax(0, 1fr);
-  gap: 14px;
-  padding: 18px;
-  border-radius: 20px;
-}
-
-.feature-card__icon {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  color: var(--vp-c-brand);
-  background: color-mix(in srgb, var(--vp-c-brand) 10%, var(--vp-c-bg-mute));
-}
-
-.feature-card__copy {
-  display: grid;
-  gap: 6px;
-}
-
-.feature-card__copy strong {
-  font-size: 1rem;
-}
-
-.feature-card__copy p {
-  margin: 0;
-  color: var(--vp-c-text-2);
-  line-height: 1.7;
 }
 
 .content-section {
@@ -327,90 +167,6 @@ const startHere = computed(() =>
 
 .section-link:hover {
   color: var(--vp-c-brand-dark);
-}
-
-.holiday-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.holiday-card {
-  display: grid;
-  grid-template-rows: 148px minmax(0, 1fr);
-  overflow: hidden;
-  border: 1px solid color-mix(in srgb, var(--vp-c-divider) 84%, transparent);
-  border-radius: 8px;
-  background: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-1);
-  text-decoration: none;
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.holiday-card:hover {
-  border-color: color-mix(in srgb, var(--vp-c-brand) 54%, var(--vp-c-divider));
-  box-shadow: 0 14px 34px rgb(15 23 42 / 7%);
-  transform: translateY(-2px);
-  text-decoration: none;
-}
-
-.holiday-media {
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--vp-c-brand) 8%, transparent), transparent 58%),
-    color-mix(in srgb, var(--vp-c-bg-mute) 78%, var(--vp-c-bg-soft));
-}
-
-.holiday-media img {
-  display: block;
-  width: calc(100% - 18px);
-  height: calc(100% - 18px);
-  margin: 0;
-  border-radius: 6px;
-  object-fit: contain;
-  object-position: center;
-}
-
-.holiday-media span {
-  display: grid;
-  place-items: center;
-  color: var(--vp-c-brand);
-}
-
-.holiday-media :deep(svg) {
-  width: 44px;
-  height: 44px;
-}
-
-.holiday-body {
-  display: grid;
-  gap: 8px;
-  align-content: start;
-  padding: 16px;
-}
-
-.holiday-label {
-  margin: 0;
-  color: var(--vp-c-brand);
-  font-size: 0.78rem;
-  font-weight: 800;
-}
-
-.holiday-body h3 {
-  margin: 0;
-  color: var(--vp-c-text-1);
-  font-size: 1rem;
-  line-height: 1.45;
-  letter-spacing: 0;
-}
-
-.holiday-body p:not(.holiday-label) {
-  margin: 0;
-  color: var(--vp-c-text-2);
-  font-size: 0.9rem;
-  line-height: 1.7;
 }
 
 .start-here .section-head {
@@ -474,34 +230,9 @@ const startHere = computed(() =>
 }
 
 @media (max-width: 860px) {
-  .holiday-grid,
   .start-grid {
     grid-template-columns: 1fr;
   }
-
-  .holiday-card {
-    grid-template-rows: 190px minmax(0, 1fr);
-  }
-}
-
-.tag-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.tag-cloud a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 28px;
-  padding: 0 10px;
-  border: 1px solid color-mix(in srgb, var(--vp-c-brand) 18%, var(--vp-c-divider));
-  border-radius: 8px;
-  color: var(--vp-c-brand);
-  background: color-mix(in srgb, var(--vp-c-brand) 6%, var(--vp-c-bg-soft));
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-decoration: none;
 }
 
 .home-split {
@@ -548,25 +279,12 @@ const startHere = computed(() =>
   font-size: 0.84rem;
 }
 
-.tag-cloud {
-  margin-top: 16px;
-}
-
-@media (max-width: 1040px) {
-  .home-split {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
 @media (max-width: 820px) {
   .home-board {
     width: min(100% - 28px, 760px);
     padding-top: 22px;
   }
 
-  .feature-strip {
-    grid-template-columns: minmax(0, 1fr);
-  }
 }
 
 @media (max-width: 560px) {
@@ -598,29 +316,6 @@ const startHere = computed(() =>
   border-right: 1px solid var(--vp-c-divider-light);
 }
 
-.feature-strip {
-  gap: 28px;
-  margin-top: 26px;
-}
-
-.feature-card {
-  grid-template-columns: 34px minmax(0, 1fr);
-  gap: 12px;
-  padding: 18px 0 0;
-  border: 0;
-  border-top: 1px solid var(--vp-c-divider-light);
-  border-radius: 0;
-  background: transparent;
-}
-
-.feature-card__icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  color: color-mix(in srgb, var(--vp-c-brand) 82%, #0f766e);
-  background: color-mix(in srgb, var(--vp-c-brand) 8%, var(--vp-c-bg-mute));
-}
-
 .content-section {
   margin-top: 54px;
 }
@@ -631,8 +326,7 @@ const startHere = computed(() =>
 }
 
 .start-card,
-.panel-card,
-.feature-card {
+.panel-card {
   box-shadow: none;
 }
 

@@ -19,6 +19,21 @@ const resolvedArticleMetadataVirtualId = `\0${articleMetadataVirtualId}`
 const teekIconfontPattern =
   /@font-face\{font-family:iconfont;src:url\(iconfont\.woff2\?t=\d+\) format\("woff2"\),url\(iconfont\.woff\?t=\d+\) format\("woff"\),url\(iconfont\.ttf\?t=\d+\) format\("truetype"\)\}/g
 
+const siteArticles = readAllArticles()
+const sidebarCategories = ['算账省钱', '消费实战', '工具效率', '个人复盘']
+const articleSidebar = sidebarCategories
+  .map((category) => ({
+    text: category,
+    collapsed: false,
+    items: siteArticles
+      .filter((article) => article.categories.includes(category))
+      .map((article) => ({
+        text: article.title,
+        link: article.url
+      }))
+  }))
+  .filter((group) => group.items.length > 0)
+
 function cleanPublicPath(value: string): string {
   if (value === '/') return value
   return value.replace(/\/+$/, '')
@@ -44,7 +59,30 @@ const teekConfig = defineTeekConfig({
   },
 
   search: {
-    provider: 'local'
+    provider: 'local',
+    options: {
+      translations: {
+        button: {
+          buttonText: '搜索',
+          buttonAriaLabel: '搜索'
+        },
+        modal: {
+          displayDetails: '显示详细结果',
+          resetButtonTitle: '清除搜索',
+          backButtonTitle: '关闭搜索',
+          noResultsText: '没有找到结果',
+          footer: {
+            selectText: '选择',
+            selectKeyAriaLabel: '回车',
+            navigateText: '移动',
+            navigateUpKeyAriaLabel: '向上箭头',
+            navigateDownKeyAriaLabel: '向下箭头',
+            closeText: '关闭',
+            closeKeyAriaLabel: '退出'
+          }
+        }
+      }
+    }
   },
 
   author: {
@@ -77,7 +115,17 @@ const teekConfig = defineTeekConfig({
     readingTime: true,
     statistics: {
       provider: 'busuanzi',
+      pageView: false,
     },
+  },
+
+  articleAnalyze: {
+    showCategory: true,
+    showTag: true,
+  },
+
+  articleUpdate: {
+    enabled: false,
   },
 
   vitePlugins: {
@@ -88,7 +136,7 @@ const teekConfig = defineTeekConfig({
   },
 
   comment: {
-    provider: 'giscus',
+    provider: 'render',
     options: {
       repo: 'qingwei0326/qing-wei-blog',
       repoId: 'R_kgDOSeN0RQ',
@@ -115,6 +163,20 @@ export default defineConfig({
   srcExclude: ['**/public/**', 'superpowers/**'],
 
   themeConfig: {
+    darkModeSwitchLabel: '深浅模式',
+    lightModeSwitchTitle: '切换到浅色模式',
+    darkModeSwitchTitle: '切换到深色模式',
+    sidebarMenuLabel: '文章目录',
+    returnToTopLabel: '返回顶部',
+    langMenuLabel: '切换语言',
+    skipToContentLabel: '跳到正文',
+    docFooter: {
+      prev: false,
+      next: false
+    },
+    sidebar: {
+      '/articles/': articleSidebar
+    },
     outline: {
       level: [2, 3],
       label: '本文目录'

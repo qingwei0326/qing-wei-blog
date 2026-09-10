@@ -7,6 +7,10 @@ export const articles: ArticleMeta[] = articleMetadata
 
 export const articleTags = [...new Set(articles.flatMap((a) => a.tags))].sort()
 
+const categoryOrder = ['算账省钱', '消费实战', '工具效率', '个人复盘']
+const detectedCategories = [...new Set(articles.flatMap((a) => a.categories))]
+
 export const articleCategories = [
-  ...new Set(articles.flatMap((a) => a.categories))
-].sort()
+  ...categoryOrder.filter((category) => detectedCategories.includes(category)),
+  ...detectedCategories.filter((category) => !categoryOrder.includes(category)).sort()
+]

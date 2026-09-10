@@ -201,6 +201,14 @@ button,
   border: 1px solid var(--vp-c-divider-light);
   border-radius: 8px;
   box-shadow: 0 16px 42px rgb(15 23 42 / 10%);
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+.article-archive img,
+.category-archive img {
+  max-width: 100% !important;
+  height: auto !important;
 }
 
 .vp-doc :where(h1, h2, h3, h4, h5, h6, p, li, blockquote, table, pre, code) {

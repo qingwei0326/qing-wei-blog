@@ -15,7 +15,7 @@ const isArticle = computed(() =>
   page.value.relativePath.startsWith('articles/') && currentSlug.value !== 'index'
 )
 
-// articles 按时间降序：idx-1 是更新的（next）、idx+1 是更老的（prev）
+// articles 按时间降序；同日文章已按 slug 排序，导航顺序因此稳定。
 const navigation = computed(() => {
   if (!isArticle.value) return { prev: null, next: null }
   const idx = articles.findIndex((a) => a.slug === currentSlug.value)
@@ -40,7 +40,19 @@ const related = computed(() => {
       return { article: a, score: tagScore * 2 + catScore }
     })
     .filter((c) => c.score > 0)
-    .sort((a, b) => b.score - a.score || b.article.timeValue - a.article.timeValue)
+    .sort(
+      (a, b) => {
+        const scoreOrder = b.score - a.score
+        if (scoreOrder !== 0) return scoreOrder
+
+        const dateOrder = b.article.timeValue - a.article.timeValue
+        if (dateOrder !== 0) return dateOrder
+
+        if (a.article.slug < b.article.slug) return -1
+        if (a.article.slug > b.article.slug) return 1
+        return 0
+      }
+    )
     .slice(0, 3)
     .map((c) => c.article)
 })

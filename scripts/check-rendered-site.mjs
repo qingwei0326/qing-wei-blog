@@ -1,7 +1,8 @@
 import { spawn } from 'node:child_process'
-import { existsSync, mkdtempSync, rmSync } from 'node:fs'
+import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
+import matter from 'gray-matter'
 
 const SITE_URL = 'https://blog.qing-wei.com'
 const localOrigin = process.env.BLOG_CHECK_ORIGIN || 'http://127.0.0.1:4173'
@@ -31,6 +32,40 @@ function extractAll(text, pattern, group = 1) {
   return Array.from(text.matchAll(pattern), (match) => match[group])
 }
 
+function countOccurrences(text, needle) {
+  return text.split(needle).length - 1
+}
+
+function countMatches(text, pattern) {
+  return Array.from(text.matchAll(pattern)).length
+}
+
+function normalizeSlugFromHref(href) {
+  return href.replace(/^\/articles\//, '').replace(/\/$/, '')
+}
+
+function readExpectedArticleOrder() {
+  const articlesDir = join(process.cwd(), 'docs', 'articles')
+
+  return readdirSync(articlesDir)
+    .filter((file) => file.endsWith('.md') && file !== 'index.md')
+    .map((file) => {
+      const { data } = matter(readFileSync(join(articlesDir, file), 'utf8'))
+      const date = data.date instanceof Date ? data.date.toISOString() : String(data.date || '')
+      return {
+        slug: file.replace(/\.md$/, ''),
+        timeValue: Date.parse(date) || 0
+      }
+    })
+    .sort((a, b) => {
+      const dateOrder = b.timeValue - a.timeValue
+      if (dateOrder !== 0) return dateOrder
+      if (a.slug < b.slug) return -1
+      if (a.slug > b.slug) return 1
+      return 0
+    })
+}
+
 function publicArticleUrl(slug) {
   return `${SITE_URL}/articles/${slug}`
 }
@@ -53,7 +88,7 @@ async function checkSeoUrls() {
 
   if (slugs.length === 0) {
     errors.push('sitemap contains no permalink-style article URLs')
-    return
+    return []
   }
 
   for (const slug of slugs) {
@@ -66,6 +101,180 @@ async function checkSeoUrls() {
     const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1]
     if (canonical !== expected) {
       errors.push(`canonical mismatch for ${slug}: expected ${expected}, got ${canonical || 'missing'}`)
+    }
+  }
+
+  return slugs
+}
+
+function extractAnchorsByClass(html, className) {
+  const anchors = []
+
+  for (const match of html.matchAll(/<a\b([^>]*)>/g)) {
+    const attributes = match[1] || ''
+    const classes = attributes.match(/\bclass="([^"]*)"/)?.[1]?.split(/\s+/) || []
+    if (!classes.includes(className)) continue
+
+    const href = attributes.match(/\bhref="([^"]*)"/)?.[1]
+    if (href) anchors.push({ href, attributes })
+  }
+
+  return anchors
+}
+
+function extractAnchorBlocksByClass(html, className) {
+  const blocks = []
+
+  for (const match of html.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)) {
+    const attributes = match[1] || ''
+    const classes = attributes.match(/\bclass="([^"]*)"/)?.[1]?.split(/\s+/) || []
+    if (!classes.includes(className)) continue
+
+    const href = attributes.match(/\bhref="([^"]*)"/)?.[1]
+    if (!href) continue
+
+    const text = (match[2] || '')
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&amp;/g, '&')
+      .replace(/&quot;/g, '"')
+      .replace(/\s+/g, ' ')
+      .trim()
+
+    blocks.push({ href, text })
+  }
+
+  return blocks
+}
+
+async function checkHomeSemantics() {
+  const html = await fetchText('/')
+  const forbidden = [
+    'holiday-heading',
+    'holiday-special',
+    'spotlight-heading',
+    'feature-strip',
+    '近期值得看',
+    '学生生活成本优化',
+    '本期推荐',
+    'Quick Read'
+  ]
+
+  for (const marker of forbidden) {
+    if (html.includes(marker)) errors.push(`homepage still contains removed marker: ${marker}`)
+  }
+
+  if (countOccurrences(html, 'id="starthere-heading"') !== 1) {
+    errors.push('homepage should contain one start-here section')
+  }
+  if (countOccurrences(html, 'id="latest-heading"') !== 1) {
+    errors.push('homepage should contain one latest-articles section')
+  }
+  if (!html.includes('我是青微，记录生活里的算账、工具和折腾。')) {
+    errors.push('homepage hero title is missing or has changed')
+  }
+
+  const startCards = extractAnchorsByClass(html, 'start-card')
+  const expectedStart = new Set([
+    '/articles/beginner-guide',
+    '/articles/secondhand-phone-deal',
+    '/articles/ai-verification-cost'
+  ])
+  if (startCards.length !== expectedStart.size) {
+    errors.push(`homepage should contain ${expectedStart.size} start-here cards, got ${startCards.length}`)
+  }
+  for (const href of startCards.map((card) => hrefFrom(card))) {
+    if (!expectedStart.has(href)) errors.push(`homepage start-here card is unexpected: ${href}`)
+  }
+
+  const heroCards = extractAnchorsByClass(html, 'hero-focus')
+  const heroSlug = heroCards[0] ? normalizeSlugFromHref(heroCards[0].href) : ''
+  if (heroCards.length !== 1) errors.push(`homepage should contain one latest hero article, got ${heroCards.length}`)
+
+  const latestCards = extractAnchorsByClass(html, 'timeline-item')
+  if (latestCards.length !== 5) {
+    errors.push(`homepage latest section should contain five articles, got ${latestCards.length}`)
+  }
+  const latestHrefs = latestCards.map((card) => card.href)
+  if (new Set(latestHrefs).size !== latestHrefs.length) errors.push('homepage latest section contains duplicate links')
+  for (const href of latestHrefs) {
+    const slug = normalizeSlugFromHref(href)
+    if (slug === heroSlug || expectedStart.has(href)) {
+      errors.push(`homepage latest section repeats an earlier hero/start-here article: ${href}`)
+    }
+  }
+
+  const categoryRows = extractAnchorBlocksByClass(html, 'topic-row')
+  const expectedCategories = new Set(['算账省钱', '消费实战', '工具效率', '个人复盘'])
+  const categoryNames = new Set(categoryRows.map((row) => row.text.replace(/\d+\s*篇$/, '').trim()))
+  if (categoryRows.length !== expectedCategories.size || categoryNames.size !== expectedCategories.size) {
+    errors.push(`homepage should contain four content categories, got ${categoryRows.map((row) => row.text).join(' / ')}`)
+  }
+  for (const category of expectedCategories) {
+    if (!categoryNames.has(category)) errors.push(`homepage category is missing: ${category}`)
+  }
+}
+
+function hrefFrom(anchor) {
+  return anchor.href
+}
+
+async function checkArticleSemantics(slugs) {
+  const expectedOrder = readExpectedArticleOrder()
+  if (expectedOrder.length !== slugs.length) {
+    errors.push(`article order source has ${expectedOrder.length} entries but sitemap has ${slugs.length}`)
+  }
+
+  for (const slug of slugs) {
+    const html = await fetchText(`/articles/${slug}`)
+    const summaryCount = countOccurrences(html, 'class="article-summary"')
+    const navigationCount = countOccurrences(html, 'class="article-nav"')
+    const articleInfoCount = countMatches(html, /class="tk-article-info(?:\s|")/g)
+
+    if (summaryCount !== 1) errors.push(`${slug}: expected one article summary, got ${summaryCount}`)
+    if (navigationCount !== 1) errors.push(`${slug}: expected one custom article navigation, got ${navigationCount}`)
+    if (articleInfoCount !== 1) errors.push(`${slug}: expected one article metadata group, got ${articleInfoCount}`)
+
+    for (const marker of [
+      'summary-meta',
+      'tk-article-update',
+      'VPDocFooter',
+      'pager-link',
+      '[category]',
+      '浏览量',
+      'Quick Read'
+    ]) {
+      if (html.includes(marker)) errors.push(`${slug}: rendered page contains removed marker: ${marker}`)
+    }
+
+    if (countOccurrences(html, 'class="blog-comment"') !== 1) {
+      errors.push(`${slug}: expected one comment section`)
+    }
+    if (!html.includes('mailto:qingwei0326@gmail.com')) {
+      errors.push(`${slug}: comment section is missing the email fallback`)
+    }
+    if (!html.includes('评论需要 GitHub 登录')) {
+      errors.push(`${slug}: comment section is missing the GitHub login note`)
+    }
+
+    const index = expectedOrder.findIndex((article) => article.slug === slug)
+    if (index === -1) {
+      errors.push(`${slug}: missing from expected article order`)
+      continue
+    }
+
+    const prevHref = extractAnchorsByClass(html, 'prev')[0]?.href
+    const nextHref = extractAnchorsByClass(html, 'next')[0]?.href
+    const expectedPrev = expectedOrder[index + 1]?.slug
+    const expectedNext = expectedOrder[index - 1]?.slug
+    const actualPrev = prevHref ? normalizeSlugFromHref(prevHref) : undefined
+    const actualNext = nextHref ? normalizeSlugFromHref(nextHref) : undefined
+
+    if (actualPrev !== expectedPrev) {
+      errors.push(`${slug}: previous navigation should target ${expectedPrev || 'none'}, got ${actualPrev || 'none'}`)
+    }
+    if (actualNext !== expectedNext) {
+      errors.push(`${slug}: next navigation should target ${expectedNext || 'none'}, got ${actualNext || 'none'}`)
     }
   }
 }
@@ -164,7 +373,7 @@ async function checkRenderedOverflow(pathname, width, height) {
           const rect = node.getBoundingClientRect();
           const style = getComputedStyle(node);
           if (style.display === 'none' || style.visibility === 'hidden') return false;
-          if (node.closest('.visually-hidden, .VPSkipLink, .VPSidebar, [aria-hidden="true"]')) return false;
+          if (node.closest('.visually-hidden, .VPSkipLink, .VPSidebar, .VPOutline, .VPDocAside, .outline-link, .giscus-host.is-hidden, [aria-hidden="true"]')) return false;
           if (node.matches('.header-anchor, .sle, .mle') || node.closest('.sle, .mle')) return false;
           const clipsInline = ['hidden', 'clip', 'auto', 'scroll'].includes(style.overflowX);
           const hasInlineClip = clipsInline && node.scrollWidth > node.clientWidth + 1;
@@ -212,12 +421,72 @@ async function checkRenderedOverflow(pathname, width, height) {
   })
 }
 
+async function checkArchiveFilter(pathname, expectedType, expectedValue) {
+  await withCdp(pathname, 1280, 1000, async (socket) => {
+    const expression = `(() => {
+      const text = (node) => (node?.textContent || '').replace(/\\s+/g, ' ').trim();
+      const cards = Array.from(document.querySelectorAll('.archive-card')).map((card) => ({
+        category: text(card.querySelector('.archive-row span')),
+        tags: Array.from(card.querySelectorAll('.tag-pill')).map(text)
+      }));
+      return {
+        activeCategory: text(document.querySelector('.topic-list a.is-active')),
+        activeTag: text(document.querySelector('.tag-cloud a.is-active')),
+        cards,
+        hasFilter: Boolean(document.querySelector('.archive-filter'))
+      };
+    })()`
+
+    const result = await cdpSend(socket, 'Runtime.evaluate', {
+      expression,
+      returnByValue: true
+    })
+    const data = result.result.value
+    const active = expectedType === 'category' ? data.activeCategory : data.activeTag
+
+    if (active !== expectedValue || !data.hasFilter || data.cards.length === 0) {
+      errors.push(`${pathname}: archive filter did not apply: ${JSON.stringify(data)}`)
+      return
+    }
+
+    if (expectedType === 'category' && data.cards.some((card) => card.category !== expectedValue)) {
+      errors.push(`${pathname}: category filter returned a card from another category: ${JSON.stringify(data.cards)}`)
+    }
+    if (expectedType === 'tag' && data.cards.some((card) => !card.tags.includes(expectedValue))) {
+      errors.push(`${pathname}: tag filter returned a card without the selected tag: ${JSON.stringify(data.cards)}`)
+    }
+  })
+}
+
 async function main() {
-  await checkSeoUrls()
-  await checkRenderedOverflow('/', 390, 1000)
-  await checkRenderedOverflow('/articles/', 390, 1100)
-  await checkRenderedOverflow('/articles/commute-optimization', 390, 1200)
-  await checkRenderedOverflow('/articles/', 1280, 1000)
+  const articleSlugs = await checkSeoUrls()
+  await checkHomeSemantics()
+  await checkArticleSemantics(articleSlugs)
+
+  const renderTargets = [
+    ['/', 390, 1000],
+    ['/', 768, 1000],
+    ['/', 1280, 1000],
+    ['/articles/', 390, 1100],
+    ['/articles/', 768, 1100],
+    ['/articles/', 1280, 1100],
+    ['/about', 390, 1100],
+    ['/about', 768, 1100],
+    ['/about', 1280, 1100],
+    ['/articles/secondhand-phone-deal', 390, 1400],
+    ['/articles/secondhand-phone-deal', 768, 1400],
+    ['/articles/secondhand-phone-deal', 1280, 1400],
+    ['/articles/commute-optimization', 390, 1400],
+    ['/articles/commute-optimization', 768, 1400],
+    ['/articles/commute-optimization', 1280, 1400]
+  ]
+
+  for (const [pathname, width, height] of renderTargets) {
+    await checkRenderedOverflow(pathname, width, height)
+  }
+
+  await checkArchiveFilter(`/articles/?category=${encodeURIComponent('算账省钱')}`, 'category', '算账省钱')
+  await checkArchiveFilter(`/articles/?tag=${encodeURIComponent('算账')}`, 'tag', '算账')
 
   if (errors.length > 0) {
     for (const error of errors) console.error(`error ${error}`)

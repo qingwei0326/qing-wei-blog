@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { articleTags, articles } from '../data/articles'
+import { articles } from '../data/articles'
 import { articleHref, siteLink } from '../utils/links'
 
 const blogCover = '/images/%E5%8D%9A%E5%AE%A2%E5%B0%81%E9%9D%A2.webp'
 
 const heroPick = computed(() => articles[0])
-const heroTags = computed(() => articleTags.slice(0, 6))
 </script>
 
 <template>
@@ -14,10 +13,10 @@ const heroTags = computed(() => articleTags.slice(0, 6))
     <div class="hero-backdrop" aria-hidden="true"></div>
 
     <div class="hero-copy">
-      <p class="eyebrow">青微的博客</p>
-      <h1>把日常选择写成可复用的判断。</h1>
+      <p class="eyebrow">青微的个人博客</p>
+      <h1>我是青微，记录生活里的算账、工具和折腾。</h1>
       <p class="hero-lead">
-        记录算账省钱、消费实战、工具效率和个人复盘里的真实经验。少一点口号，多一点可以照着做的细节。
+        写算账省钱、消费实战、工具效率和个人复盘。把真实经历、账单和验证过程留下来，给自己复盘，也给你一套可以照着做的参考。
       </p>
 
       <div class="hero-actions">
@@ -25,9 +24,6 @@ const heroTags = computed(() => articleTags.slice(0, 6))
         <a class="action action-secondary" :href="siteLink('/about')">关于作者</a>
       </div>
 
-      <div class="hero-tags" aria-label="站点主题">
-        <span v-for="tag in heroTags" :key="tag">{{ tag }}</span>
-      </div>
     </div>
 
     <div class="hero-side">
@@ -46,7 +42,7 @@ const heroTags = computed(() => articleTags.slice(0, 6))
         :href="articleHref(heroPick.url)"
       >
         <div class="hero-focus__meta">
-          <span>本期推荐</span>
+          <span>最新文章</span>
           <time :datetime="heroPick.date">{{ heroPick.date }}</time>
         </div>
         <strong>{{ heroPick.title }}</strong>
@@ -156,49 +152,6 @@ const heroTags = computed(() => articleTags.slice(0, 6))
   background: var(--hero-surface-hover);
 }
 
-.hero-stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(120px, 1fr));
-  gap: 12px;
-  margin: 0;
-}
-
-.hero-stats div {
-  padding: 14px;
-  border: 1px solid var(--hero-border);
-  border-radius: 14px;
-  background: var(--hero-surface);
-  backdrop-filter: blur(8px);
-}
-
-.hero-stats dt {
-  color: var(--vp-c-text-3);
-  font-size: 0.78rem;
-  font-weight: 700;
-}
-
-.hero-stats dd {
-  margin: 5px 0 0;
-  color: var(--vp-c-text-1);
-  font-size: 1rem;
-  font-weight: 800;
-  line-height: 1.35;
-}
-
-.hero-tags {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.hero-tags span {
-  display: inline-flex;
-  align-items: center;
-  padding: 0 12px;
-  border: 1px solid color-mix(in srgb, var(--vp-c-brand) 18%, var(--vp-c-divider));
-  font-size: 0.8rem;
-  font-weight: 700;
-}
-
 .hero-side {
   display: grid;
 }
@@ -267,10 +220,6 @@ const heroTags = computed(() => articleTags.slice(0, 6))
 }
 
 @media (max-width: 560px) {
-  .hero-stats {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .hero-actions {
     align-items: flex-start;
     flex-direction: column;
@@ -326,17 +275,6 @@ const heroTags = computed(() => articleTags.slice(0, 6))
 
 .action-primary:hover {
   background: color-mix(in srgb, var(--vp-c-text-1) 88%, var(--vp-c-brand));
-}
-
-.hero-tags {
-  gap: 8px;
-}
-
-.hero-tags span {
-  min-height: 28px;
-  border-radius: 8px;
-  color: var(--vp-c-text-2);
-  background: transparent;
 }
 
 .hero-side {
@@ -439,13 +377,6 @@ const heroTags = computed(() => articleTags.slice(0, 6))
     width: 100%;
   }
 
-  .hero-tags span {
-    max-width: 100%;
-    font-size: 0.76rem;
-    overflow-wrap: anywhere;
-    word-break: keep-all;
-  }
-
   .hero-side {
     width: 100%;
     min-width: 0;
@@ -497,8 +428,7 @@ html[data-teek-preset="doc"] .home-hero {
 }
 
 html[data-teek-preset="doc"] .hero-backdrop,
-html[data-teek-preset="doc"] .hero-side,
-html[data-teek-preset="doc"] .hero-tags {
+html[data-teek-preset="doc"] .hero-side {
   display: none;
 }
 
@@ -553,20 +483,16 @@ html[data-teek-preset="wide"] .hero-backdrop {
 
 html[data-teek-preset="wide"] .eyebrow,
 html[data-teek-preset="wide"] .hero-copy h1,
-html[data-teek-preset="wide"] .hero-stats dd,
 html[data-teek-preset="wide"] .hero-focus strong {
   color: #fff;
 }
 
 html[data-teek-preset="wide"] .hero-lead,
-html[data-teek-preset="wide"] .hero-stats dt,
 html[data-teek-preset="wide"] .hero-focus__meta,
 html[data-teek-preset="wide"] .hero-focus > span {
   color: rgb(255 255 255 / 78%);
 }
 
-html[data-teek-preset="wide"] .hero-stats div,
-html[data-teek-preset="wide"] .hero-tags span,
 html[data-teek-preset="wide"] .hero-focus {
   border-color: rgb(255 255 255 / 18%);
   background: rgb(255 255 255 / 10%);
@@ -636,16 +562,11 @@ html[data-teek-preset="wide"] .blog-cover {
   border-radius: 8px;
 }
 
-html[data-teek-preset="wide"] .hero-tags span,
 html[data-teek-preset="wide"] .hero-focus {
   border-color: color-mix(in srgb, var(--vp-c-brand) 18%, var(--vp-c-divider));
   background: transparent;
   box-shadow: none;
   backdrop-filter: none;
-}
-
-html[data-teek-preset="wide"] .hero-tags span {
-  color: var(--vp-c-text-2);
 }
 
 html[data-teek-preset="wide"] .hero-focus {
@@ -724,12 +645,6 @@ html[data-teek-preset="card"] .blog-cover {
   background: var(--hero-surface);
 }
 
-.dark .hero-tags span {
-  border-color: rgb(141 164 197 / 42%);
-  color: #c8d7ea;
-  background: rgb(141 164 197 / 10%);
-}
-
 .dark .hero-focus__meta {
   color: #afbdd1;
 }
@@ -799,13 +714,6 @@ html[data-teek-preset="card"] .blog-cover {
     width: 100%;
   }
 
-  .hero-tags span {
-    max-width: 100%;
-    font-size: 0.76rem;
-    overflow-wrap: anywhere;
-    word-break: keep-all;
-  }
-
   .hero-side {
     width: 100%;
     min-width: 0;
@@ -844,7 +752,4 @@ html[data-teek-preset="card"] .blog-cover {
   }
 }
 
-html[data-teek-preset="wide"] .feature-strip {
-  margin-top: 26px;
-}
 </style>

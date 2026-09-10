@@ -84,7 +84,14 @@ export function readAllArticles(): ArticleMeta[] {
         timeValue
       }
     })
-    .sort((a, b) => b.timeValue - a.timeValue)
+    // 日期相同的文章按 slug 排序，确保首页、侧栏和上一篇/下一篇在每次构建中一致。
+    .sort((a, b) => {
+      const dateOrder = b.timeValue - a.timeValue
+      if (dateOrder !== 0) return dateOrder
+      if (a.slug < b.slug) return -1
+      if (a.slug > b.slug) return 1
+      return 0
+    })
 }
 
 export function getArticleBySlug(slug: string): ArticleMeta | null {
