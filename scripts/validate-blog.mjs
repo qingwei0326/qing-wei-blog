@@ -153,6 +153,38 @@ for (const name of readArticleFiles()) {
   }
 }
 
+const seriesFile = 'docs/.vitepress/theme/data/series.json'
+const seriesList = JSON.parse(readFileSync(join(root, seriesFile), 'utf8'))
+const articleSlugs = new Set([...articleBodies.keys()].map((name) => name.replace(/\.md$/, '')))
+const seriesIds = new Set()
+const slugToSeries = new Map()
+
+for (const series of seriesList) {
+  if (!isNonEmptyString(series.id) || !isNonEmptyString(series.title) || !isNonEmptyString(series.description)) {
+    errors.push(`${seriesFile}: every series needs non-empty id, title and description`)
+    continue
+  }
+  if (seriesIds.has(series.id)) errors.push(`${seriesFile}: duplicate series id ${series.id}`)
+  seriesIds.add(series.id)
+  if (!Array.isArray(series.articles) || series.articles.length === 0) {
+    errors.push(`${seriesFile}: series ${series.id} must list at least one article`)
+    continue
+  }
+  for (const slug of series.articles) {
+    if (!articleSlugs.has(slug)) {
+      errors.push(`${seriesFile}: series ${series.id} references missing article ${slug}`)
+    } else if (slugToSeries.has(slug)) {
+      errors.push(`${seriesFile}: article ${slug} is in both ${slugToSeries.get(slug)} and ${series.id}`)
+    } else {
+      slugToSeries.set(slug, series.id)
+    }
+  }
+}
+
+for (const slug of articleSlugs) {
+  if (!slugToSeries.has(slug)) warnings.push(`docs/articles/${slug}.md: not part of any series`)
+}
+
 const secondhandBody = articleBodies.get('secondhand-phone-deal.md') || ''
 for (const phrase of [
   '实际支付金额是 1368.82',

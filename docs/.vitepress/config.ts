@@ -46,6 +46,7 @@ const teekConfig = defineTeekConfig({
   nav: [
     { text: '首页', link: '/' },
     { text: '文章', link: '/articles/' },
+    { text: '系列', link: '/series/' },
     { text: '关于', link: '/about' },
   ],
 
@@ -364,7 +365,7 @@ export default defineConfig({
     writeFileSync(resolve(siteConfig.outDir, 'feed.xml'), feed.rss2(), 'utf-8')
     writeFileSync(resolve(siteConfig.outDir, 'atom.xml'), feed.atom1(), 'utf-8')
 
-    const staticUrls = ['/', '/articles/', '/about', ...articleCategoriesFrom(articles)]
+    const staticUrls = ['/', '/articles/', '/series/', '/about', ...articleCategoriesFrom(articles)]
     const sitemapUrls = [
       ...staticUrls.map((path) => `${SITE_URL}${path}`),
       ...items.map((item) => item.url)

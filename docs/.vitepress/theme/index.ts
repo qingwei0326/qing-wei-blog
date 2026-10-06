@@ -15,6 +15,7 @@ import HomeBoard from './components/HomeBoard.vue'
 import ImageGrid from './components/ImageGrid.vue'
 import VPFeature from './components/VPFeature.vue'
 import RouteCard from './components/RouteCard.vue'
+import SeriesIndex from './components/SeriesIndex.vue'
 import TakeawayCard from './components/TakeawayCard.vue'
 import 'virtual:teek-index.css'
 import './style.css'
@@ -40,6 +41,7 @@ export default {
     app.component('HomeBoard', HomeBoard)
     app.component('ImageGrid', ImageGrid)
     app.component('RouteCard', RouteCard)
+    app.component('SeriesIndex', SeriesIndex)
     app.component('TakeawayCard', TakeawayCard)
     app.component('VPFeature', VPFeature)
   }

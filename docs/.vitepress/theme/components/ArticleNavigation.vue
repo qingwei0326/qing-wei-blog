@@ -2,7 +2,8 @@
 import { useData } from 'vitepress'
 import { computed } from 'vue'
 import { articles } from '../data/articles'
-import { articleHref } from '../utils/links'
+import { findSeriesBySlug } from '../data/series'
+import { articleHref, siteLink } from '../utils/links'
 
 const { page } = useData()
 
@@ -15,9 +16,22 @@ const isArticle = computed(() =>
   page.value.relativePath.startsWith('articles/') && currentSlug.value !== 'index'
 )
 
+// 当前文章所在的系列（按阅读顺序）
+const seriesInfo = computed(() => (isArticle.value ? findSeriesBySlug(currentSlug.value) : null))
+
+// 在系列中：按系列顺序给上一篇/下一篇；不在系列中：按时间。
 // articles 按时间降序；同日文章已按 slug 排序，导航顺序因此稳定。
 const navigation = computed(() => {
   if (!isArticle.value) return { prev: null, next: null }
+
+  if (seriesInfo.value) {
+    const { series, index } = seriesInfo.value
+    return {
+      prev: index > 0 ? series.articles[index - 1] : null,
+      next: index < series.articles.length - 1 ? series.articles[index + 1] : null
+    }
+  }
+
   const idx = articles.findIndex((a) => a.slug === currentSlug.value)
   if (idx === -1) return { prev: null, next: null }
   return {
@@ -32,8 +46,10 @@ const related = computed(() => {
   const current = articles.find((a) => a.slug === currentSlug.value)
   if (!current) return []
 
+  const seriesSlugs = new Set(seriesInfo.value?.series.articles.map((a) => a.slug) ?? [])
+
   return articles
-    .filter((a) => a.slug !== current.slug)
+    .filter((a) => a.slug !== current.slug && !seriesSlugs.has(a.slug))
     .map((a) => {
       const tagScore = a.tags.filter((t) => current.tags.includes(t)).length
       const catScore = a.categories.filter((c) => current.categories.includes(c)).length
@@ -58,19 +74,42 @@ const related = computed(() => {
 })
 
 const showAnything = computed(
-  () => navigation.value.prev || navigation.value.next || related.value.length > 0
+  () =>
+    seriesInfo.value ||
+    navigation.value.prev ||
+    navigation.value.next ||
+    related.value.length > 0
 )
 </script>
 
 <template>
   <div v-if="isArticle && showAnything" class="article-nav">
+    <section v-if="seriesInfo" class="series-box" aria-label="所属系列">
+      <div class="series-box-head">
+        <span class="series-box-label">所属系列</span>
+        <a :href="siteLink('/series/') + '#' + seriesInfo.series.id" class="series-box-name">{{ seriesInfo.series.title }}</a>
+        <span class="series-box-pos">第 {{ seriesInfo.index + 1 }} / {{ seriesInfo.series.articles.length }} 篇</span>
+      </div>
+      <ol class="series-box-list">
+        <li
+          v-for="(item, i) in seriesInfo.series.articles"
+          :key="item.slug"
+          :class="{ current: i === seriesInfo.index }"
+        >
+          <span class="series-box-num">{{ i + 1 }}</span>
+          <span v-if="i === seriesInfo.index" class="series-box-title" aria-current="page">{{ item.title }}</span>
+          <a v-else :href="articleHref(item.url)" class="series-box-title">{{ item.title }}</a>
+        </li>
+      </ol>
+    </section>
+
     <div v-if="navigation.prev || navigation.next" class="nav-row">
       <a
         v-if="navigation.prev"
         :href="articleHref(navigation.prev.url)"
         class="nav-card prev"
       >
-        <div class="nav-label">← 上一篇</div>
+        <div class="nav-label">← {{ seriesInfo ? '系列上一篇' : '上一篇' }}</div>
         <div class="nav-title">{{ navigation.prev.title }}</div>
       </a>
       <div v-else class="nav-card empty" />
@@ -80,7 +119,7 @@ const showAnything = computed(
         :href="articleHref(navigation.next.url)"
         class="nav-card next"
       >
-        <div class="nav-label">下一篇 →</div>
+        <div class="nav-label">{{ seriesInfo ? '系列下一篇' : '下一篇' }} →</div>
         <div class="nav-title">{{ navigation.next.title }}</div>
       </a>
       <div v-else class="nav-card empty" />
@@ -109,6 +148,88 @@ const showAnything = computed(
 </template>
 
 <style scoped>
+.series-box {
+  margin-bottom: 32px;
+  padding: 18px 20px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  background: var(--vp-c-bg-soft);
+}
+
+.series-box-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin-bottom: 12px;
+}
+
+.series-box-label {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--vp-c-text-2);
+}
+
+.series-box-name {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--vp-c-brand);
+  text-decoration: none;
+}
+
+.series-box-pos {
+  font-size: 12px;
+  color: var(--vp-c-text-2);
+}
+
+.series-box-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.series-box-list li {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 8px;
+  align-items: baseline;
+  margin: 0;
+}
+
+.series-box-num {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--vp-c-text-3);
+}
+
+.series-box-name,
+.series-box-title {
+  border-bottom: 0;
+}
+
+.series-box-title {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+}
+
+a.series-box-title:hover {
+  color: var(--vp-c-brand);
+}
+
+.series-box-list li.current .series-box-title {
+  font-weight: 800;
+  color: var(--vp-c-brand);
+}
+
+.series-box-list li.current .series-box-num {
+  color: var(--vp-c-brand);
+}
+
 .article-nav {
   margin-top: 56px;
   padding-top: 32px;
