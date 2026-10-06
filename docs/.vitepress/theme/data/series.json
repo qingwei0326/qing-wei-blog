@@ -1,0 +1,53 @@
+[
+  {
+    "id": "money-thinking",
+    "title": "算账入门",
+    "description": "从“算账不等于理财”开始，到预算结构、下单前的省钱流程，再到常见的消费套路。",
+    "articles": [
+      "beginner-guide",
+      "personal-budget",
+      "systematic-money-saving",
+      "consumption-traps"
+    ]
+  },
+  {
+    "id": "travel-and-shipping",
+    "title": "出行与寄件省钱",
+    "description": "通勤、返乡去车站、寄行李和寄大件，把几块钱的差别算清楚。",
+    "articles": [
+      "commute-optimization",
+      "zhe-pian-shi-ke-hu-shun-feng-che-fan-kui",
+      "guan-yu-ji-kuai-di"
+    ]
+  },
+  {
+    "id": "secondhand-and-protection",
+    "title": "二手与保障",
+    "description": "买二手手机的完整复盘，以及保险、延保和官方保障怎么算账。",
+    "articles": [
+      "secondhand-phone-deal",
+      "bao-xian"
+    ]
+  },
+  {
+    "id": "ai-workflow",
+    "title": "AI 与工具工作流",
+    "description": "把 AI Agent 放进真实工作流：怎么验证、怎么订阅，以及这个博客自己的工具链。",
+    "articles": [
+      "ai-agent-tool",
+      "ai-verification-cost",
+      "oversea-ai-subscription",
+      "blog-toolchain-rebuild"
+    ]
+  },
+  {
+    "id": "working-style",
+    "title": "做事方式与信息差",
+    "description": "从聊天记录、信息差和关系里的身份切换，看我是怎么做事的。",
+    "articles": [
+      "chat-log-working-style",
+      "information-gap-money",
+      "three-selves"
+    ]
+  }
+]
