@@ -339,6 +339,11 @@ const startHere = computed(() =>
 }
 
 @media (max-width: 1040px) {
+  .home-board {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
   .home-aside {
     padding-right: 0;
     border-right: 0;
