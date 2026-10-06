@@ -5,7 +5,7 @@ import HeroBanner from './HeroBanner.vue'
 import StoryCardList from './StoryCardList.vue'
 import PresetOverrides from './PresetOverrides.vue'
 import { articleCategories, articles } from '../data/articles'
-import { articleHref, categoryHref } from '../utils/links'
+import { articleHref, categoryHref, siteLink } from '../utils/links'
 
 const categoryStats = computed(() =>
   articleCategories.map((name) => ({
@@ -45,6 +45,21 @@ const startHere = computed(() =>
     </aside>
 
     <div class="home-main">
+      <div class="home-author-strip">
+        <img
+          class="home-author-avatar"
+          :src="siteLink('/images/avatar.webp')"
+          alt="青微"
+          width="56"
+          height="56"
+          fetchpriority="high"
+        />
+        <div class="home-author-text">
+          <strong>青微</strong>
+          <span>记录技术、生活与折腾</span>
+        </div>
+      </div>
+
       <HeroBanner />
 
       <section v-if="startHere.length" class="content-section start-here" aria-labelledby="starthere-heading">
@@ -363,6 +378,47 @@ const startHere = computed(() =>
   .home-main {
     width: 100%;
     min-width: 0;
+  }
+}
+</style>
+
+<style scoped>
+/* 窄屏隐藏作者侧栏后，用一条精简作者条补回头像 */
+.home-author-strip {
+  display: none;
+}
+
+@media (max-width: 1040px) {
+  .home-author-strip {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 4px 0 0;
+  }
+
+  .home-author-avatar {
+    width: 56px;
+    height: 56px;
+    flex: none;
+    object-fit: cover;
+    border: 2px solid color-mix(in srgb, var(--vp-c-brand) 28%, transparent);
+    border-radius: 8px;
+  }
+
+  .home-author-text {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .home-author-text strong {
+    font-size: 1rem;
+    color: var(--vp-c-text-1);
+  }
+
+  .home-author-text span {
+    font-size: 0.85rem;
+    color: var(--vp-c-text-2);
   }
 }
 </style>

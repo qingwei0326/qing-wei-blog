@@ -79,7 +79,8 @@ button,
   font-family: inherit;
 }
 
-.VPNav {
+/* backdrop-filter 不能放在 .VPNav 上：它会成为手机菜单 .VPNavScreen（fixed）的包含块，把菜单高度压成 0 */
+.VPNavBar {
   backdrop-filter: saturate(160%) blur(14px);
 }
 
