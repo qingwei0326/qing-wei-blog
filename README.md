@@ -1,70 +1,87 @@
-# 青微博客
+# 青微的博客
 
-省钱达人博客，基于 VitePress + Cloudflare 的个人博客，分享省钱技巧、消费观察与副业记录。
+记录生活里的算账、工具和折腾。基于 VitePress + Teek 主题，部署在 Cloudflare Pages。
 
 🌐 [blog.qing-wei.com](https://blog.qing-wei.com)
 
+## 内容主线
+
+- **算账省钱**：预算、通勤、保险、寄快递和订阅
+- **消费实战**：二手交易、百亿补贴、闲鱼和办卡
+- **工具效率**：AI Agent、写作工具、自动化和验证流程
+- **个人复盘**：做事方式、副业观察和关系里的身份切换
+
 ## 技术栈
 
-- **框架**：VitePress + vitepress-theme-teek
-- **托管**：Cloudflare Pages
+- **博客**：VitePress + vitepress-theme-teek
+- **托管**：Cloudflare Pages（GitHub Actions + Wrangler 部署）
 - **图床**：Cloudflare R2
-- **桌面端**：Tauri（开发中）
+- **写作助手**：Tauri + React（青微博客助手，见下文）
+
+## 仓库结构
+
+| 路径 | 说明 |
+|---|---|
+| `docs/` | 博客本体：文章、页面、自定义主题组件和样式 |
+| `docs/articles/` | 文章 Markdown |
+| `docs/public/` | 封面（`covers/`）和文章配图（`images/`） |
+| `packages/shared/` | 文章读取逻辑，博客构建和写作助手共用 |
+| `src/`、`src-tauri/` | 写作助手：Tauri 桌面应用，前端为 React + CodeMirror |
+| `scripts/` | 校验与图片优化脚本 |
 
 ## 快速开始
 
 ```bash
 pnpm install
-pnpm run docs:dev     # 开发 http://localhost:5173
-pnpm run docs:check   # 检查文章元数据、图片路径和 permalink
-pnpm run docs:build   # 构建
+pnpm run docs:dev      # 本地开发 http://localhost:5173
 ```
+
+## 常用命令
+
+| 命令 | 作用 |
+|---|---|
+| `pnpm run docs:dev` | 启动博客开发服务器 |
+| `pnpm run docs:build` | 构建博客 |
+| `pnpm run docs:preview` | 预览构建结果 |
+| `pnpm run docs:check` | 检查文章元数据、图片路径和 permalink |
+| `pnpm run docs:links` | 检查构建产物里的链接 |
+| `pnpm run docs:render-check` | 检查渲染后的页面 |
+| `pnpm run optimize:images` | 优化图片 |
+| `pnpm run lint` | ESLint 检查 |
+| `pnpm run verify` | 提交前的完整检查：文章校验、lint、构建、链接检查和写作助手构建 |
 
 ## 写文章
 
-在 `docs/articles/` 下创建 `.md` 文件，头部 YAML frontmatter：
+在 `docs/articles/` 下新建 `.md` 文件，头部写 frontmatter：
 
 ```yaml
 ---
 title: 文章标题
-description: 描述
-date: 2025-05-23
+description: 一两句话描述
+date: 2026-07-01
 tags: [标签1, 标签2]
-categories: [分类]
-cover: /covers/xxx.svg
+categories: [算账省钱]
+cover: /covers/xxx.webp
 ---
 ```
 
-## 📜 更新日志
+- `categories` 使用上面四条内容主线之一
+- 封面放在 `docs/public/covers/`，配图放在 `docs/public/images/`，统一用 `.webp`
+- 写完先跑 `pnpm run docs:check`，提交前跑 `pnpm run verify`
 
-### 2025-05-23 首页大改版 + Tauri 桌面端
+## 青微博客助手（Tauri）
 
-- **首页重构**：改为左右双栏布局（左侧作者卡片 + 右侧主内容）
-- **封面升级**：hero 区域封面动态取最新文章封面图
-- **推荐机制**："本期推荐"改为最新文章置顶，热点故事从 3 列缩为 2 列
-- **文章列表**：新增分类/标签筛选功能（URL query 驱动，支持组合筛选）
-- **标签排序**：按使用频率降序排列，高频标签靠前
-- **About 页**：删除 profile 网格卡片区，页面简化
-- **Tauri 桌面端原型**：新建 `src-tauri/` + `src/`，博客助手桌面应用雏形
-- **主题系统**：从 `vitepress-theme-teek/index.css` 改为 `virtual:teek-index.css`
-- **新文章**：《三个我》——副业人际关系观察
-- **封面 SVG**：重绘 budget-plan、finance-beginner；新增 three-selves 封面
-- **清理**：删除废弃的优惠券截图、打车价格图等 6 张图片
+写作和发布用的桌面应用：编辑 Markdown、实时预览、新建和重命名文章、查看发布日志。
 
-### 2025-05-21 About 页重构
+```bash
+pnpm run app     # 开发模式（tauri dev）
+pnpm run dist    # 打包 Windows 安装包（NSIS）
+```
 
-- AboutProfile 组件化，改成真人头像 + 重写自我介绍
-- 修复 about 页对比度过低
-- 完善 VitePress 配置
+根目录的 `config.json` 里的 `blogPath` 指向本机的博客仓库路径，换电脑时需要改成自己的路径。
 
-### 2025-05-20 新文章 + 仓库清理
+## 部署
 
-- 新文章《被百亿补贴盾了之后，1370 拿下一台二手 Neo7》
-- 清理 GitHub 上多余的说明文档和配置文件
-- 更新 .gitignore 忽略 Edge 调试缓存、截图等垃圾文件
+推送到 `main` 后，GitHub Actions 会依次执行文章校验、图片优化、构建和链接检查，再用 Wrangler 部署到 Cloudflare Pages（见 `.github/workflows/deploy.yml`）。
 
-### 2025-05-19 新文章上线
-
-- 发布《个人预算表》《通勤经济学》《消费陷阱识别指南》《理财入门指南》
-- 封面 SVG 统一设计风格
-- 部署自动化，连接 Cloudflare Pages 自动构建
+变更历史请看 Git 提交记录和 Pull Request。
