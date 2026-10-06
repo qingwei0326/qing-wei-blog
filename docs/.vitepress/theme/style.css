@@ -356,3 +356,29 @@ button,
     background: #fff;
   }
 }
+
+/* 面包屑：Teek 用目录名渲染，articles 显示为中文 */
+.tk-article-breadcrumb .tk-breadcrumb__item:nth-child(2) .tk-breadcrumb__inner span {
+  font-size: 0;
+}
+
+.tk-article-breadcrumb .tk-breadcrumb__item:nth-child(2) .tk-breadcrumb__inner span::after {
+  content: '文章';
+  font-size: 1rem;
+}
+
+/* 文章标签：拆成独立小标签，避免连成一串 */
+.tk-article-info__item[aria-label='标签'] {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.tk-article-info__item[aria-label='标签'] > a {
+  padding: 0 8px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 20px;
+}

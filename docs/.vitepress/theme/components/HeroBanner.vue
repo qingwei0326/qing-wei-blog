@@ -312,6 +312,16 @@ const heroPick = computed(() => articles[0])
   border-color: color-mix(in srgb, var(--vp-c-brand) 58%, #f59e0b);
 }
 
+@media (max-width: 1040px) {
+  .home-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-copy h1 {
+    max-width: 14em;
+  }
+}
+
 @media (max-width: 820px) {
   .home-hero {
     display: grid;
