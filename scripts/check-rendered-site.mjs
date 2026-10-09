@@ -221,6 +221,9 @@ function hrefFrom(anchor) {
 
 async function checkArticleSemantics(slugs) {
   const expectedOrder = readExpectedArticleOrder()
+  const expectedSeries = JSON.parse(
+    readFileSync(join(process.cwd(), 'docs', '.vitepress', 'theme', 'data', 'series.json'), 'utf8')
+  )
   if (expectedOrder.length !== slugs.length) {
     errors.push(`article order source has ${expectedOrder.length} entries but sitemap has ${slugs.length}`)
   }
@@ -265,8 +268,15 @@ async function checkArticleSemantics(slugs) {
 
     const prevHref = extractAnchorsByClass(html, 'prev')[0]?.href
     const nextHref = extractAnchorsByClass(html, 'next')[0]?.href
-    const expectedPrev = expectedOrder[index + 1]?.slug
-    const expectedNext = expectedOrder[index - 1]?.slug
+    // 系列文章按显式阅读顺序导航，其余文章保持时间顺序。
+    const series = expectedSeries.find((item) => item.articles.includes(slug))
+    const seriesIndex = series?.articles.indexOf(slug)
+    const expectedPrev = series
+      ? series.articles[seriesIndex - 1]
+      : expectedOrder[index + 1]?.slug
+    const expectedNext = series
+      ? series.articles[seriesIndex + 1]
+      : expectedOrder[index - 1]?.slug
     const actualPrev = prevHref ? normalizeSlugFromHref(prevHref) : undefined
     const actualNext = nextHref ? normalizeSlugFromHref(nextHref) : undefined
 
@@ -283,9 +293,14 @@ function cdpSend(socket, method, params = {}) {
   const id = (cdpSend.nextId = (cdpSend.nextId || 0) + 1)
   socket.send(JSON.stringify({ id, method, params }))
   return new Promise((resolve, reject) => {
+    const timeout = setTimeout(() => {
+      socket.removeEventListener('message', onMessage)
+      reject(new Error(`${method}: browser did not respond within 15 seconds`))
+    }, 15000)
     const onMessage = (event) => {
       const message = JSON.parse(event.data)
       if (message.id !== id) return
+      clearTimeout(timeout)
       socket.removeEventListener('message', onMessage)
       if (message.error) reject(new Error(`${method}: ${message.error.message}`))
       else resolve(message.result)
@@ -335,8 +350,18 @@ async function withCdp(pathname, width, height, callback) {
 
     const socket = new WebSocket(tab.webSocketDebuggerUrl)
     await new Promise((resolve, reject) => {
-      socket.addEventListener('open', resolve, { once: true })
-      socket.addEventListener('error', reject, { once: true })
+      const timeout = setTimeout(() => {
+        socket.close()
+        reject(new Error(`Browser connection timed out for ${pathname} at ${width}px`))
+      }, 10000)
+      socket.addEventListener('open', () => {
+        clearTimeout(timeout)
+        resolve()
+      }, { once: true })
+      socket.addEventListener('error', (error) => {
+        clearTimeout(timeout)
+        reject(error)
+      }, { once: true })
     })
 
     try {

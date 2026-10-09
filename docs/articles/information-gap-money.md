@@ -4,7 +4,7 @@ description: 信息差不是卖一条消息，而是替别人跑通规则、承�
 date: 2026-05-25
 tags: [信息差, 副业, 个人观察]
 categories: [个人复盘]
-cover: /covers/information-gap-workflow.webp
+cover: /covers/information-gap-workflow-image21.webp
 permalink: /articles/information-gap-money/
 ---
 

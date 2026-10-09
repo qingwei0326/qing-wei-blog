@@ -4,7 +4,7 @@ description: 两张客户反馈截图，复盘顺风车为什么适合去车站�
 date: 2026-07-01
 tags: [顺风车, 客户反馈, 省钱]
 categories: [算账省钱]
-cover: /covers/customer-ride-cost.webp
+cover: /covers/customer-ride-cost-image21.webp
 permalink: /articles/zhe-pian-shi-ke-hu-shun-feng-che-fan-kui/
 ---
 

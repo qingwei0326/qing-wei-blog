@@ -4,7 +4,7 @@ description: 一个偏 INTJ 的人为什么会把 AI 当工具人：我不关心
 date: 2026-05-25
 tags: [AI 工具, 工具]
 categories: [工具效率]
-cover: /images/ai-agent-tool-image2.webp
+cover: /covers/ai-agent-tool-image21.webp
 permalink: /articles/ai-agent-tool/
 ---
 

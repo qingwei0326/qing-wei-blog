@@ -4,7 +4,7 @@ description: 返利、优惠券、会员、比价、风控，看起来都是小�
 date: 2026-05-25
 tags: [省钱, 消费, 算账]
 categories: [算账省钱]
-cover: /images/systematic-money-saving-image2.webp
+cover: /covers/systematic-money-saving-image21.webp
 permalink: /articles/systematic-money-saving/
 ---
 

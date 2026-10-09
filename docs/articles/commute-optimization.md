@@ -4,7 +4,7 @@ description: 放假返乡、跨城回家、带行李出门时，公交太折腾�
 date: 2026-05-15
 tags: [省钱, 通勤, 算账]
 categories: [算账省钱]
-cover: /covers/holiday-commute-value.webp
+cover: /covers/holiday-commute-value-image21.webp
 ---
 
 # 放假返乡别只会打车：我用 9 块钱换回 1 小时睡眠

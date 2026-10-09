@@ -4,7 +4,7 @@ description: 我在 2026 年 5 月用海外区 Apple ID + iTunes 礼品卡走 Ap
 date: 2026-05-24
 tags: [AI 工具, 工具, 算账]
 categories: [工具效率]
-cover: /covers/ai-subscription-appstore.webp
+cover: /covers/ai-subscription-appstore-image21.webp
 permalink: /articles/oversea-ai-subscription/
 ---
 

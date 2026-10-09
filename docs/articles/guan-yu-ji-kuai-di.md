@@ -4,7 +4,7 @@ description: 学生党寒暑假寄行李、寄闲置、寄大件时怎么省钱�
 date: 2026-05-24
 tags: [寄快递, 省钱, 算账]
 categories: [算账省钱]
-cover: /covers/student-delivery-savings.webp
+cover: /covers/student-delivery-savings-image21.webp
 permalink: /articles/guan-yu-ji-kuai-di/
 ---
 
