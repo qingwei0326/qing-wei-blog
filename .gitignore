@@ -6,15 +6,8 @@ docs/.vitepress/cache/
 docs/.vitepress/dist/
 tsconfig.tsbuildinfo
 
-# Rust / Tauri
-src-tauri/target/
-src-tauri/gen/schemas/
-
-# 打包文件
-*.exe
-*.msi
-*.nsis
-win-unpacked/
+# 写作助手已拆到独立仓库，本地残留的构建目录
+src-tauri/
 
 # 开发缓存
 project_all.txt

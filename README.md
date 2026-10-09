@@ -16,7 +16,6 @@
 - **博客**：VitePress + vitepress-theme-teek
 - **托管**：Cloudflare Pages（GitHub Actions + Wrangler 部署）
 - **图床**：Cloudflare R2
-- **写作助手**：Tauri + React（青微博客助手，见下文）
 
 ## 仓库结构
 
@@ -25,8 +24,7 @@
 | `docs/` | 博客本体：文章、页面、自定义主题组件和样式 |
 | `docs/articles/` | 文章 Markdown |
 | `docs/public/` | 封面（`covers/`）和文章配图（`images/`） |
-| `packages/shared/` | 文章读取逻辑，博客构建和写作助手共用 |
-| `src/`、`src-tauri/` | 写作助手：Tauri 桌面应用，前端为 React + CodeMirror |
+| `packages/shared/` | 文章读取逻辑，博客构建使用 |
 | `scripts/` | 校验与图片优化脚本 |
 
 ## 快速开始
@@ -48,7 +46,7 @@ pnpm run docs:dev      # 本地开发 http://localhost:5173
 | `pnpm run docs:render-check` | 检查渲染后的页面 |
 | `pnpm run optimize:images` | 优化图片 |
 | `pnpm run lint` | ESLint 检查 |
-| `pnpm run verify` | 提交前的完整检查：文章校验、lint、构建、链接检查和写作助手构建 |
+| `pnpm run verify` | 提交前的完整检查：文章校验、lint、构建和链接检查 |
 
 ## 写文章
 
@@ -69,16 +67,9 @@ cover: /covers/xxx.webp
 - 封面放在 `docs/public/covers/`，配图放在 `docs/public/images/`，统一用 `.webp`
 - 写完先跑 `pnpm run docs:check`，提交前跑 `pnpm run verify`
 
-## 青微博客助手（Tauri）
+## 写作助手
 
-写作和发布用的桌面应用：编辑 Markdown、实时预览、新建和重命名文章、查看发布日志。
-
-```bash
-pnpm run app     # 开发模式（tauri dev）
-pnpm run dist    # 打包 Windows 安装包（NSIS）
-```
-
-根目录的 `config.json` 里的 `blogPath` 指向本机的博客仓库路径，换电脑时需要改成自己的路径。
+写作和发布用的桌面应用「青微博客助手」（Tauri + React）已拆到独立项目，通过 `blogPath` 配置指向本仓库，只读写 `docs/articles`，与博客代码无依赖。
 
 ## 部署
 
